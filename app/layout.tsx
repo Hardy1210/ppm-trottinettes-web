@@ -1,15 +1,18 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Michroma, Questrial } from "next/font/google";
 import "./globals.css";
+import SmoothScrollProvider from "./providers/SmoothScrollProvider";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const michroma = Michroma({
   subsets: ["latin"],
+  variable: "--font-michroma",
+  weight: "400",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const questrial = Questrial({
   subsets: ["latin"],
+  variable: "--font-questrial",
+  weight: "400",
 });
 
 export const metadata: Metadata = {
@@ -25,9 +28,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+        className={`${michroma.variable} ${questrial.variable} antialiased`}
+      ><SmoothScrollProvider>
         {children}
+      </SmoothScrollProvider>
+        
       </body>
     </html>
   );
