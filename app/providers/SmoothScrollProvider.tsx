@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import type { LenisRef } from "lenis/react";
-import { ReactLenis } from "lenis/react";
-import { useEffect, useRef } from "react";
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import type { LenisRef } from 'lenis/react';
+import { ReactLenis } from 'lenis/react';
+import { useEffect, useRef } from 'react';
 
 export default function SmoothScrollProvider({
   children,
@@ -24,7 +24,7 @@ export default function SmoothScrollProvider({
     gsap.ticker.add(update);
 
     // 🔥 Cuando Lenis hace scroll → actualizar ScrollTrigger
-    lenisRef.current?.lenis?.on("scroll", ScrollTrigger.update);
+    lenisRef.current?.lenis?.on('scroll', ScrollTrigger.update);
 
     gsap.ticker.lagSmoothing(0);
 
@@ -40,7 +40,6 @@ export default function SmoothScrollProvider({
         autoRaf: false,
         duration: 1.1,
         smoothWheel: true,
-        
       }}
       ref={lenisRef}
     >

@@ -1,9 +1,10 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 /* === Design tokens === */
 :root {
-  --ppm-bg: #1E2126;
-  --ppm-yellow: #E4E700;
+  --header-h: 80px;
+  --ppm-bg: #1e2126;
+  --ppm-yellow: #e4e700;
 
   --font-title: var(--font-michroma);
   --font-body: var(--font-questrial);
