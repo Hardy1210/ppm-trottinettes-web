@@ -27,7 +27,7 @@ export function PrimaryButton({
       )}
     >
       {children}
-      <span aria-hidden className="inline-block translate-y-[1px]">
+      <span aria-hidden className="inline-block translate-y-1px">
         ↗
       </span>
     </Link>

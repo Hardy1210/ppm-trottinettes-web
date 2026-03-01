@@ -18,7 +18,16 @@
   --font-title: var(--font-michroma);
   --font-body: var(--font-questrial);
 
-  --max-width-container: 1180px;
+  /* ✅ Breakpoints personalizados 
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 860px; /* antes 768px 
+  --breakpoint-lg: 1120px; /* antes 1024px 
+  --breakpoint-xl: 1440px; /* antes 1280px 
+  --breakpoint-2xl: 1680px; /* antes 1536px */
+
+  --max-width-container: 1280px;
+  --max-width-reading: 720px;
+  --max-width-wide: 1600px;
 }
 
 /* Opcional */
