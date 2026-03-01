@@ -1,17 +1,24 @@
 'use client';
 
+import { IntroLoader } from '@/components/animations/intro/IntroLoader';
+import ScrollIndicator from '@/components/animations/intro/ScrollIndicator';
+import { Section } from '@/components/layout/Section';
 import { useState } from 'react';
-import { IntroLoader } from './components/animations/intro/IntroLoader';
-import { Section } from './components/layout/Section';
+import { useIntroScrollReset } from './hooks/useIntroScrollReset';
 
 export default function HomeClient() {
   const [introDone, setIntroDone] = useState(false);
+
+  // 👇 Hook que controla scroll y reinicio seguro
+  useIntroScrollReset(setIntroDone);
+
   return (
     <>
+      <ScrollIndicator />
       {!introDone && (
         <IntroLoader
           onComplete={() => setIntroDone(true)}
-          imageHref="/textures/intro-texture.webp"
+          imageHref="/images/intro-texture.webp"
           brandYellow="#FFC700"
         />
       )}

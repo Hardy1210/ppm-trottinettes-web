@@ -1,0 +1,35 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 50;
+  mix-blend-mode: difference;
+
+  /* 🔑 crea un nuevo contexto de mezcla */
+  isolation: isolate;
+}
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+
+  /* “fondo” para que mix-blend tenga algo estable */
+  background: #000;
+
+  /* pero sin tapar visualmente el sitio */
+  opacity: 0;
+
+  pointer-events: none;
+}
+
+.nav {
+  position: relative;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  gap: 1.5rem;
+
+  /* blend en el texto */
+  mix-blend-mode: difference;
+  color: white;
+}

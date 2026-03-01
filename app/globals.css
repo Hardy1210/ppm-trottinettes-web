@@ -1,5 +1,18 @@
 @import 'tailwindcss';
+:root {
+  --brand-yellow: #e4e700;
+  --scrollbar-w: 10px;
+  --scrollbar-border: rgba(0, 0, 0, 0.9);
+}
 
+/* Oculta scrollbar nativo, mantiene scroll */
+html {
+  -ms-overflow-style: none; /* IE/Edge viejo */
+  scrollbar-width: none; /* Firefox */
+}
+html::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
 /* === Design tokens === */
 :root {
   --header-h: 80px;
