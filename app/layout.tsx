@@ -1,5 +1,6 @@
 import { Footer } from '@/components/layout/Footer';
 import { Header } from '@/components/layout/Header';
+import { IntroProvider } from '@/context/IntroContext';
 import type { Metadata } from 'next';
 import { Michroma, Questrial } from 'next/font/google';
 import './globals.css';
@@ -32,11 +33,13 @@ export default function RootLayout({
       <body
         className={`${michroma.variable} ${questrial.variable} antialiased`}
       >
-        <Header />
-        <SmoothScrollProvider>
-          <main>{children}</main>
-          <Footer />
-        </SmoothScrollProvider>
+        <IntroProvider>
+          <Header />
+          <SmoothScrollProvider>
+            <main>{children}</main>
+            <Footer />
+          </SmoothScrollProvider>
+        </IntroProvider>
       </body>
     </html>
   );
