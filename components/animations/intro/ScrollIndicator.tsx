@@ -12,7 +12,7 @@ type ScrollIndicatorProps = {
 };
 
 export default function ScrollIndicator({
-  color = '#FFC700',
+  color = '#e4e700',
   borderColor = 'rgba(0,0,0,0.9)',
   width = 10,
   hideAfterMs = 1200,

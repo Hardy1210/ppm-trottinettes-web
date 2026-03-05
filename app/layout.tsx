@@ -40,6 +40,7 @@ export default function RootLayout({
             <Footer />
           </SmoothScrollProvider>
         </IntroProvider>
+        <div id="modal-root" />
       </body>
     </html>
   );

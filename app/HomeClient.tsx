@@ -1,13 +1,14 @@
 'use client';
 
+import { HeroWindowsStack } from '@/components/animations/hero-window/HeroWindowsStack';
 import { IntroLoader } from '@/components/animations/intro/IntroLoader';
 import ScrollIndicator from '@/components/animations/intro/ScrollIndicator';
+import LogoHeroBg from '@/components/icons/LogoHeroBg';
 import { Section } from '@/components/layout/Section';
-import { HeroBackdrop } from '@/components/sections/HeroBackdrop';
+import WhyChooseUs from '@/components/sections/why-choose-us/WhyChooseUs';
 import { useIntroScrollReset } from '@/hooks/useIntroScrollReset';
 import { PrimaryButton } from '@/ui/Buttons';
 import gsap from 'gsap';
-import Image from 'next/image';
 import { useLayoutEffect, useRef, useState } from 'react';
 
 export default function HomeClient() {
@@ -43,83 +44,23 @@ export default function HomeClient() {
       {!introDone && (
         <IntroLoader
           imageHref="/images/intro-texture.webp"
-          brandYellow="#FFC700"
+          brandYellow="#e4e700"
         />
       )}
 
-      <Section className="hero">
-        <div ref={heroRef} className="text-white font-body">
-          <div className="h-screen mx-auto flex w-full flex-col items-center justify-center px-6 py-20">
-            <h1
-              data-hero-item
-              className="mb-6 text-4xl font-title text-ppmYellow"
-            >
-              Pile Power Mobilité
-            </h1>
-
-            <p
-              data-hero-item
-              className="mb-10 max-w-xl text-center text-lg opacity-80"
-            >
-              Test des nouveaux styles Tailwind v4 avec couleurs personnalisées,
-              container et typographie.
-            </p>
-
-            <div data-hero-item className="flex gap-4">
-              <button className="rounded-lg bg-ppmYellow px-6 py-3 font-semibold text-black transition hover:opacity-80">
-                Bouton primaire
-              </button>
-
-              <button className="rounded-lg border border-ppmYellow px-6 py-3 text-ppmYellow transition hover:bg-ppmYellow hover:text-black">
-                Bouton secondaire
-              </button>
-            </div>
-          </div>
-        </div>
-      </Section>
       <Section
         aria-label="Hero Pile Power Mobilité"
-        className="relative overflow-hidden bg-ppm-bg text-white"
+        className="relative bg-ppm-bg text-white "
       >
-        {/* Backdrop shapes */}
-        <HeroBackdrop />
+        {/* Backdrop shapes    <HeroBackdrop /> */}
 
         {/* Content wrapper */}
-        <div className="relative z-10 grid min-h-svh grid-cols-1 items-start gap-10 pb-10 pt-10 md:grid-cols-2 md:items-center md:gap-12 md:py-20">
+        <div className="relative z-10 grid  grid-cols-1 items-start gap-10 pb-10 pt-20 lg:grid-cols-2 md:items-center md:gap-10 md:py-26">
           {/* Left column */}
-          <div className="flex flex-col">
+
+          <div className="flex flex-col mb-0 sm:mb-5 md:mb-0">
             {/* (En tu screenshot móvil hay logo + icono menú arriba; navbar lo haces luego)
               Igual te dejo un placeholder superior para que no te rompa el layout. */}
-            <div className="mb-10 flex items-center justify-between md:hidden">
-              <div className="flex items-center gap-2" aria-label="PPM logo">
-                <span
-                  className="inline-block h-6 w-6 rounded-full bg-ppm-yellow"
-                  aria-hidden="true"
-                />
-                <span className="text-lg font-semibold tracking-wide">PPM</span>
-              </div>
-              <button
-                type="button"
-                aria-label="Open menu"
-                className="rounded-md p-2 outline-none ring-offset-2 focus-visible:ring-2 focus-visible:ring-ppm-yellow"
-              >
-                {/* icon simple */}
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                  className="opacity-90"
-                >
-                  <path
-                    d="M4 7h16M4 12h16M4 17h16"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                  />
-                </svg>
-              </button>
-            </div>
 
             <h1
               className="
@@ -142,7 +83,98 @@ export default function HomeClient() {
               font-body text-white/85
               text-[clamp(1rem,2.6vw,1.9rem)]
               
-              leading-tight
+              leading-tight pr-10
+            "
+            >
+              Nous accompagnons chaque utilisateur avec des solutions fiables,
+              rapides et adaptées pour garantir performance et sécurité au
+              quotidien.
+            </p>
+
+            {/* Desktop CTA sits under text (mobile CTA goes bottom like screenshot) */}
+            <div className="mt-20 hidden lg:block">
+              <PrimaryButton
+                href="#contact"
+                ariaLabel="Prendre rendez-vous"
+                className="min-w-[220px]"
+              >
+                Prendre RV
+              </PrimaryButton>
+            </div>
+          </div>
+
+          {/* Right / center media */}
+          <div className="relative aspect-square isolate">
+            <HeroWindowsStack
+              topSrc="/images/hero-tt.webp"
+              bottomSrc="/images/hero-b.webp"
+              maskUrl="/svg-mask/mask-hero.svg"
+              topCurtainColor="#e4e700" // color cortina ventana top
+              bottomCurtainColor="#e5e0d8" // color cortina ventana bottom
+              startDelay={0.5}
+              logo={
+                <LogoHeroBg
+                  className="w-[clamp(400px,160vw,2100px)] lg:w-[clamp(500px,80vw,1130px)] h-auto origin-right"
+                  color="currentColor"
+                  opacity={0.07}
+                  withStroke
+                  strokeWidth={10}
+                  d="M1262 33.7217C1395.92 -55.8149 1560 43.6065 1560 206.615C1560 248.799 1509.42 324.574 1443.58 433.922C1349.31 590.488 1330.71 627.338 1330.67 627.407L1345.26 641.064C1847.87 1175.57 1402.17 2038.31 675.959 1936.59L657.223 1933.97L652.381 1938.93C649.718 1941.65 576.076 2021.41 488.733 2116.17C401.391 2210.94 326.89 2291.4 323.177 2294.98C283.026 2333.69 226.121 2352.88 169.153 2346.94C49.6146 2334.45 -28.1347 2212.43 9.59473 2096.52C15.6952 2077.78 21.5567 2067.6 129.104 1889.13C186.445 1793.98 233.632 1715.42 233.963 1714.56C234.369 1713.5 230.839 1709.09 223.104 1701C1.217 1468.94 -51.2063 1116.68 93.1807 827.966C241.386 531.615 564.45 361.17 889.896 407.626L907.684 410.165L911.433 406.302C913.499 404.172 986.505 325.133 1073.67 230.656C1240.49 49.8554 1245.13 45.0034 1262 33.7217ZM1391.36 198.543C1398.41 178.721 1374.84 160.726 1357.08 172.363C1355.66 173.293 1266.93 268.931 1159.89 384.892C1015.09 541.773 964.846 595.588 963.56 595.188C657.396 499.279 324.899 665.156 215.66 968.303C122.96 1225.56 218.523 1518.44 445.025 1671.26C449.162 1674.05 452.546 1676.72 452.546 1677.2C452.546 1677.68 389.167 1783.3 311.704 1911.91C168.365 2149.88 167.627 2150.51 168.356 2158.55C169.828 2174.78 183.796 2183.83 198.989 2178.42C201.129 2177.65 203.845 2176.18 205.024 2175.15C206.537 2173.82 591.692 1756.97 599.463 1748.25C599.93 1747.73 606.267 1749.12 614.352 1751.52C937.265 1847.39 1277.94 1659.96 1370.04 1335.75C1440.14 1088.97 1342.19 821.685 1126.72 671.784C1119.63 666.854 1113.69 662.677 1113.51 662.496C1113.33 662.321 1175.45 558.777 1251.55 432.399C1327.65 306.021 1390.57 200.786 1391.36 198.543ZM1255.81 342.844C1258.07 340.206 1262.52 332.793 1036.72 707.771C916.008 908.221 815.952 1074.98 814.366 1078.35C794.762 1120.05 816.568 1173.18 860.008 1189.57C874.42 1195 875.835 1195.08 958.932 1195.08C1045.77 1195.08 1040.83 1192.62 1042.84 1200.1C1045.59 1210.37 1049.22 1201.93 675.277 1604.54C264.311 2047 302.935 2007.95 304.946 2004.54C305.774 2003.14 406.844 1835.23 529.546 1631.42C652.248 1427.6 753.951 1258.04 755.552 1254.63C771.713 1220.17 753.527 1174.28 717.781 1159.33C703.24 1153.24 704.563 1153.32 612.301 1153.3C522.801 1153.28 525.091 1153.41 522.398 1148.2C519.515 1142.63 520.347 1139.4 526.298 1133.07C533.593 1125.31 1254.02 344.917 1255.81 342.844Z"
+                  delay={1.25}
+                />
+              }
+            />
+          </div>
+
+          {/* Mobile CTA at bottom centered wide (like screenshot) */}
+          <div className="lg:hidden mx-auto w-full max-w-[360px] mt-10">
+            <PrimaryButton
+              href="#contact"
+              ariaLabel="Prendre rendez-vous"
+              className="mx-auto w-full max-w-[360px]"
+            >
+              Prendre RV
+            </PrimaryButton>
+          </div>
+        </div>
+      </Section>
+      <WhyChooseUs />
+      <Section
+        aria-label="Hero Pile Power Mobilité"
+        className="relative bg-ppm-bg text-white "
+      >
+        {/* Backdrop shapes    <HeroBackdrop /> */}
+
+        {/* Content wrapper */}
+        <div className="relative z-10 grid min-h-svh grid-cols-1 items-start gap-10 pb-10 pt-20 md:grid-cols-2 md:items-center md:gap-10 md:py-20">
+          {/* Left column */}
+
+          <div className="flex flex-col mb-0 sm:mb-5 md:mb-0">
+            {/* (En tu screenshot móvil hay logo + icono menú arriba; navbar lo haces luego)
+              Igual te dejo un placeholder superior para que no te rompa el layout. */}
+
+            <h1
+              className="
+              font-title
+              text-[clamp(2.8rem,8vw,4.8rem)]
+              leading-[1.1]
+              tracking-wide
+            "
+            >
+              Pile
+              <br />
+              Power
+              <br />
+              Mobilité
+            </h1>
+
+            <p
+              className="
+              mt-6 max-w-[42ch]
+              font-body text-white/85
+              text-[clamp(1rem,2.6vw,1.9rem)]
+              
+              leading-tight pr-10
             "
             >
               Nous accompagnons chaque utilisateur avec des solutions fiables,
@@ -163,72 +195,26 @@ export default function HomeClient() {
           </div>
 
           {/* Right / center media */}
-          <div className="relative flex items-center justify-center md:justify-end">
-            <div
-              className="
-              relative
-              w-full max-w-[420px]
-              md:max-w-[520px]
-            "
-              aria-label="Illustrations"
-            >
-              {/* “Circle” container like screenshot */}
-              <div
-                className="
-                relative aspect-square w-full
-                
-              "
-              >
-                {/* Top image (scooter) */}
-                <div
-                  className="
-                  absolute left-1/2 top-[18%]
-                  w-[82%]
-                  -translate-x-1/2
-                  drop-shadow-[0_18px_40px_rgba(0,0,0,0.35)]
-                  md:left-auto md:right-0 md:top-[10%] md:translate-x-0
-                  md:w-[78%]
-                "
-                  style={{
-                    clipPath: 'polygon(20% 0%, 100% 0%, 80% 100%, 0% 100%)',
-                  }}
-                >
-                  <div className="relative aspect-video w-full overflow-hidden rounded-sm">
-                    <Image
-                      src="/images/hero-t.webp"
-                      alt="Trottinette électrique en atelier"
-                      fill
-                      className="object-cover"
-                      priority
-                    />
-                  </div>
-                </div>
-
-                {/* Bottom image (repair) */}
-                <div
-                  className="
-                  absolute left-1/2 bottom-[6%]
-                  w-[82%]
-                  -translate-x-1/2
-                  drop-shadow-[0_18px_40px_rgba(0,0,0,0.35)]
-                  md:left-auto md:right-0 md:bottom-[0%] md:translate-x-0
-                  md:w-[78%]
-                "
-                  style={{
-                    clipPath: 'polygon(20% 0%, 100% 0%, 80% 100%, 0% 100%)',
-                  }}
-                >
-                  <div className="relative aspect-video w-full overflow-hidden rounded-sm">
-                    <Image
-                      src="/images/hero-b.webp"
-                      alt="Réparation et maintenance de trottinette"
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div className="relative aspect-square isolate">
+            <HeroWindowsStack
+              topSrc="/images/hero-t.webp"
+              bottomSrc="/images/hero-b.webp"
+              maskUrl="/svg-mask/mask-hero.svg"
+              topCurtainColor="#e5e0d8" // color cortina ventana top
+              bottomCurtainColor="#e4e700" // color cortina ventana bottom
+              startDelay={0.5}
+              logo={
+                <LogoHeroBg
+                  className="w-[clamp(400px,160vw,2100px)] md:w-[clamp(500px,80vw,1130px)] h-auto origin-right"
+                  color="currentColor"
+                  opacity={0.07}
+                  withStroke
+                  strokeWidth={10}
+                  d="M1273.55 43.0709C1343.14 -3.45594 1420.95 -0.981613 1481.28 34.5709C1541.52 70.0712 1584 138.323 1584 222.615C1584 234.614 1580.44 248.342 1574.52 263.466C1568.56 278.681 1559.99 295.871 1549.49 314.942C1528.51 353.005 1499.22 399.59 1466.43 454.048C1419.27 532.37 1391.08 580.686 1374.69 609.398C1366.49 623.753 1361.25 633.2 1358.07 639.041C1357.52 640.048 1357.03 640.948 1356.6 641.747L1366.72 651.224L1366.91 651.398L1367.08 651.584C1874.85 1191.58 1424.56 2063.29 690.846 1960.52V1960.52L676.116 1958.45L674.1 1960.52L674.101 1960.52C674.101 1960.52 674.093 1960.53 674.074 1960.54C674.055 1960.56 674.031 1960.59 673.999 1960.62C673.935 1960.69 673.851 1960.78 673.747 1960.89C673.537 1961.11 673.258 1961.41 672.908 1961.79C672.209 1962.53 671.245 1963.57 670.027 1964.88C667.593 1967.5 664.16 1971.21 659.84 1975.88C651.199 1985.22 639.017 1998.4 624.187 2014.46C594.528 2046.59 554.284 2090.22 510.614 2137.6C423.455 2232.16 348.67 2312.93 344.727 2316.73C302.825 2357.13 243.564 2377.08 184.321 2370.89C59.5712 2357.87 -21.2743 2230.65 17.9851 2110.04C21.2975 2099.86 24.623 2092.06 40.3728 2064.73C56.0938 2037.45 84.4997 1990.2 138.25 1901.01C166.919 1853.43 193.048 1810 212.052 1778.37C221.553 1762.55 229.272 1749.68 234.635 1740.71C237.216 1736.4 239.247 1732.99 240.668 1730.6C239.06 1728.67 236.647 1726.01 233.32 1722.53C9.08114 1488.01 -43.8634 1132.1 102.023 840.387C251.752 540.991 578.133 368.759 907.025 415.707L920.777 417.67L921.688 416.731L921.763 416.651C921.82 416.591 921.896 416.512 921.992 416.409C922.185 416.203 922.447 415.922 922.779 415.565C923.443 414.852 924.371 413.853 925.552 412.58C927.912 410.034 931.271 406.406 935.518 401.814C944.013 392.631 956.055 379.601 970.758 363.684C1000.16 331.85 1040.21 288.47 1083.79 241.231C1167.17 150.866 1210.1 104.38 1234.28 79.0905C1258.52 53.7466 1264.38 49.2054 1273.55 43.0709ZM1394.67 196.014C1389.86 192.339 1383.51 191.449 1378.04 194.693C1377.91 194.828 1377.75 194.992 1377.56 195.19C1376.84 195.938 1375.78 197.043 1374.4 198.503C1371.65 201.415 1367.66 205.666 1362.57 211.117C1352.39 222.015 1337.82 237.673 1319.96 256.931C1284.22 295.445 1235.28 348.34 1181.77 406.317C1109.37 484.759 1060.59 537.449 1029.75 570.482C1014.34 586.993 1003.38 598.62 996.179 606.105C992.59 609.838 989.886 612.593 988.014 614.422C987.095 615.321 986.281 616.091 985.62 616.664C985.315 616.928 984.87 617.302 984.372 617.646C984.148 617.801 983.658 618.129 983.006 618.43C982.681 618.58 982.085 618.833 981.302 619.004C980.659 619.144 979.236 619.378 977.514 618.922L977.166 618.822C675.122 524.203 346.98 687.872 239.184 987.014C147.724 1240.82 242.035 1529.85 465.498 1680.63C467.689 1682.11 469.738 1683.59 471.295 1684.82C472.053 1685.42 472.817 1686.05 473.45 1686.65C473.746 1686.93 474.185 1687.37 474.608 1687.89C474.813 1688.14 475.164 1688.6 475.501 1689.21C475.724 1689.61 476.544 1691.11 476.544 1693.2C476.512 1693.92 476.341 1694.99 476.25 1695.35C476.187 1695.57 476.068 1695.92 476.016 1696.06C475.915 1696.33 475.82 1696.53 475.781 1696.62C475.693 1696.8 475.613 1696.96 475.578 1697.03C475.495 1697.18 475.406 1697.34 475.335 1697.47C475.183 1697.74 474.976 1698.1 474.729 1698.52C474.23 1699.38 473.499 1700.63 472.554 1702.22C470.662 1705.42 467.877 1710.1 464.3 1716.09C457.143 1728.08 446.796 1745.35 434.031 1766.62C408.5 1809.17 373.288 1867.73 334.554 1932.03C262.858 2051.07 226.887 2110.64 208.915 2141.48C199.875 2156.99 195.59 2164.9 193.585 2169.36C192.597 2171.56 192.357 2172.51 192.294 2172.85C192.268 2172.99 192.245 2172.99 192.322 2173.83C192.858 2179.74 195.563 2183.74 198.878 2185.89C202.181 2188.03 206.839 2188.83 212.3 2186.88L212.795 2186.69C213.325 2186.47 213.947 2186.18 214.555 2185.85C214.947 2185.64 215.275 2185.44 215.52 2185.28C215.57 2185.25 215.611 2185.22 215.646 2185.19C215.835 2184.99 216.092 2184.72 216.419 2184.37C217.184 2183.55 218.303 2182.35 219.755 2180.78C222.657 2177.66 226.872 2173.11 232.218 2167.34C242.907 2155.8 258.106 2139.38 276.327 2119.68C312.769 2080.27 361.298 2027.77 410.023 1975.04C507.531 1869.51 605.669 1763.21 609.488 1758.93L609.49 1758.93C611.151 1757.06 613.138 1756.54 613.722 1756.4C614.544 1756.2 615.248 1756.16 615.646 1756.15C616.472 1756.12 617.251 1756.19 617.798 1756.26C618.962 1756.4 620.341 1756.66 621.762 1756.97C624.664 1757.61 628.467 1758.61 632.626 1759.85C951.264 1854.46 1287.46 1669.49 1378.34 1349.56C1447.48 1106.17 1350.9 842.363 1138.15 694.351C1134.59 691.879 1131.32 689.593 1128.91 687.9C1127.71 687.055 1126.72 686.35 1126 685.842C1125.65 685.591 1125.35 685.375 1125.12 685.21C1125.01 685.129 1124.89 685.042 1124.78 684.96C1124.73 684.921 1124.65 684.859 1124.56 684.787C1124.51 684.751 1124.44 684.691 1124.35 684.617C1124.3 684.57 1124.09 684.396 1123.85 684.154L1123.84 684.144L1123.83 684.134C1122.34 682.049 1121.5 678.573 1121.56 677.547C1121.63 677.068 1121.8 676.33 1121.88 676.067C1122.02 675.63 1122.17 675.299 1122.2 675.214C1122.31 674.975 1122.41 674.783 1122.44 674.721C1122.53 674.555 1122.62 674.389 1122.69 674.27C1122.83 674.009 1123.03 673.66 1123.27 673.253C1123.75 672.425 1124.46 671.22 1125.38 669.669C1127.22 666.559 1129.93 661.996 1133.43 656.14C1140.42 644.426 1150.55 627.512 1163.06 606.658C1188.09 564.948 1222.64 507.464 1260.7 444.272C1298.74 381.088 1333.49 323.192 1358.83 280.815C1371.5 259.625 1381.81 242.322 1389 230.18C1392.6 224.107 1395.4 219.339 1397.33 216.025C1398.3 214.365 1399.04 213.092 1399.53 212.212C1399.72 211.879 1399.86 211.62 1399.97 211.428C1401.87 205.506 1399.52 199.722 1394.67 196.014ZM1270.69 350.46C1272.4 350.104 1276 350.102 1278.56 353.286C1280.44 355.634 1280.34 358.143 1280.32 358.64C1280.26 360.034 1279.83 361.104 1279.8 361.166C1279.5 361.992 1279 362.878 1278.77 363.285C1278.41 363.935 1277.9 364.834 1277.19 366.047C1274.37 370.896 1268.05 381.492 1254.64 403.819C1227.81 448.514 1172.47 540.413 1059.57 727.897C999.213 828.122 944.023 919.922 903.725 987.085C883.576 1020.67 867.151 1048.09 855.667 1067.32C849.924 1076.93 845.42 1084.5 842.304 1089.76C840.746 1092.39 839.541 1094.44 838.705 1095.87C837.724 1097.55 837.507 1097.96 837.603 1097.75C820.012 1135.17 839.695 1183.32 878.829 1198.08H878.828C882.43 1199.44 884.75 1200.28 887.599 1200.91C890.462 1201.55 894.107 1202.04 900.156 1202.37C912.413 1203.06 933.236 1203.08 974.929 1203.08C1017.94 1203.08 1038.94 1202.46 1048.95 1202.79C1051.52 1202.87 1053.75 1203.02 1055.61 1203.33C1057.39 1203.63 1059.64 1204.18 1061.67 1205.6C1064.04 1207.26 1065.18 1209.4 1065.77 1211.1C1066.02 1211.83 1066.19 1212.52 1066.29 1212.93C1066.41 1213.44 1066.47 1213.69 1066.56 1214.03C1066.79 1214.88 1067.87 1217.91 1066.95 1221.77C1066.18 1224.99 1064.23 1228.18 1061.59 1231.76C1056.16 1239.13 1044.85 1251.97 1022.2 1276.61C976.698 1326.12 884.053 1424.73 697.136 1625.98C491.647 1847.22 398.574 1948.06 357.128 1993.16C336.409 2015.71 328.595 2024.32 326.091 2027.08C325.535 2027.69 325.114 2028.16 324.927 2028.35C324.901 2028.38 324.86 2028.42 324.809 2028.47C324.775 2028.5 324.662 2028.62 324.512 2028.75C324.425 2028.83 324.188 2029.03 324.036 2029.15C323.715 2029.39 322.353 2030.16 321.256 2030.55C316.114 2030.24 311.188 2023.79 311.463 2020.55C311.711 2019.84 312.166 2018.9 312.318 2018.64C312.53 2018.29 312.727 2018.04 312.742 2018.02C312.803 2017.94 312.853 2017.87 312.879 2017.84C312.932 2017.77 312.979 2017.72 313.003 2017.69C313.087 2017.59 313.218 2017.43 313.304 2017.33C313.527 2017.06 313.79 2016.75 314.018 2016.46C314.108 2016.35 314.167 2016.27 314.204 2016.23C318.65 2008.81 418.279 1843.3 538.69 1643.29C600.04 1541.38 656.139 1448.04 697.099 1379.75C717.58 1345.61 734.273 1317.73 745.946 1298.18C751.783 1288.4 756.361 1280.71 759.527 1275.36C761.111 1272.69 762.336 1270.61 763.185 1269.15C764.181 1267.45 764.404 1267.03 764.306 1267.23C778.475 1237.02 762.371 1195.96 730.691 1182.71C726.93 1181.13 724.855 1180.25 722.179 1179.58C719.519 1178.91 716.005 1178.38 709.727 1178.03C698.593 1177.39 680.046 1177.32 644.567 1177.3L628.297 1177.3C583.735 1177.29 561.588 1177.32 550.343 1176.68C545.044 1176.38 540.787 1175.91 537.645 1174.46C535.687 1173.56 534.143 1172.3 532.955 1170.71C532.067 1169.52 531.366 1168.02 531.291 1167.88C529.426 1164.27 527.994 1159.94 529.286 1154.92C530.423 1150.51 533.402 1146.85 536.467 1143.59C540.082 1139.75 721.981 942.741 903.262 746.372C993.887 648.204 1084.34 550.216 1152.24 476.645C1186.19 439.86 1214.51 409.178 1234.38 387.63C1244.32 376.857 1252.15 368.368 1257.53 362.541C1263.01 356.595 1265.74 353.627 1265.73 353.633C1265.8 353.56 1265.79 353.569 1265.92 353.415C1265.98 353.339 1266.17 353.117 1266.39 352.89C1266.48 352.788 1266.72 352.538 1267.05 352.258C1267.21 352.121 1267.51 351.866 1267.93 351.594C1268.22 351.41 1269.22 350.763 1270.69 350.46ZM325.346 2027.87C325.348 2027.86 325.355 2027.86 325.364 2027.85C325.365 2027.84 325.367 2027.84 325.369 2027.84C325.351 2027.86 325.345 2027.87 325.346 2027.87Z"
+                  delay={1.25}
+                />
+              }
+            />
           </div>
 
           {/* Mobile CTA at bottom centered wide (like screenshot) */}
@@ -245,4 +231,70 @@ export default function HomeClient() {
       </Section>
     </>
   );
+}
+
+{
+  /*
+  
+  <div
+              className="
+              relative
+              w-full max-w-[420px]
+              md:max-w-full
+            "
+              aria-label="Illustrations"
+            >
+              
+              <div
+                className="relative
+                aspect-square w-full "
+              >
+                
+                <div
+                  className="
+                  w-[82%]
+                  drop-shadow-[0_18px_40px_rgba(0,0,0,0.35)]
+                  md:left-auto md:right-0 md:top-0 md:translate-x-0
+                  md:w%]
+                "
+                  style={{
+                    clipPath: 'polygon(27% 0%, 100% 0%, 73% 100%, 0% 100%)',
+                  }}
+                >
+                  <div className="relative  aspect-video w-full overflow-hidden ">
+                    <Image
+                      src="/images/hero-t.webp"
+                      alt="Trottinette électrique en atelier"
+                      fill
+                      className="object-cover"
+                      priority
+                    />
+                  </div>
+                </div>
+
+             
+                <div
+                  className="
+                  absolute right-0 bottom-0
+                  w-[82%]
+                  
+                  drop-shadow-[0_18px_40px_rgba(0,0,0,0.35)]
+                 md:left-auto md:right-0 md:bottom-0 md:translate-x-0
+                  md:w-[84%]
+                "
+                  style={{
+                    clipPath: 'polygon(24% 0%, 100% 0%, 76% 100%, 0% 100%)',
+                  }}
+                >
+                  <div className="relative aspect-video w-full overflow-hidden ">
+                    <Image
+                      src="/images/hero-b.webp"
+                      alt="Réparation et maintenance de trottinette"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>*/
 }

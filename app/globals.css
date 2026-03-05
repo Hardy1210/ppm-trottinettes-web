@@ -1,6 +1,7 @@
 @import 'tailwindcss';
 :root {
   --brand-yellow: #e4e700;
+  --brand-text: #f1efe6;
   --scrollbar-w: 10px;
   --scrollbar-border: rgba(0, 0, 0, 0.9);
 }

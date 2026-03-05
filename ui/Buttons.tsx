@@ -26,10 +26,21 @@ export function PrimaryButton({
     'min-h-12 px-10',
     'bg-[var(--ppm-yellow)] text-[var(--ppm-bg)]',
     'font-title tracking-wide',
-    'transition-all duration-200',
     'relative',
+
+    // transición
+    'transition-all duration-300 ease-out',
+
+    // hover
+    'hover:-translate-y-[2px]',
+    'hover:shadow-[0_10px_25px_rgba(0,0,0,0.35)]',
+    'hover:brightness-110',
+
+    // active
+    'active:translate-y-[0px] active:brightness-95',
+
+    // focus accessibility
     'focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ppm-yellow)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--ppm-bg)]',
-    'hover:brightness-95',
     className,
   );
 

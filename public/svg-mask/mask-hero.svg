@@ -1,0 +1,8 @@
+<svg width="872" height="872" viewBox="0 0 872 872" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fondo TRANSPARENTE (alpha 0): NO se ve -->
+  <rect width="872" height="872" fill="black" fill-opacity="0"/>
+
+  <!-- Ventanas OPACAS (alpha 1): SÍ se ven -->
+  <path d="M695.856 1.50016H187.466L2.59672 411.491H510.987L695.856 1.50016Z" fill="black" fill-opacity="1"/>
+  <path d="M868.543 459.649H360.153L175.284 869.64H683.674L868.543 459.649Z" fill="black" fill-opacity="1"/>
+</svg>

@@ -4,33 +4,312 @@
   left: 0;
   width: 100%;
   z-index: 50;
-  mix-blend-mode: difference;
+  /* clave anti-parpadeo */
+  visibility: hidden;
+  /*  isolation: isolate;mix-blend-mode: difference;*/
 
-  /* 🔑 crea un nuevo contexto de mezcla */
-  isolation: isolate;
-  opacity: 0;
+  /* GSAP */
+
+  .backdrop {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+
+    background: rgba(0, 0, 0, 0.25);
+
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .inner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 15px 20px;
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    margin-right: 15px;
+
+    /*mix-blend-mode: difference;*/
+    color: #fff;
+
+    .brandIcon {
+      width: 26px;
+      height: 18px;
+      border-radius: 999px;
+      background: currentColor;
+      opacity: 0.9;
+    }
+
+    .brandText {
+      font-weight: 700;
+      letter-spacing: 0.06em;
+    }
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+
+    /*mix-blend-mode: difference;*/
+    color: #fff;
+
+    /* ✅ LISTA: NO mobile/tablet, SÍ lg+ */
+    .navList {
+      display: none;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      @media (min-width: 1024px) {
+        display: flex;
+        align-items: center;
+        gap: 26px;
+      }
+
+      .navItem {
+        position: relative;
+      }
+
+      .navLink {
+        position: relative;
+        display: inline-block;
+        padding: 6px 2px;
+        text-decoration: none;
+        color: inherit;
+        font-size: 13px;
+        letter-spacing: 0.02em;
+        opacity: 0.95;
+
+        &::after {
+          content: '';
+          position: absolute;
+          left: 0;
+          bottom: -6px;
+          width: 100%;
+          height: 2px;
+          background: currentColor;
+
+          transform: scaleX(0);
+          transform-origin: left center;
+          transition: transform 260ms ease;
+        }
+
+        &:hover::after {
+          transform: scaleX(1);
+        }
+      }
+
+      .isActive {
+        &::after {
+          transform: scaleX(1);
+        }
+      }
+    }
+
+    /* ✅ BURGER: SÍ mobile/tablet, NO lg+ */
+    .burgerBtn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      appearance: none;
+      border: 0;
+      background: transparent;
+      padding: 8px;
+      cursor: pointer;
+      color: inherit;
+      @media (min-width: 1024px) {
+        display: none;
+      }
+
+      .burgerIcon {
+        position: relative;
+        width: 28px;
+        height: 18px;
+        display: inline-block;
+
+        span {
+          position: absolute;
+          left: 0;
+          width: 100%;
+          height: 2px;
+          background: currentColor;
+          border-radius: 99px;
+
+          transition:
+            transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+            top 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+            opacity 0.25s ease;
+
+          &:nth-child(1) {
+            top: 3px;
+          }
+
+          &:nth-child(2) {
+            top: 13px;
+          }
+        }
+      }
+    }
+
+    /* estado abierto */
+
+    .isOpen {
+      .burgerIcon {
+        span:nth-child(1) {
+          top: 8px;
+          transform: rotate(45deg);
+        }
+
+        span:nth-child(2) {
+          top: 8px;
+          transform: rotate(-45deg);
+        }
+      }
+    }
+
+    /* Botón tel */
+    .phoneBtn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      height: 34px;
+      padding: 0 14px;
+
+      border: 3px solid rgba(255, 255, 255, 0.65);
+      text-decoration: none;
+      color: inherit;
+
+      clip-path: polygon(8% 0%, 100% 0%, 92% 100%, 0% 100%);
+
+      transition:
+        background-color 240ms ease,
+        border-color 240ms ease;
+
+      .phoneBtnText {
+        font-size: 12px;
+        letter-spacing: 0.02em;
+        transition: color 240ms ease;
+      }
+
+      &:hover {
+        background: #fff;
+        border-color: rgba(255, 255, 255, 0.95);
+
+        .phoneBtnText {
+          color: #000;
+          /*mix-blend-mode: difference;*/
+        }
+      }
+    }
+  }
 }
-
-.backdrop {
-  position: absolute;
+/* ✅ OVERLAY: opaca TODA la página (mobile/tablet) */
+.desktopMenuOverlay {
+  position: fixed;
   inset: 0;
+  z-index: 9999;
 
-  /* “fondo” para que mix-blend tenga algo estable */
-  background: #000;
-
-  /* pero sin tapar visualmente el sitio */
   opacity: 0;
-
   pointer-events: none;
+
+  /* importante: que sea semi-transparente, no muy oscuro */
+  background-color: rgba(0, 0, 0, 0.28);
+
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+
+  /* 💡 para test: comenta este bloque si estás en desktop */
+  @media (min-width: 1024px) {
+    display: none;
+  }
+
+  /* Panel */
+  .desktopMenuPanel {
+    position: absolute;
+    top: 76px;
+    right: 18px;
+    width: min(420px, calc(100vw - 36px));
+    padding: 18px 18px 14px;
+    border-radius: 18px;
+
+    background: rgba(20, 20, 20, 0.86);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 22px 60px rgba(0, 0, 0, 0.45);
+
+    transform-origin: top right;
+
+    .desktopMenuList {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 10px;
+
+      .desktopMenuItem {
+        position: relative;
+      }
+
+      .desktopMenuLink {
+        display: block;
+        padding: 12px 12px;
+        border-radius: 12px;
+        text-decoration: none;
+        color: #fff;
+        letter-spacing: 0.02em;
+        font-size: 14px;
+        opacity: 0.95;
+        transition:
+          background-color 200ms ease,
+          opacity 200ms ease;
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.08);
+          opacity: 1;
+        }
+      }
+
+      .desktopMenuActive {
+        background: rgba(255, 255, 255, 0.1);
+      }
+    }
+
+    .desktopMenuFooter {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      display: flex;
+      justify-content: flex-end;
+
+      .desktopMenuPhone {
+        text-decoration: none;
+        color: #fff;
+        opacity: 0.9;
+        font-size: 13px;
+        letter-spacing: 0.02em;
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+  }
 }
 
-.nav {
-  position: relative;
-  padding: 1.25rem 1.5rem;
-  display: flex;
-  gap: 1.5rem;
-
-  /* blend en el texto */
-  mix-blend-mode: difference;
-  color: white;
+/* ✅ Clase opcional para habilitar clicks cuando está abierto */
+.isOpen {
+  pointer-events: auto;
 }
