@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 :root {
   --brand-yellow: #e4e700;
-  --brand-text: #f1efe6;
+  --brand-text: #dededd;
   --scrollbar-w: 10px;
   --scrollbar-border: rgba(0, 0, 0, 0.9);
 }
@@ -19,6 +19,7 @@ html::-webkit-scrollbar {
   --header-h: 80px;
   --ppm-bg: #1e2126;
   --ppm-yellow: #e4e700;
+  --color-brandText: #dededd;
 
   --font-title: var(--font-michroma);
   --font-body: var(--font-questrial);
@@ -31,6 +32,7 @@ html::-webkit-scrollbar {
 
   --font-title: var(--font-michroma);
   --font-body: var(--font-questrial);
+  --color-brandText: var(--brand-text);
 
   /* ✅ Breakpoints personalizados 
   --breakpoint-sm: 640px;

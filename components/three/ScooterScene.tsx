@@ -41,7 +41,7 @@ function ScooterModel({
       <pointLight
         ref={lightRef}
         intensity={45}
-        distance={10}
+        distance={15}
         decay={2}
         position={[2, 2, 2]}
         color="#ffffff"
@@ -83,15 +83,7 @@ export default function ScooterScene({ modelUrl }: ScooterSceneProps) {
         camera={{ position: [-0.2, -0.65, 7], fov: 30, near: 0.01, far: 200 }}
         gl={{ antialias: true, alpha: true }}
       >
-        <ambientLight intensity={0.35} />
-
-        <directionalLight
-          intensity={1.2}
-          position={[-2, 3, 2]}
-          castShadow
-          shadow-mapSize-width={1024}
-          shadow-mapSize-height={1024}
-        />
+        <ambientLight intensity={-1.05} />
 
         <Suspense fallback={null}>
           <ScooterModel url={modelUrl} targetLight={targetLight} />
@@ -102,7 +94,7 @@ export default function ScooterScene({ modelUrl }: ScooterSceneProps) {
 
         <mesh
           rotation={[-Math.PI / 2, 0, 0]}
-          position={[0, -0.25, 0]}
+          position={[0, -1.0, 0]}
           receiveShadow
         >
           <planeGeometry args={[20, 20]} />

@@ -1,0 +1,33 @@
+.root {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.desktopMedia {
+  position: absolute;
+  left: -220%;
+  bottom: -160%;
+  width: 2900px;
+  height: 2500px;
+}
+
+.mobileMedia {
+  position: absolute;
+  inset: 0;
+}
+.mobileImage {
+  position: absolute;
+  left: -70%;
+  bottom: 60%;
+  width: 180%;
+  height: auto;
+  max-width: none;
+}
+
+@media (min-width: 767px) {
+  .mobileImage {
+    left: -60%;
+    bottom: -45%;
+  }
+}

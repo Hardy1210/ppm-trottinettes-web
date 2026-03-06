@@ -8,7 +8,7 @@
 .inner {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 84px 24px;
+  padding: 84px 0px;
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
   gap: 48px;
@@ -16,7 +16,10 @@
 
   @media (max-width: 900px) {
     grid-template-columns: 1fr;
-    padding: 64px 18px;
+    //padding: 64px 18px;
+    .left {
+      order: 2;
+    }
   }
 }
 
@@ -37,40 +40,51 @@
   min-height: 520px;
 }
 
-/* El área del 3D NO recorta nada */
 .scooterStage {
   position: absolute;
-  left: -220%; /* ⬅️ para que salga hacia la izquierda como mockup */
-  bottom: -130%; /* ⬅️ lo bajas para que “pise” el borde inferior */
-  width: 2900px; /* ⬅️ tamaño grande */
-  height: 2420px;
-  pointer-events: auto; /* o none si quieres que el mouse pase */
+  inset: 0;
+}
+/*
+.left {
+  position: relative;
+  min-height: 520px;
 }
 
-/* Opcional: un “marco” visual redondeado SIN recortar el 3D */
-.scooterStage::before {
+ El área del 3D NO recorta nada 
+.scooterStage {
+  position: absolute;
+  left: -220%; ⬅️ para que salga hacia la izquierda como mockup 
+  bottom: -160%; ⬅️ lo bajas para que “pise” el borde inferior 
+  width: 2900px; ⬅️ tamaño grande 
+  height: 2500px;
+  pointer-events: auto; /* o none si quieres que el mouse pase 
+}*/
+
+/* Opcional: un “marco” visual redondeado SIN recortar el 3D .scooterStage::before {
   content: '';
   position: absolute;
   inset: 0;
   border-radius: 22px;
   border: 1px solid rgba(255, 255, 255, 0.06);
   pointer-events: none;
-  /* NO overflow aquí */
-}
+ 
+}*/
 
 .right {
   position: absolute;
-  color: #f1efe6; // tu --brand-text
+  color: var(--brand-text); // tu --brand-text
   top: 0;
   right: 50%;
 
-  transform: translate(95%, 20%);
+  transform: translate(90%, 15%);
+  max-width: 570px;
 }
 
 .kicker {
-  font-size: 26px;
+  font-size: 2rem;
   letter-spacing: 0.2px;
-  margin: 0 0 18px 0;
+  font-family: var(--font-questrial);
+  margin: 0 0 25px 0;
 }
 
 .list {
@@ -84,35 +98,61 @@
 .item {
   display: grid;
   grid-template-columns: 56px 1fr;
-  gap: 14px;
-  align-items: start;
+  gap: 50px;
+  align-items: center;
 }
 
 .iconWrap {
+  position: relative;
   width: 56px;
   height: 56px;
   display: grid;
   place-items: center;
+  margin-right: 1rem;
 }
-
-.iconPlaceholder {
-  width: 40px;
-  height: 40px;
-  border-radius: 12px;
-  border: 1px solid rgba(228, 231, 0, 0.7); // --ppm-yellow
-  box-shadow: 0 0 0 6px rgba(228, 231, 0, 0.12) inset;
-  opacity: 0.9;
+.iconShape {
+  position: absolute;
+  left: -30px;
+  bottom: -20px;
+}
+.iconTop {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  // opcional: si tu icono usa currentColor
+  // color: var(--brand-yellow);
 }
 
 .title {
   margin: 0;
-  font-size: 18px;
-  font-weight: 600;
+  font-size: clamp(1.2rem, 2.2vw, 1.5rem);
+  font-family: var(--font-michroma);
 }
 
 .desc {
-  margin: 6px 0 0 0;
-  font-size: 14px;
-  line-height: 1.5;
-  opacity: 0.9;
+  margin: 10px 0 0 0;
+  font-size: clamp(1rem, 2.2vw, 1.45rem);
+  font-family: var(--font-questrial);
+  //line-height: 1.5;
+}
+@media (max-width: 767px) {
+  .inner {
+    padding: 3rem 0;
+  }
+  .left {
+    position: relative;
+  }
+  .right {
+    position: relative; // o static
+    top: auto;
+    right: auto;
+    transform: none;
+    max-width: none;
+    width: 100%;
+  }
+  .list {
+    padding: 0 0rem 0 1.25rem;
+  }
 }
