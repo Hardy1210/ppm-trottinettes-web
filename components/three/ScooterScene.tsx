@@ -76,7 +76,7 @@ export default function ScooterScene({ modelUrl }: ScooterSceneProps) {
       }}
     >
       <Canvas
-        style={{ border: '1px solid red' }}
+        //style={{ border: '1px solid red' }}
         shadows
         dpr={[1, 2]}
         // ✅ tus valores (no los cambio)

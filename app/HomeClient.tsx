@@ -5,6 +5,7 @@ import { IntroLoader } from '@/components/animations/intro/IntroLoader';
 import ScrollIndicator from '@/components/animations/intro/ScrollIndicator';
 import LogoHeroBg from '@/components/icons/LogoHeroBg';
 import { Section } from '@/components/layout/Section';
+import { QualityBlock } from '@/components/sections/QualityBlock';
 import WhyChooseUs from '@/components/sections/why-choose-us/WhyChooseUs';
 import { useIntroScrollReset } from '@/hooks/useIntroScrollReset';
 import { PrimaryButton } from '@/ui/Buttons';
@@ -137,15 +138,53 @@ export default function HomeClient() {
               </PrimaryButton>
             </div>
           </div>
-          <div className="flex flex-col items-start gap-8 text-white/80">
-            <span className="rotate-90 origin-left whitespace-nowrap text-xs tracking-[0.35em] font-light">
+          <div className="absolute flex flex-col items-start gap-8 font-body text-brandTex bottom-1²0 md:-bottom-92">
+            <span className="rotate-90 origin-left whitespace-nowrap text-[0.6rem] tracking-[0.35em] font-light">
               SCROLL FOR MORE
             </span>
 
-            <span className="w-px h-40 bg-white/60 animate-pulse"></span>
+            <span className="w-px h-20 md:h-40 bg-brandBbgSecondary/50 animate-pulse mt-32"></span>
           </div>
         </Section>
         <WhyChooseUs />
+
+        <QualityBlock
+          description="Atelier spécialisé en trottinettes électriques, créé pour offrir une solution plus rapide, plus fiable et moins chère que le SAV classique."
+          visuals={[
+            {
+              title: 'Roue',
+              imageSrc: '/images/wheel.png',
+              imageAlt: 'Roue de trottinette',
+            },
+            {
+              title: 'Batterie',
+              imageSrc: '/images/battery.png',
+              imageAlt: 'Batterie de trottinette',
+            },
+          ]}
+          brands={[
+            {
+              name: 'Segway',
+              logo: <img src="/icons/segway.svg" alt="Segway" />,
+            },
+            {
+              name: 'Bosch',
+              logo: <img src="/icons/bosch.svg" alt="Bosch" />,
+            },
+            {
+              name: 'Kaabo',
+              logo: <img src="/icons/kaabo.svg" alt="Kaabo" />,
+            },
+            {
+              name: 'Makita',
+              logo: <img src="/icons/makita.svg" alt="Makita" />,
+            },
+            {
+              name: 'Xiaomi',
+              logo: <img src="/icons/xiaomi.svg" alt="Xiaomi" />,
+            },
+          ]}
+        />
       </div>
     </>
   );

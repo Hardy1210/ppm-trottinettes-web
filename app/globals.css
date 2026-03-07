@@ -2,6 +2,7 @@
 :root {
   --brand-yellow: #e4e700;
   --brand-text: #dededd;
+  --brand-bg-secondary: #dededd;
   --scrollbar-w: 10px;
   --scrollbar-border: rgba(0, 0, 0, 0.9);
 }
@@ -20,6 +21,7 @@ html::-webkit-scrollbar {
   --ppm-bg: #1e2126;
   --ppm-yellow: #e4e700;
   --color-brandText: #dededd;
+  --color-brand-bg-secondary: #dededd;
 
   --font-title: var(--font-michroma);
   --font-body: var(--font-questrial);
@@ -29,7 +31,7 @@ html::-webkit-scrollbar {
 @theme inline {
   --color-ppmBg: var(--ppm-bg);
   --color-ppmYellow: var(--ppm-yellow);
-
+  --color-brandBbgSecondary: var(--color-brand-bg-secondary);
   --font-title: var(--font-michroma);
   --font-body: var(--font-questrial);
   --color-brandText: var(--brand-text);

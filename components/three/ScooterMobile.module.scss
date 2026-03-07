@@ -20,14 +20,14 @@
   position: absolute;
   left: -70%;
   bottom: 60%;
-  width: 180%;
+  width: clamp(120%, 155vw, 180%);
   height: auto;
   max-width: none;
 }
 
 @media (min-width: 767px) {
   .mobileImage {
-    left: -60%;
-    bottom: -45%;
+    left: -77%;
+    bottom: -42%;
   }
 }
