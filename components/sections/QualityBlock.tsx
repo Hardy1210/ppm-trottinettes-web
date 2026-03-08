@@ -2,6 +2,7 @@ import { Section } from '@/components/layout/Section';
 import TitleAccentLine from '@/ui/TitleAccentLine';
 import YellowPanelShape from '@/ui/YellowPanelShape';
 import Image from 'next/image';
+import BrandsMarquee from '../animations/marquee/BrandsMarquee';
 
 type BrandItem = {
   name: string;
@@ -19,6 +20,7 @@ type QualityBlockProps = {
   description: string;
   visuals: VisualItem[];
   brands: BrandItem[];
+  brandsMobile: BrandItem[];
 };
 
 export function QualityBlock({
@@ -26,13 +28,14 @@ export function QualityBlock({
   description,
   visuals,
   brands,
+  brandsMobile,
 }: QualityBlockProps) {
   const titleLines = title.split('\n');
 
   return (
     <section className="relative -mt-96 sm:-mt-100 md:mt-22 lg:mt-[10.3rem] w-full overflow-hidden bg-ppmBg">
       {/* fondo desktop/tablet */}
-      <YellowPanelShape className="absolute left-[-35%] hidden h-full w-full md:block" />
+      <YellowPanelShape className="absolute left-[-40%] hidden h-full w-full md:block" />
 
       <Section innerClassName="px-0 py-0">
         <div className="relative">
@@ -61,35 +64,64 @@ export function QualityBlock({
             </div>
 
             {/* Columna 2 */}
-            <div className="relative flex flex-col items-center justify-center gap-24 px-4">
+            <div className="relative flex flex-col items-center justify-center gap-24 ">
               {visuals.slice(0, 2).map((item, idx) => (
                 <div
                   key={idx}
-                  className="relative flex h-[118px] w-[118px] items-center justify-center rounded-[18px] bg-white shadow-[0_8px_24px_rgba(0,0,0,0.18)] lg:h-[132px] lg:w-[132px]"
+                  className="relative flex h-[118px] w-[118px] items-center justify-center rounded-[18px] bg-white shadow-[0_8px_24px_rgba(0,0,0,0.18)] lg:h-[142px] lg:w-[142px]"
                 >
                   <Image
                     src={item.imageSrc}
                     alt={item.imageAlt}
                     width={100}
                     height={100}
-                    className="h-auto w-[78%] object-contain"
+                    className="h-auto w-full object-contain rounded-[18px]"
                   />
                 </div>
               ))}
             </div>
 
             {/* Columna 3 */}
-            <div className="flex flex-col justify-center gap-10 px-6 lg:px-10">
-              {brands.map((brand, idx) => (
-                <div
-                  key={idx}
-                  className="flex items-center justify-start text-white/90"
-                >
+            <div className="relative min-h-[520px] md:mr-5 xl:mr-0">
+              {brands[0] && (
+                <div className="absolute top-[2%] right-[0%] text-white/90">
                   <div className="max-w-[170px] lg:max-w-[190px] [&_img]:max-h-[28px] [&_img]:w-auto [&_svg]:max-h-[28px] [&_svg]:w-auto">
-                    {brand.logo}
+                    {brands[0].logo}
                   </div>
                 </div>
-              ))}
+              )}
+
+              {brands[1] && (
+                <div className="absolute top-[20%] left-[8%] text-white/90">
+                  <div className="max-w-[170px] lg:max-w-[190px] [&_img]:max-h-[28px] [&_img]:w-auto [&_svg]:max-h-[28px] [&_svg]:w-auto">
+                    {brands[1].logo}
+                  </div>
+                </div>
+              )}
+
+              {brands[2] && (
+                <div className="absolute top-[42%] right-[0%] text-white/90">
+                  <div className="max-w-[170px] lg:max-w-[190px] [&_img]:max-h-[28px] [&_img]:w-auto [&_svg]:max-h-[28px] [&_svg]:w-auto">
+                    {brands[2].logo}
+                  </div>
+                </div>
+              )}
+
+              {brands[3] && (
+                <div className="absolute top-[65%] left-[10%] text-white/90">
+                  <div className="max-w-[170px] lg:max-w-[190px] [&_img]:max-h-[28px] [&_img]:w-auto [&_svg]:max-h-[28px] [&_svg]:w-auto">
+                    {brands[3].logo}
+                  </div>
+                </div>
+              )}
+
+              {brands[4] && (
+                <div className="absolute bottom-[2%] right-[0%] text-white/90">
+                  <div className="max-w-[170px] lg:max-w-[190px] [&_img]:max-h-[28px] [&_img]:w-auto [&_svg]:max-h-[28px] [&_svg]:w-auto">
+                    {brands[4].logo}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
 
@@ -124,42 +156,33 @@ export function QualityBlock({
 
             {/* visual 1 */}
             {visuals[0] && (
-              <div className="relative right-5 z-10 flex h-[86px] w-[86px] items-center justify-center self-center justify-self-center rounded-[16px] bg-white p-2 shadow-[0_8px_24px_rgba(0,0,0,0.18)]">
+              <div className="relative right-5 z-10 flex h-[110px] w-[110px] items-center justify-center self-center justify-self-center rounded-[16px] bg-white shadow-[0_8px_24px_rgba(0,0,0,0.18)]">
                 <Image
                   src={visuals[0].imageSrc}
                   alt={visuals[0].imageAlt}
-                  width={80}
-                  height={80}
-                  className="h-auto w-[76%] object-contain"
+                  width={100}
+                  height={100}
+                  className="h-auto w-auto object-contain rounded-[16px]"
                 />
               </div>
             )}
 
             {/* visual 2 */}
             {visuals[1] && (
-              <div className="relative right-5 z-10 flex h-[86px] w-[86px] items-center justify-center self-center justify-self-center rounded-[16px] bg-white p-2 shadow-[0_8px_24px_rgba(0,0,0,0.18)]">
+              <div className="relative right-5 z-10 flex h-[110px] w-[110px] items-center justify-center self-center justify-self-center rounded-[16px] bg-white shadow-[0_8px_24px_rgba(0,0,0,0.18)]">
                 <Image
                   src={visuals[1].imageSrc}
                   alt={visuals[1].imageAlt}
-                  width={80}
-                  height={80}
-                  className="h-auto w-[76%] object-contain"
+                  width={100}
+                  height={100}
+                  className="h-auto w-auto object-contain rounded-[16px]"
                 />
               </div>
             )}
 
             {/* marcas abajo */}
-            <div className="col-span-2 overflow-hidden border-t border-white/10 pt-5 pb-6 mt-24">
-              <div className="flex w-max items-center gap-8 whitespace-nowrap">
-                {[...brands, ...brands].map((brand, idx) => (
-                  <div
-                    key={idx}
-                    className="flex h-[24px] items-center text-white/90 [&_img]:max-h-[18px] [&_img]:w-auto [&_svg]:max-h-[18px] [&_svg]:w-auto"
-                  >
-                    {brand.logo}
-                  </div>
-                ))}
-              </div>
+            <div className="col-span-2">
+              <BrandsMarquee brandsMobile={brandsMobile} />
             </div>
           </div>
         </div>

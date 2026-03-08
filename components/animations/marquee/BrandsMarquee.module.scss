@@ -1,0 +1,42 @@
+.marquee {
+  overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 1.25rem;
+  padding-bottom: 1.5rem;
+  margin-top: 6rem;
+}
+
+.track {
+  display: flex;
+  width: max-content;
+  align-items: center;
+  gap: 3rem;
+  white-space: nowrap;
+  animation: marquee 18s linear infinite;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  height: 28px;
+  color: rgb(255 255 255 / 0.9);
+
+  :global(img) {
+    max-height: 28px;
+    width: auto;
+  }
+
+  :global(svg) {
+    max-height: 28px;
+    width: auto;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}

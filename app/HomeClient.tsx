@@ -3,16 +3,26 @@
 import { HeroWindowsStack } from '@/components/animations/hero-window/HeroWindowsStack';
 import { IntroLoader } from '@/components/animations/intro/IntroLoader';
 import ScrollIndicator from '@/components/animations/intro/ScrollIndicator';
+import { Bosch } from '@/components/icons/Bosch';
+import { Hikoki } from '@/components/icons/Hikoki';
+import { Kaabo } from '@/components/icons/Kaabo';
 import LogoHeroBg from '@/components/icons/LogoHeroBg';
+import { Makita } from '@/components/icons/Makita';
+import { Xiaomi } from '@/components/icons/Xiaomi';
 import { Section } from '@/components/layout/Section';
 import { QualityBlock } from '@/components/sections/QualityBlock';
+import { WhiteSectionServices } from '@/components/sections/WhiteSectionServices';
 import WhyChooseUs from '@/components/sections/why-choose-us/WhyChooseUs';
 import { useIntroScrollReset } from '@/hooks/useIntroScrollReset';
 import { PrimaryButton } from '@/ui/Buttons';
 import gsap from 'gsap';
 import { useLayoutEffect, useRef, useState } from 'react';
+import { servicesItems } from './_data/WhiteServices';
+
+//import { getHomeData } from "@/lib/sanity.queries";
 
 export default function HomeClient() {
+  //const data = await getHomeData()
   const [introDone, setIntroDone] = useState(false);
 
   const heroRef = useRef<HTMLDivElement | null>(null);
@@ -48,7 +58,7 @@ export default function HomeClient() {
           brandYellow="#e4e700"
         />
       )}
-      <div className="overflow-hidden h-[500vh]">
+      <div className="overflow-hidden ">
         <Section
           aria-label="Hero Pile Power Mobilité"
           className="relative bg-ppm-bg text-brandText "
@@ -138,7 +148,7 @@ export default function HomeClient() {
               </PrimaryButton>
             </div>
           </div>
-          <div className="absolute flex flex-col items-start gap-8 font-body text-brandTex bottom-1²0 md:-bottom-92">
+          <div className="absolute flex flex-col items-start gap-8 font-body text-brandTex bottom-10 md:-bottom-92">
             <span className="rotate-90 origin-left whitespace-nowrap text-[0.6rem] tracking-[0.35em] font-light">
               SCROLL FOR MORE
             </span>
@@ -153,23 +163,32 @@ export default function HomeClient() {
           visuals={[
             {
               title: 'Roue',
-              imageSrc: '/images/wheel.png',
+              imageSrc: '/images/wheel.webp',
               imageAlt: 'Roue de trottinette',
             },
             {
               title: 'Batterie',
-              imageSrc: '/images/battery.png',
+              imageSrc: '/images/battery.webp',
               imageAlt: 'Batterie de trottinette',
             },
           ]}
           brands={[
             {
               name: 'Segway',
-              logo: <img src="/icons/segway.svg" alt="Segway" />,
+              /* eslint-disable @next/next/no-img-element */
+              logo: (
+                <img src="/icons/hikoki.svg" alt="Segway" className="h-5" />
+              ),
             },
             {
               name: 'Bosch',
-              logo: <img src="/icons/bosch.svg" alt="Bosch" />,
+              logo: (
+                <img
+                  src="/icons/bosch.svg"
+                  alt="Bosch"
+                  className="h-[1.23rem]"
+                />
+              ),
             },
             {
               name: 'Kaabo',
@@ -177,13 +196,46 @@ export default function HomeClient() {
             },
             {
               name: 'Makita',
-              logo: <img src="/icons/makita.svg" alt="Makita" />,
+              logo: (
+                <img
+                  src="/icons/makita3.svg"
+                  alt="Makita"
+                  className=" h-[1.20rem]"
+                />
+              ),
             },
             {
               name: 'Xiaomi',
-              logo: <img src="/icons/xiaomi.svg" alt="Xiaomi" />,
+              logo: <img src="/icons/xiaomi.svg" alt="Xiaomi" className="" />,
             },
           ]}
+          brandsMobile={[
+            {
+              name: 'Segway',
+              logo: <Hikoki className="h-[18px] w-auto" />,
+            },
+            {
+              name: 'Bosch',
+              logo: <Bosch className="h-[20px] w-auto" />,
+            },
+            {
+              name: 'Kaabo',
+              logo: <Kaabo className="h-[28px] w-auto" />,
+            },
+            {
+              name: 'Makita',
+              logo: <Makita className="h-[20px] w-auto" />,
+            },
+            {
+              name: 'Xiaomi',
+              logo: <Xiaomi className="h-[28px] w-auto" />,
+            },
+          ]}
+        />
+        <WhiteSectionServices
+          items={servicesItems}
+          ctaHref="#contact"
+          ctaLabel="Contact"
         />
       </div>
     </>

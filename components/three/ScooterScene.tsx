@@ -83,7 +83,7 @@ export default function ScooterScene({ modelUrl }: ScooterSceneProps) {
         camera={{ position: [-0.2, -0.65, 7], fov: 30, near: 0.01, far: 200 }}
         gl={{ antialias: true, alpha: true }}
       >
-        <ambientLight intensity={-1.05} />
+        <ambientLight intensity={0.5} />
 
         <Suspense fallback={null}>
           <ScooterModel url={modelUrl} targetLight={targetLight} />
@@ -91,7 +91,7 @@ export default function ScooterScene({ modelUrl }: ScooterSceneProps) {
         </Suspense>
 
         <OrbitControls enableZoom={false} />
-
+        {/*<OrbitControls enableZoom={false} enableRotate={false} enablePan={false} />*/}
         <mesh
           rotation={[-Math.PI / 2, 0, 0]}
           position={[0, -1.0, 0]}
