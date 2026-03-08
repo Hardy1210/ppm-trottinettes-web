@@ -67,10 +67,15 @@ function DesktopPinnedShowcase({
   const wrapperRef = useRef<HTMLDivElement | null>(null);
   const stickyRef = useRef<HTMLDivElement | null>(null);
 
-  const leftRef = useRef<HTMLDivElement | null>(null);
-  const rightRef = useRef<HTMLDivElement | null>(null);
+  const titleRef = useRef<HTMLDivElement | null>(null);
+  const descRef = useRef<HTMLParagraphElement | null>(null);
+  const shapeTopRef = useRef<HTMLDivElement | null>(null);
+  const shapeBottomRef = useRef<HTMLDivElement | null>(null);
   const imageWrapRef = useRef<HTMLDivElement | null>(null);
   const metaRef = useRef<HTMLParagraphElement | null>(null);
+
+  const isAnimatingRef = useRef(false);
+  const currentTimelineRef = useRef<gsap.core.Timeline | null>(null);
 
   const [activeIndex, setActiveIndex] = useState(0);
   const prevIndexRef = useRef(0);
@@ -81,82 +86,273 @@ function DesktopPinnedShowcase({
     if (!wrapperRef.current || !stickyRef.current || items.length === 0) return;
 
     const ctx = gsap.context(() => {
-      const totalSteps = items.length;
-      const snapPoints = totalSteps > 1 ? 1 / (totalSteps - 1) : 1;
-      //aqui cambiamos la duracion del scroll , etc y entrada decada elemento
+      const baseTargets = [
+        imageWrapRef.current,
+        titleRef.current,
+        descRef.current,
+        metaRef.current,
+        shapeTopRef.current,
+        shapeBottomRef.current,
+      ].filter(Boolean);
+
+      gsap.set(baseTargets, {
+        opacity: 0,
+        willChange: 'transform, opacity',
+      });
+
+      gsap.set(imageWrapRef.current, {
+        x: 80,
+        scale: 0.975,
+      });
+
+      gsap.set(titleRef.current, {
+        y: 30,
+      });
+
+      gsap.set(descRef.current, {
+        y: 22,
+      });
+
+      if (metaRef.current) {
+        gsap.set(metaRef.current, {
+          y: 18,
+        });
+      }
+
+      gsap.set(shapeTopRef.current, {
+        x: 120,
+        scale: 1.04,
+      });
+
+      gsap.set(shapeBottomRef.current, {
+        x: 190,
+        scale: 1.03,
+      });
+
       ScrollTrigger.create({
         trigger: wrapperRef.current,
-        start: 'top top',
-        end: `+=${window.innerHeight * (items.length * 1.1)}`,
+        start: 'top top+=40',
+        end: `+=${window.innerHeight * items.length * 1.1}`,
         pin: stickyRef.current,
-        scrub: 0.6,
+        scrub: 0.3,
+        markers: true,
         invalidateOnRefresh: true,
         onUpdate: (self) => {
           const nextIndex = Math.min(
             items.length - 1,
-            Math.round(self.progress / snapPoints),
+            Math.floor(self.progress * items.length),
           );
 
-          if (nextIndex !== prevIndexRef.current) {
-            prevIndexRef.current = nextIndex;
-            setActiveIndex(nextIndex);
+          if (nextIndex !== prevIndexRef.current && !isAnimatingRef.current) {
+            isAnimatingRef.current = true;
+            currentTimelineRef.current?.kill();
+
+            const outTl = gsap.timeline({
+              defaults: {
+                duration: 0.42,
+                ease: 'power3.in',
+              },
+              onComplete: () => {
+                prevIndexRef.current = nextIndex;
+                setActiveIndex(nextIndex);
+              },
+            });
+
+            outTl
+              .to(
+                imageWrapRef.current,
+                {
+                  opacity: 0,
+                  x: -80,
+                  scale: 0.985,
+                },
+                0,
+              )
+              .to(
+                shapeTopRef.current,
+                {
+                  opacity: 0,
+                  x: -180,
+                  scale: 1,
+                },
+                0.02,
+              )
+              .to(
+                shapeBottomRef.current,
+                {
+                  opacity: 0,
+                  x: -120,
+                  scale: 1,
+                },
+                0.06,
+              )
+              .to(
+                titleRef.current,
+                {
+                  opacity: 0,
+                  y: -30,
+                },
+                0.04,
+              )
+              .to(
+                descRef.current,
+                {
+                  opacity: 0,
+                  y: -22,
+                },
+                0.08,
+              );
+
+            if (metaRef.current) {
+              outTl.to(
+                metaRef.current,
+                {
+                  opacity: 0,
+                  y: -18,
+                },
+                0.12,
+              );
+            }
+
+            currentTimelineRef.current = outTl;
           }
         },
       });
-
-      gsap.set([leftRef.current, rightRef.current], {
-        opacity: 1,
-        y: 0,
-        x: 0,
-      });
     }, wrapperRef);
 
-    return () => ctx.revert();
+    return () => {
+      currentTimelineRef.current?.kill();
+      ctx.revert();
+    };
   }, [items]);
 
+  //Entrada del nuevo contenido
   useLayoutEffect(() => {
-    if (!leftRef.current || !rightRef.current || !imageWrapRef.current) return;
+    if (!imageWrapRef.current || !titleRef.current || !descRef.current) return;
+
+    currentTimelineRef.current?.kill();
+
+    gsap.set(imageWrapRef.current, {
+      opacity: 0,
+      x: 80,
+      scale: 0.975,
+    });
+
+    gsap.set(titleRef.current, {
+      opacity: 0,
+      y: 30,
+    });
+
+    gsap.set(descRef.current, {
+      opacity: 0,
+      y: 22,
+    });
+
+    if (metaRef.current) {
+      gsap.set(metaRef.current, {
+        opacity: 0,
+        y: 18,
+      });
+    }
+
+    gsap.set(shapeTopRef.current, {
+      opacity: 0,
+      x: 180,
+      scale: 1.04,
+    });
+
+    gsap.set(shapeBottomRef.current, {
+      opacity: 0,
+      x: 120,
+      scale: 1.03,
+    });
 
     const tl = gsap.timeline({
       defaults: {
-        duration: 0.7,
-        ease: 'power3.out',
+        ease: 'power4.out',
+      },
+      onComplete: () => {
+        isAnimatingRef.current = false;
       },
     });
 
-    tl.set([leftRef.current, rightRef.current], {
-      willChange: 'transform, opacity',
-    });
-
-    tl.fromTo(leftRef.current, { opacity: 0, y: 26 }, { opacity: 1, y: 0 }, 0)
-      .fromTo(
-        rightRef.current,
-        { opacity: 0, x: 40 },
-        { opacity: 1, x: 0 },
-        0.08,
+    tl.to(
+      imageWrapRef.current,
+      {
+        opacity: 1,
+        x: 0,
+        scale: 1,
+        duration: 1.05,
+      },
+      0,
+    )
+      .to(
+        shapeTopRef.current,
+        {
+          opacity: 1,
+          x: 0,
+          scale: 1,
+          duration: 1.1,
+        },
+        0.15,
       )
-      .fromTo(
-        imageWrapRef.current,
-        { opacity: 0, scale: 0.985 },
-        { opacity: 1, scale: 1 },
-        0.12,
+      .to(
+        shapeBottomRef.current,
+        {
+          opacity: 1,
+          x: 0,
+          scale: 1,
+          duration: 1.15,
+        },
+        0.22,
+      )
+      .to(
+        titleRef.current,
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.95,
+        },
+        0.2,
+      )
+      .to(
+        descRef.current,
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.95,
+        },
+        0.34,
       );
+
+    if (metaRef.current) {
+      tl.to(
+        metaRef.current,
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.85,
+        },
+        0.46,
+      );
+    }
+
+    currentTimelineRef.current = tl;
 
     return () => {
       tl.kill();
     };
   }, [activeIndex]);
-
   return (
     <div
       ref={wrapperRef}
       className="relative"
-      style={{ height: `${items.length * 100}vh` }}
+      style={{ height: `${items.length * 135}vh` }}
     >
       <div ref={stickyRef} className="h-screen overflow-hidden">
         <div className="flex h-full items-center">
           <Section innerClassName="w-full">
-            <div className="flex mx-auto max-h-[820px] min-h-[620px] flex-col mt-10">
+            <div className="flex mx-auto max-h-[820px] min-h-[620px] flex-col mt-5 xl:mt-0">
               <div className="mb-8 flex items-end justify-between gap-6">
                 <div>
                   <p className="font-title text-[clamp(1.15rem,1.2vw,1.5rem)] tracking-tight text-black/55">
@@ -174,7 +370,7 @@ function DesktopPinnedShowcase({
                   {/* COL IZQUIERDA */}
                   <div className="col-span-6">
                     <div
-                      ref={leftRef}
+                      ref={titleRef}
                       className="max-w-[40rem]  text-black/70"
                       key={`left-${activeIndex}`}
                     >
@@ -190,7 +386,10 @@ function DesktopPinnedShowcase({
                         )}
                       </div>
 
-                      <p className="mt-10 max-w-[35rem] text-[clamp(1.5rem,1.25vw,1.85rem)] font-body leading-normal">
+                      <p
+                        ref={descRef}
+                        className="mt-10 max-w-[35rem] text-[clamp(1.5rem,1.25vw,1.85rem)] font-body leading-normal"
+                      >
                         {activeItem.description}
                       </p>
 
@@ -208,19 +407,23 @@ function DesktopPinnedShowcase({
                   {/* COL DERECHA */}
                   <div className="col-span-6">
                     <div
-                      ref={rightRef}
                       className="relative z-0 mx-auto flex w-full max-w-[46rem] items-center justify-center"
                       key={`right-${activeIndex}`}
                     >
                       {/* SVG decorativo superior - placeholder */}
-                      <Shape
+                      <div
+                        ref={shapeTopRef}
                         className="pointer-events-none absolute z-10 right-0 top-[-5%] h-[38%] w-[54%]"
-                        opacity={0.045}
-                      />
-                      <Shape
+                      >
+                        <Shape className="h-full w-full" opacity={0.045} />
+                      </div>
+
+                      <div
+                        ref={shapeBottomRef}
                         className="pointer-events-none absolute z-10 bottom-[4%] left-[-2%] h-[26%] w-[30%]"
-                        opacity={0.09}
-                      />
+                      >
+                        <Shape className="h-full w-full" opacity={0.09} />
+                      </div>
 
                       <div
                         ref={imageWrapRef}
@@ -247,7 +450,7 @@ function DesktopPinnedShowcase({
                     key={idx}
                     className={`h-[3px] rounded-full transition-all duration-300 ${
                       idx === activeIndex
-                        ? 'w-12 bg-black/70'
+                        ? 'w-12 bg-ppmYellow'
                         : 'w-6 bg-black/15'
                     }`}
                   />
