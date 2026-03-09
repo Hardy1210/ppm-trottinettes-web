@@ -16,8 +16,11 @@ import WhyChooseUs from '@/components/sections/why-choose-us/WhyChooseUs';
 import { useIntroScrollReset } from '@/hooks/useIntroScrollReset';
 import { PrimaryButton } from '@/ui/Buttons';
 import gsap from 'gsap';
+import { SplitText } from 'gsap/SplitText';
 import { useLayoutEffect, useRef, useState } from 'react';
 import { servicesItems } from './_data/WhiteServices';
+
+gsap.registerPlugin(SplitText);
 
 //import { getHomeData } from "@/lib/sanity.queries";
 
@@ -25,39 +28,82 @@ export default function HomeClient() {
   //const data = await getHomeData()
   const [introDone, setIntroDone] = useState(false);
 
-  const heroRef = useRef<HTMLDivElement | null>(null);
+  useIntroScrollReset(setIntroDone);
+
+  const h1Ref = useRef<HTMLHeadingElement | null>(null);
+  const pRef = useRef<HTMLParagraphElement | null>(null);
+  const ctaRef = useRef<HTMLDivElement | null>(null);
 
   useIntroScrollReset(setIntroDone);
 
   useLayoutEffect(() => {
-    if (!heroRef.current) return;
+    let h1Split: SplitText | undefined;
+    let pSplit: SplitText | undefined;
+    let tl: gsap.core.Timeline | undefined;
 
-    const ctx = gsap.context(() => {
-      const items = heroRef.current!.querySelectorAll('[data-hero-item]');
+    const init = async () => {
+      await document.fonts.ready;
 
-      gsap.from(items, {
-        y: 40,
-        autoAlpha: 0,
-        duration: 1,
-        ease: 'power3.out',
-        stagger: 0.2,
-        delay: 2,
+      if (!h1Ref.current || !pRef.current || !ctaRef.current) return;
+
+      h1Split = SplitText.create(h1Ref.current, {
+        type: 'chars',
+        charsClass: 'char',
+        mask: 'chars', //oculta los caracteres como overflow hidden
       });
-    }, heroRef);
 
-    return () => ctx.revert();
+      pSplit = SplitText.create(pRef.current, {
+        type: 'lines',
+        linesClass: 'line',
+        mask: 'lines',
+        //autoSplit: true,
+      });
+
+      tl = gsap.timeline({ delay: 1.9 }); // ← inicio general de toda la secuencia
+      tl.from(h1Split.chars, {
+        yPercent: 110,
+        opacity: 0,
+        duration: 0.9,
+        stagger: 0.02,
+        ease: 'power4.out',
+      })
+        .from(
+          pSplit.lines,
+          {
+            yPercent: 100,
+            opacity: 0,
+            duration: 0.9,
+            stagger: 0.1,
+            ease: 'expo.out',
+          },
+          '-=0.65', // empieza antes de que el h1 termine
+        )
+        .from(
+          ctaRef.current,
+          {
+            y: 24,
+            opacity: 0,
+            duration: 0.8,
+            ease: 'power3.out',
+          },
+          '-=0.65', // empieza antes de que el p termine
+        );
+    };
+
+    init();
+
+    return () => {
+      tl?.kill();
+      h1Split?.revert();
+      pSplit?.revert();
+    };
   }, []);
 
   return (
     <>
       <ScrollIndicator />
 
-      {!introDone && (
-        <IntroLoader
-          imageHref="/images/intro-texture.webp"
-          brandYellow="#e4e700"
-        />
-      )}
+      {!introDone && <IntroLoader />}
       <div className="overflow-hidden ">
         <Section
           aria-label="Hero Pile Power Mobilité"
@@ -74,6 +120,7 @@ export default function HomeClient() {
               Igual te dejo un placeholder superior para que no te rompa el layout. */}
 
               <h1
+                ref={h1Ref}
                 className="
               font-title
               text-[clamp(2.8rem,8vw,4.8rem)]
@@ -89,6 +136,7 @@ export default function HomeClient() {
               </h1>
 
               <p
+                ref={pRef}
                 className="
               mt-6 max-w-[42ch]
               font-body text-brandText
@@ -103,7 +151,7 @@ export default function HomeClient() {
               </p>
 
               {/* Desktop CTA sits under text (mobile CTA goes bottom like screenshot) */}
-              <div className="mt-20 hidden lg:block">
+              <div ref={ctaRef} className="mt-20 hidden lg:block">
                 <PrimaryButton
                   href="#contact"
                   ariaLabel="Prendre rendez-vous"

@@ -149,7 +149,7 @@ export function HeroWindowsStack({
       src: topSrc,
       alt: 'Trottinette électrique en atelier',
       curtainColor: topCurtainColor,
-      delay: 0,
+      delay: 1.3,
       priority: true,
     },
     {
@@ -158,7 +158,7 @@ export function HeroWindowsStack({
       src: bottomSrc,
       alt: 'Réparation et maintenance de trottinette',
       curtainColor: bottomCurtainColor,
-      delay: 0,
+      delay: 1.3,
     },
   ];
 

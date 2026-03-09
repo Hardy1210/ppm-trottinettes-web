@@ -46,7 +46,7 @@ export function Header({
     () =>
       items ?? [
         { label: 'Accueil', href: '#accueil', sectionId: 'accueil' },
-        { label: 'A propo', href: '#apropos', sectionId: 'apropos' },
+        { label: 'A propos', href: '#apropos', sectionId: 'apropos' },
         { label: 'Services', href: '#services', sectionId: 'services' },
         { label: 'Contact', href: '#contact', sectionId: 'contact' },
         {

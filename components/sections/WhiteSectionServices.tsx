@@ -132,10 +132,10 @@ function DesktopPinnedShowcase({
       ScrollTrigger.create({
         trigger: wrapperRef.current,
         start: 'top top+=40',
-        end: `+=${window.innerHeight * items.length * 1.1}`,
+        end: `+=${window.innerHeight * items.length * 0.75}`,
         pin: stickyRef.current,
         scrub: 0.3,
-        markers: true,
+        //markers: true,
         invalidateOnRefresh: true,
         onUpdate: (self) => {
           const nextIndex = Math.min(
@@ -347,7 +347,7 @@ function DesktopPinnedShowcase({
     <div
       ref={wrapperRef}
       className="relative"
-      style={{ height: `${items.length * 135}vh` }}
+      style={{ height: `${items.length * 85}vh` }}
     >
       <div ref={stickyRef} className="h-screen overflow-hidden">
         <div className="flex h-full items-center">

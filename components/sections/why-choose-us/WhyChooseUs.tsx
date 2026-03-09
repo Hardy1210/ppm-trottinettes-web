@@ -1,5 +1,6 @@
 'use client';
 
+import { useIntro } from '@/context/IntroContext';
 import type { ReactNode } from 'react';
 
 import { IconShape2 } from '@/components/icons/IconShape2';
@@ -37,13 +38,14 @@ const items: Item[] = [
 ];
 
 export default function WhyChooseUs() {
+  const { introDoneLogo } = useIntro();
   return (
     <Section className={styles.section}>
       <div className={styles.inner}>
         {/* LEFT: 3D scooter */}
         <div className={styles.left}>
           <div className={styles.scooterStage} aria-hidden="true">
-            <ScooterMobile />
+            {introDoneLogo && <ScooterMobile />}
           </div>
         </div>
 

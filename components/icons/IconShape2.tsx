@@ -18,7 +18,7 @@ export const IconShape2 = (
         <path
           d="M49.3604 44.001H0L16.0146 0H65.375L49.3604 44.001Z"
           fill="#E4E700"
-          fill-opacity="0.19"
+          fillOpacity="0.19"
         />
       </g>
     </svg>

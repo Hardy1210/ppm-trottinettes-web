@@ -1,0 +1,9 @@
+//Hero animation
+.char {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+
+.line {
+  will-change: transform, opacity;
+}
