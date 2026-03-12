@@ -1,5 +1,6 @@
 'use client';
 
+import { servicesItems } from '@/_data/WhiteServices';
 import { HeroWindowsStack } from '@/components/animations/hero-window/HeroWindowsStack';
 import { IntroLoader } from '@/components/animations/intro/IntroLoader';
 import ScrollIndicator from '@/components/animations/intro/ScrollIndicator';
@@ -11,14 +12,15 @@ import { Makita } from '@/components/icons/Makita';
 import { Xiaomi } from '@/components/icons/Xiaomi';
 import { Section } from '@/components/layout/Section';
 import { QualityBlock } from '@/components/sections/QualityBlock';
+import { TestimonialsTrustSection } from '@/components/sections/testimonials/TestimonialsTrust';
 import { WhiteSectionServices } from '@/components/sections/WhiteSectionServices';
 import WhyChooseUs from '@/components/sections/why-choose-us/WhyChooseUs';
+import { WorkshopSection } from '@/components/sections/Work-section/WorkshopSection';
 import { useIntroScrollReset } from '@/hooks/useIntroScrollReset';
 import { PrimaryButton } from '@/ui/Buttons';
 import gsap from 'gsap';
 import { SplitText } from 'gsap/SplitText';
 import { useLayoutEffect, useRef, useState } from 'react';
-import { servicesItems } from './_data/WhiteServices';
 
 gsap.registerPlugin(SplitText);
 
@@ -285,6 +287,8 @@ export default function HomeClient() {
           ctaHref="#contact"
           ctaLabel="Contact"
         />
+        <WorkshopSection imageSrc="/images/chris.webp" />
+        <TestimonialsTrustSection />
       </div>
     </>
   );

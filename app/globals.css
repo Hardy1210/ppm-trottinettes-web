@@ -27,6 +27,16 @@ html::-webkit-scrollbar {
   --font-body: var(--font-questrial);
 }
 
+::selection {
+  background: var(--ppm-yellow);
+  color: var(--ppm-bg);
+}
+
+::-moz-selection {
+  background: var(--brand);
+  color: #000;
+}
+
 /* === Tailwind theme extension === */
 @theme inline {
   --color-ppmBg: var(--ppm-bg);

@@ -347,7 +347,7 @@ function DesktopPinnedShowcase({
     <div
       ref={wrapperRef}
       className="relative"
-      style={{ height: `${items.length * 85}vh` }}
+      style={{ height: `${items.length * 100}vh` }}
     >
       <div ref={stickyRef} className="h-screen overflow-hidden">
         <div className="flex h-full items-center">
