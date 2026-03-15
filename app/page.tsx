@@ -1,9 +1,14 @@
 import HomeClient from './HomeClient';
 
-export default function Home() {
+import { client } from '@/sanity/lib/client';
+import { serviceListSectionQuery } from '@/sanity/lib/queries/serviceListQuery';
+
+export default async function Home() {
+  const serviceSection = await client.fetch(serviceListSectionQuery);
+
   return (
     <>
-      <HomeClient />
+      <HomeClient serviceSection={serviceSection} />
     </>
   );
 }

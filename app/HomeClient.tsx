@@ -26,9 +26,28 @@ import { useLayoutEffect, useRef, useState } from 'react';
 
 gsap.registerPlugin(SplitText);
 
-//import { getHomeData } from "@/lib/sanity.queries";
+//sanity
+type ServiceItem = {
+  _key?: string;
+  title: string;
+  description: string;
+  priceLabel?: string;
+  priceValue?: string;
+  order?: number;
+};
 
-export default function HomeClient() {
+type ServiceSection = {
+  title?: string;
+  intro?: string;
+  footnote?: string;
+  services?: ServiceItem[];
+} | null;
+
+type HomeClientProps = {
+  serviceSection: ServiceSection;
+};
+
+export default function HomeClient({ serviceSection }: HomeClientProps) {
   //const data = await getHomeData()
   const [introDone, setIntroDone] = useState(false);
 
@@ -297,7 +316,12 @@ export default function HomeClient() {
             grainSrc="/images/parallax/gran.webp"
           />
         </div>
-        <ServiceList />
+        <ServiceList
+          title={serviceSection?.title}
+          intro={serviceSection?.intro}
+          items={serviceSection?.services}
+          footnote={serviceSection?.footnote}
+        />
       </div>
     </>
   );

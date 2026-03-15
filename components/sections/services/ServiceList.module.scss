@@ -13,10 +13,17 @@
     clamp(2.5rem, 4vw, 3rem);
 }
 
-.header {
-  display: none;
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
-
 .sectionTitle {
   margin: 0;
 }
@@ -90,7 +97,7 @@
   margin: 0;
   font-size: clamp(1rem, 2.2vw, 1.45rem);
   line-height: 1.15;
-  color: rgba(255, 255, 255, 0.92);
+  color: rgba(185, 185, 185, 0.92);
 }
 
 .priceBox {

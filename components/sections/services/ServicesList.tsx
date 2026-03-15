@@ -174,7 +174,7 @@ export default function ServiceList({
   return (
     <section className={styles.section}>
       <div className={styles.inner}>
-        <header className={styles.header}>
+        <header className={styles.srOnly}>
           <h2 className={styles.sectionTitle}>{title}</h2>
           {intro ? <p className={styles.sectionIntro}>{intro}</p> : null}
         </header>
