@@ -1,10 +1,13 @@
 'use client';
 
 import { testimonials } from '@/_data/testimoniasl';
+import { IconShape2 } from '@/components/icons/IconShape2';
+import { Quote } from '@/components/icons/Quote';
+import { TrustIcon } from '@/components/icons/TrustIcon';
 import { gsap, registerGsapPlugins, SplitText } from '@/lib/gsap';
+
 import Image from 'next/image';
 import { useLayoutEffect, useRef } from 'react';
-
 type Props = {
   className?: string;
 };
@@ -127,39 +130,34 @@ export function TestimonialsTrustSection({ className }: Props) {
     <section
       ref={sectionRef}
       className={[
-        'relative overflow-hidden  text-primary-white',
+        'relative text-primary-white',
         'py-[clamp(4.5rem,8vw,8rem)]',
         className ?? '',
       ].join(' ')}
     >
       {/* Fondos decorativos */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        {/* bloque inclinado izquierdo superior */}
-        <div
-          className="
-            absolute left-[-8%] top-[clamp(9rem,12vw,14rem)]
-            hidden md:block
-            h-[clamp(16rem,22vw,22rem)] w-[clamp(28rem,40vw,38rem)]
-            bg-white/6
-            [clip-path:polygon(8%_0%,100%_0%,78%_100%,0%_100%)]
-          "
+      <div className="pointer-events-none overflow-hidden opacity-20">
+        {/* shape top */}
+        <IconShape2
+          className="absolute top-[20%] left-[20%]"
+          size={400}
+          color="#FEFEFE"
         />
-
-        {/* bloque inclinado izquierdo inferior */}
-        <div
-          className="
-            absolute bottom-0 left-[clamp(-3rem,-2vw,0rem)]
-            hidden md:block
-            h-[clamp(7rem,11vw,10rem)] w-[clamp(8rem,12vw,12rem)]
-            bg-white/6
-            [clip-path:polygon(30%_0%,100%_0%,70%_100%,0%_100%)]
-          "
+        {/* shape 2 */}
+        <IconShape2
+          className="absolute top-[50%] left-[70%]"
+          size={200}
+          color="#FEFEFE"
         />
-
-        {/* dot grid derecha */}
+        {/* shape bottom */}
+        <IconShape2
+          className="absolute top-[70%] left-[40%]"
+          size={500}
+          color="#FEFEFE"
+        />
       </div>
 
-      <div className="relative mx-auto w-full max-w-[1440px] px-[clamp(1rem,3vw,2.5rem)]">
+      <div className="relative mx-auto w-full max-w-container px-[clamp(1.2rem,1vw,2.5rem)] xl:px-0">
         {/* Header */}
         <div className="flex flex-col gap-y-[clamp(1.25rem,2vw,2rem)] lg:flex-row lg:items-end">
           <div className="lg:max-w-[63ch]">
@@ -177,7 +175,7 @@ export function TestimonialsTrustSection({ className }: Props) {
             </h2>
           </div>
 
-          <div className="lg:ml-auto w-full lg:max-w-[45ch] ">
+          <div className="lg:ml-auto w-full lg:max-w-[55ch] ">
             <p
               ref={introRef}
               className="
@@ -196,7 +194,7 @@ export function TestimonialsTrustSection({ className }: Props) {
         </div>
 
         {/* Divider */}
-        <div className="w-full mt-[2.3rem]" aria-hidden="true">
+        <div className="w-full mt-[3.2rem]" aria-hidden="true">
           <svg
             viewBox="2 0 355 16"
             preserveAspectRatio="none"
@@ -229,10 +227,10 @@ export function TestimonialsTrustSection({ className }: Props) {
         {/* Cards */}
         <div
           className="
-            mt-[clamp(2rem,5vw,4.5rem)]
+            mt-[clamp(3rem,5vw,4.5rem)]
             grid grid-cols-1
-            gap-[clamp(2rem,3vw,3rem)]
-            md:grid-cols-3
+            gap-[clamp(2rem,4vw,4rem)]
+            md:grid-cols-3 
             
           "
         >
@@ -243,16 +241,14 @@ export function TestimonialsTrustSection({ className }: Props) {
                 js-trust-card
                 relative flex h-full flex-col
                 gap-[clamp(1rem,1.6vw,1.5rem)]
+                mb-10
                 rounded-[clamp(1rem,1.5vw,1.25rem)]
                 bg-transparent
-                px-[clamp(0rem,0vw,0rem)]
-                py-[clamp(0rem,0vw,0rem)]
+                
               "
             >
               <div className="text-primary-white/95">
-                <span className="text-[clamp(3rem,5vw,4.5rem)] leading-none">
-                  “
-                </span>
+                <Quote size={50} />
               </div>
 
               <p
@@ -260,34 +256,32 @@ export function TestimonialsTrustSection({ className }: Props) {
                   if (el) cardTextRefs.current[index] = el;
                 }}
                 className="
-                  max-w-[28ch]
+                  max-w-[40h]
                   text-primary-white/92
                   leading-[1.45]
                   text-[clamp(1rem,1.15vw,1.3rem)]
+                  pt-3
                 "
               >
                 {item.quote}
               </p>
 
-              <div className="mt-[clamp(0.5rem,1vw,1rem)] flex items-center gap-[clamp(0.75rem,1vw,1rem)]">
+              <div className="mt-[clamp(0.5rem,1vw,1rem)] flex items-end gap-[clamp(0.75rem,1vw,1rem)]">
                 {/* icono marca */}
-                <div className="relative flex h-[clamp(3rem,4vw,4rem)] w-[clamp(3rem,4vw,4rem)] shrink-0 items-center justify-center rounded-full bg-lime-accent">
-                  {/* cambia esto por tu svg/logo */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-black text-[clamp(1rem,1.4vw,1.4rem)] font-semibold">
-                      ⚡
-                    </span>
-                  </div>
+
+                {/* cambia esto por tu svg/logo */}
+                <div className="">
+                  <TrustIcon size={60} />
                 </div>
 
                 {/* avatar */}
-                <div className="relative -ml-[clamp(1.2rem,1.6vw,1.5rem)] h-[clamp(2.8rem,3.6vw,3.4rem)] w-[clamp(2.8rem,3.6vw,3.4rem)] overflow-hidden rounded-full border border-white/10">
+                <div className="relative top-3 -ml-[clamp(2.2rem,1.6vw,1.5rem)] h-[clamp(3.8rem,3.6vw,3.8rem)]  w-[clamp(3.9rem,3.6vw,3.9rem)] overflow-hidden rounded-full border border-white/10">
                   <Image
                     src={item.avatar}
                     alt={item.name}
                     fill
                     className="object-cover"
-                    sizes="56px"
+                    sizes="76px"
                   />
                 </div>
 

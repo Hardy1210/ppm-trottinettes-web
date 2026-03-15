@@ -1,0 +1,345 @@
+.section {
+  position: relative;
+  width: 100%;
+  //background: #171b24;
+  color: var(--color-brandText);
+  overflow: hidden;
+}
+
+.inner {
+  width: min(100%, 1100px);
+  margin: 0 auto;
+  padding: clamp(4rem, 8vw, 6rem) clamp(1rem, 2vw, 1.5rem)
+    clamp(2.5rem, 4vw, 3rem);
+}
+
+.header {
+  display: none;
+}
+
+.sectionTitle {
+  margin: 0;
+}
+
+.sectionIntro {
+  margin: 0;
+}
+
+.desktopList {
+  position: relative;
+  border-top: 1px solid var(--color-brandText);
+}
+
+.item {
+  position: relative;
+  border-bottom: 1px solid var(--color-brandText);
+}
+
+.itemInner {
+  display: block;
+  padding: 2rem 0 2rem;
+}
+
+.itemHeaderRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 2rem;
+  align-items: start;
+}
+
+.itemHeaderAside {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  min-width: 2rem;
+  padding-top: 0.35rem;
+}
+
+.itemTitle {
+  margin: 0;
+  color: var(--color-brandText);
+  font-size: clamp(1.3rem, 21rem, 2rem);
+  //line-height: 1.05;
+}
+
+.itemContentWrap {
+  height: 0;
+  opacity: 0;
+  overflow: hidden;
+}
+
+.itemContentInner {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.itemOpenContent {
+  display: grid;
+  grid-template-columns: minmax(0, 39rem) auto;
+  gap: 2rem;
+  align-items: start;
+}
+@media (max-width: 1200px) {
+  .itemOpenContent {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+}
+
+.itemDescription {
+  max-width: 39rem;
+  margin: 0;
+  font-size: clamp(1rem, 2.2vw, 1.45rem);
+  line-height: 1.15;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.priceBox {
+  position: relative;
+  min-width: 9.5rem;
+  height: 100%;
+  //padding: 1rem 1.1rem 0.95rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;
+  text-align: right;
+}
+
+.priceLabel {
+  font-size: clamp(1rem, 2.2vw, 1.45rem);
+  line-height: 1.15;
+  color: #f3f3f3;
+}
+
+.priceValue {
+  font-size: clamp(1rem, 2.2vw, 1.45rem);
+  line-height: 1.1;
+  color: #f3f3f3;
+}
+
+.plusIcon {
+  position: relative;
+  width: 1rem;
+  height: 1rem;
+  flex: 0 0 1rem;
+  margin-top: 0.55rem;
+}
+
+.plusLineHorizontal,
+.plusLineVertical {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1rem;
+  height: 1.5px;
+  background: var(--ppm-yellow);
+  transform-origin: center;
+  transition:
+    transform 0.28s ease,
+    opacity 0.28s ease;
+}
+
+.plusLineHorizontal {
+  transform: translate(-50%, -50%);
+}
+
+.plusLineVertical {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.plusIconOpen .plusLineVertical {
+  transform: translate(-50%, -50%) rotate(90deg) scaleX(0);
+  opacity: 0;
+}
+
+.mobileWrapper {
+  display: none;
+}
+
+.embla {
+  overflow: hidden;
+}
+
+.emblaContainer {
+  display: flex;
+}
+
+.emblaSlide {
+  min-width: 0;
+  flex: 0 0 100%;
+}
+
+.mobileCard {
+  min-height: 34rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0;
+}
+
+.mobileTitle {
+  margin: 0;
+  font-size: clamp(2rem, 8.2vw, 2.55rem);
+  line-height: 1.05;
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  color: var(--color-brandText);
+}
+
+.mobileDescription {
+  margin: 2rem 0 0;
+  max-width: 35rem;
+  font-size: clamp(1.35rem, 4.4vw, 1.35rem);
+  line-height: 1.18;
+  color: var(--color-brandText);
+}
+
+.mobileBottom {
+  margin-top: auto;
+  padding-top: 2rem;
+}
+
+.mobilePriceRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.mobilePriceLabel {
+  font-size: clamp(1.3rem, 4vw, 1.35rem);
+  line-height: 1.2;
+  color: var(--color-brandText);
+}
+
+.mobilePriceValue {
+  font-size: clamp(1.3rem, 4vw, 1.35rem);
+  //line-height: 1.2;
+  color: var(--color-brandText);
+}
+
+.mobileControls {
+  display: grid;
+  justify-items: center;
+  gap: 2.3rem;
+  margin-top: 2.2rem;
+}
+
+.dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+}
+
+.dot {
+  width: 0.62rem;
+  height: 0.62rem;
+  padding: 0;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.06);
+  cursor: pointer;
+  transition:
+    transform 0.28s ease,
+    border-color 0.28s ease,
+    background-color 0.28s ease,
+    opacity 0.28s ease;
+}
+
+.dotActive {
+  width: 0.79rem;
+  height: 0.79rem;
+  border-width: 1.5px;
+  border: 1px solid var(--ppm-yellow);
+  background: transparent;
+}
+
+.arrows {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.55rem 0.7rem;
+  // border-radius: 1.2rem;
+  // backdrop-filter: blur(10px);
+  // -webkit-backdrop-filter: blur(10px);
+  //background: rgba(255, 255, 255, 0.08);
+  //  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.arrowBtn {
+  width: 3.9rem;
+  height: 3.9rem;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border-radius: 999px;
+  border: 2px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+  cursor: pointer;
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease,
+    background-color 0.25s ease,
+    border-color 0.25s ease;
+
+  span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+  }
+
+  svg {
+    width: 1.4rem;
+    height: 1.4rem;
+    display: block;
+  }
+
+  &:disabled {
+    opacity: 0.35;
+    cursor: default;
+    transform: none;
+  }
+
+  &:not(:disabled):hover {
+    //transform: translateY(-1px);
+  }
+
+  &:not(:disabled):active {
+    //transform: translateY(0);
+  }
+}
+
+.footnote {
+  max-width: 48rem;
+  margin: clamp(2.4rem, 4vw, 3rem) 0 0;
+  font-size: clamp(0.78rem, 0.82vw, 0.9rem);
+  line-height: 1.05;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+@media (max-width: 991px) {
+  .inner {
+    width: 100%;
+    padding: 2.8rem 0.9rem 2.5rem;
+  }
+
+  .desktopList {
+    display: none;
+  }
+
+  .mobileWrapper {
+    display: block;
+  }
+
+  .mobileCard {
+    min-height: 27rem;
+  }
+
+  .footnote {
+    display: none;
+  }
+}

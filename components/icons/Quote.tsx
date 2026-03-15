@@ -1,0 +1,28 @@
+import { ComponentPropsWithoutRef } from 'react';
+
+type Props = ComponentPropsWithoutRef<'svg'> & {
+  size?: number;
+};
+
+export const Quote = ({ size = 24, ...props }: Props) => {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="7 9 10.2 5.7"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <title>Quote</title>
+
+      <path
+        d="M9.13456 9H12.1346L10 14.6075H7L9.13456 9Z"
+        fill="currentColor"
+      />
+      <path
+        d="M14.1346 9H17.1346L15 14.6075H12L14.1346 9Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+};

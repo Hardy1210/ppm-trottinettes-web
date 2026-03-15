@@ -58,7 +58,7 @@ export default function WhyChooseUs() {
               <li key={it.title} className={styles.item}>
                 <span className={styles.iconWrap} aria-hidden="true">
                   <span className={styles.iconShape}>
-                    <IconShape2 size={60} />
+                    <IconShape2 size={60} color="#E4E700" />
                   </span>
                   <span className={styles.iconTop}>{it.iconTop}</span>
                 </span>

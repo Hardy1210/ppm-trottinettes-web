@@ -13,7 +13,7 @@ export const testimonials: TestimonialItem[] = [
       'Un atelier sérieux et réactif. Diagnostic rapide et explications claires à chaque étape. On sent une vraie expertise technique et un vrai souci de la qualité du travail.',
     name: 'Marc D.',
     role: 'CLIENT PARTICULIER',
-    avatar: '/images/testimonials/marc.webp',
+    avatar: '/images/testimonials/user4.webp',
   },
   {
     id: 2,
@@ -21,7 +21,7 @@ export const testimonials: TestimonialItem[] = [
       'Service professionnel et délais respectés, ce qui est rare dans le domaine de la réparation. Intervention propre et efficace avec des conseils utiles pour l’entretien de la trottinette.',
     name: 'Sophie L.',
     role: 'UTILISATRICE QUOTIDIENNE',
-    avatar: '/images/testimonials/sophie.webp',
+    avatar: '/images/testimonials/user6.webp',
   },
   {
     id: 3,
@@ -29,6 +29,6 @@ export const testimonials: TestimonialItem[] = [
       'Très bonne expérience du premier contact jusqu’à la récupération de la trottinette. Travail soigné, prix cohérents et communication transparente tout au long de l’intervention.',
     name: 'Julien R.',
     role: 'CLIENT RÉGULIER',
-    avatar: '/images/testimonials/julien.webp',
+    avatar: '/images/testimonials/user5.webp',
   },
 ];

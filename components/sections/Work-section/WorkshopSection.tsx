@@ -1,3 +1,4 @@
+import { Quote } from '@/components/icons/Quote';
 import { Section } from '@/components/layout/Section';
 import YellowPanelLeftShape from '@/ui/YellowPanelLeftShape';
 import Image from 'next/image';
@@ -9,7 +10,7 @@ type WorkshopSectionProps = {
 };
 
 export function WorkshopSection({
-  imageSrc = '/images/chris.webp',
+  imageSrc,
   imageAlt = 'Technicien réparant une carte électronique dans l’atelier',
 }: WorkshopSectionProps) {
   return (
@@ -71,8 +72,8 @@ export function WorkshopSection({
             className={styles.quoteBlock}
             aria-labelledby="workshop-quote-author"
           >
-            <div className={styles.quoteMark} aria-hidden="true">
-              &#10077;
+            <div className="text-primary-white/95">
+              <Quote size={50} />
             </div>
 
             <blockquote className={styles.quote}>

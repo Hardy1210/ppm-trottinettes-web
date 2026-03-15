@@ -11,7 +11,9 @@ import LogoHeroBg from '@/components/icons/LogoHeroBg';
 import { Makita } from '@/components/icons/Makita';
 import { Xiaomi } from '@/components/icons/Xiaomi';
 import { Section } from '@/components/layout/Section';
+import ParallaxSection from '@/components/sections/parallax-section/ParallaxSection';
 import { QualityBlock } from '@/components/sections/QualityBlock';
+import ServiceList from '@/components/sections/services/ServicesList';
 import { TestimonialsTrustSection } from '@/components/sections/testimonials/TestimonialsTrust';
 import { WhiteSectionServices } from '@/components/sections/WhiteSectionServices';
 import WhyChooseUs from '@/components/sections/why-choose-us/WhyChooseUs';
@@ -289,6 +291,13 @@ export default function HomeClient() {
         />
         <WorkshopSection imageSrc="/images/chris.webp" />
         <TestimonialsTrustSection />
+        <div className="relative">
+          <ParallaxSection
+            backgroundSrc="/images/parallax/parallax.webp"
+            grainSrc="/images/parallax/gran.webp"
+          />
+        </div>
+        <ServiceList />
       </div>
     </>
   );

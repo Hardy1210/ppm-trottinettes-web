@@ -17,7 +17,7 @@ export const IconShape2 = (
       <g>
         <path
           d="M49.3604 44.001H0L16.0146 0H65.375L49.3604 44.001Z"
-          fill="#E4E700"
+          fill="currentColor"
           fillOpacity="0.19"
         />
       </g>
