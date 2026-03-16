@@ -1,0 +1,334 @@
+.contactSection {
+  position: relative;
+  width: 100%;
+  overflow: clip;
+  //background: #121720;
+  color: var(--color-brandText);
+}
+
+.inner {
+  max-width: var(--max-width-container);
+  margin-inline: auto;
+  padding: clamp(4rem, 7vw, 6rem) clamp(1rem, 3vw, 2.5rem)
+    clamp(4rem, 7vw, 6rem);
+}
+
+.heading {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1rem, 2vw, 1.5rem);
+  //margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(2rem, 9vw, 3.5rem);
+  font-family: var(--font-michroma);
+  line-height: 0.95;
+  font-weight: 400;
+  //letter-spacing: -0.04em;
+  text-wrap: balance;
+  overflow: hidden;
+}
+
+.underlineWrap {
+  width: 100%;
+  margin-top: 1rem;
+  height: 12px;
+  @media (max-width: 767px) {
+    margin-top: 1.3rem;
+  }
+}
+.titleLine {
+  display: block;
+  width: 100%;
+  height: 12px;
+  color: rgba(255, 255, 255, 0.45); // o negro/70 según la sección
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: clamp(1.25rem, 3vw, 2rem);
+  align-items: center;
+}
+
+.mapCard {
+  position: relative;
+  height: clamp(20rem, 34vw, 28rem);
+  // margin-top: 1.5rem;
+}
+
+.mapVisual {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.05) inset,
+    0 18px 40px rgba(0, 0, 0, 0.18);
+}
+
+.mapImage {
+  object-fit: cover;
+  z-index: 0;
+}
+
+.routeSvg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.routeLine {
+  fill: none;
+  stroke: #d41414;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.arrowMarker {
+  position: absolute;
+  left: 22%;
+  top: 63%;
+  width: 0.95rem;
+  height: 0.95rem;
+  background: #111;
+  clip-path: polygon(0 50%, 100% 0, 82% 100%);
+  transform: rotate(-18deg);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.55);
+}
+
+.pin {
+  position: absolute;
+  top: 32%;
+  left: 67%;
+  width: clamp(2.55rem, 2vw, 1.85rem);
+  aspect-ratio: 1;
+  border-radius: 999px;
+  background: #d41414;
+  transform: translate(-50%, -50%);
+  box-shadow:
+    0 0 0 0.45rem rgba(212, 20, 20, 0.14),
+    0 0 0 0.9rem rgba(212, 20, 20, 0.06);
+}
+
+.pin::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 80%;
+  width: 0.9rem;
+  height: 1rem;
+  background: #d41414;
+  clip-path: polygon(50% 100%, 0 0, 100% 0);
+  transform: translateX(-50%);
+}
+
+.pinCore {
+  position: absolute;
+  inset: 50%;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 999px;
+  background: #fff;
+  transform: translate(-50%, -50%);
+}
+
+.infoCard {
+  position: relative;
+  min-height: clamp(20rem, 34vw, 28rem);
+  //overflow: hidden;
+  isolation: isolate;
+}
+
+.infoCardShape {
+  position: absolute;
+  bottom: -13%;
+  color: var(--color-brandText);
+  opacity: 30%;
+}
+
+.infoContent {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  padding: clamp(1.6rem, 3vw, 2.25rem) clamp(1.4rem, 3vw, 2.2rem)
+    clamp(1.6rem, 3vw, 2rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.placeTitle {
+  margin: 0 0 1.5rem;
+  font-size: clamp(2rem, 4vw, 4rem);
+  line-height: 0.98;
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  overflow: hidden;
+}
+
+.address {
+  margin: 0 0 0.5rem;
+  max-width: 32ch;
+  font-size: clamp(1rem, 1.25vw, 1.1rem);
+  line-height: 1.55;
+  color: rgba(245, 245, 243, 0.9);
+}
+
+.hours {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin-bottom: 0.5rem;
+  overflow: hidden;
+}
+
+.hoursRow {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1rem;
+  align-items: start;
+  font-size: clamp(1rem, 1.2vw, 1.08rem);
+  line-height: 1.45;
+  color: rgba(245, 245, 243, 0.95);
+  overflow: hidden;
+}
+
+.phone {
+  display: inline-block;
+  width: fit-content;
+  margin-bottom: 1.5rem;
+  color: #f5f5f3;
+  text-decoration: none;
+  font-size: clamp(1rem, 1.25vw, 1.12rem);
+  transition: opacity 0.25s ease;
+  overflow: hidden;
+}
+
+.phone:hover {
+  opacity: 0.72;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.9rem;
+  margin-top: auto;
+}
+
+.buttonWrap {
+  width: fit-content;
+}
+
+.routeLink {
+  color: rgba(245, 245, 243, 0.82);
+  text-decoration: none;
+  font-size: 0.98rem;
+  line-height: 1.4;
+  text-decoration: underline;
+  transition:
+    color 0.25s ease,
+    opacity 0.25s ease;
+}
+
+.routeLink:hover {
+  color: #f5f5f3;
+}
+
+.privacyNote {
+  margin: 0.2rem 0 0;
+  max-width: 60ch;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: rgba(245, 245, 243, 0.62);
+}
+
+.char {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+
+.line {
+  display: block;
+  overflow: hidden;
+  will-change: transform, opacity;
+}
+
+@media (max-width: 767px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mapCard {
+    height: 15rem;
+  }
+
+  .infoCard {
+    min-height: auto;
+  }
+
+  /*.infoCardShape {
+    clip-path: polygon(12% 0%, 100% 0%, 86% 100%, 0% 100%);
+  }*/
+
+  .infoContent {
+    justify-content: flex-start;
+    padding: clamp(1.4rem, 4vw, 1.8rem) clamp(1rem, 4vw, 1.3rem)
+      clamp(1.6rem, 4vw, 2rem);
+  }
+  .actions {
+    margin-top: 1.5rem;
+  }
+
+  .privacyNote {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .inner {
+    padding: clamp(3rem, 10vw, 4rem) 1rem clamp(3rem, 10vw, 4rem);
+  }
+
+  .heading {
+    margin-bottom: 1.4rem;
+  }
+
+  .title {
+    font-size: clamp(2rem, 10vw, 3.2rem);
+  }
+
+  .mapCard {
+    height: 15.5rem;
+  }
+  .pin {
+    top: 25%;
+  }
+  .actions {
+    margin-top: 1.5rem;
+  }
+  .placeTitle {
+    font-size: clamp(2rem, 9vw, 3rem);
+  }
+  .infoContent {
+    margin-top: 0.5rem;
+  }
+  .hoursRow {
+    grid-template-columns: 1fr auto;
+    gap: 0.75rem;
+    font-size: 0.98rem;
+  }
+
+  .privacyNote {
+    font-size: 0.78rem;
+  }
+}

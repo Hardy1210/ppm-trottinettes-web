@@ -1,0 +1,406 @@
+.footer {
+  position: relative;
+  overflow: hidden;
+
+  background: var(--color-dark, #111111);
+  color: var(--color-brandText);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-family: var(--font-questrial);
+}
+
+.inner {
+  // width: min(100%, 1440px);
+  margin: 0 auto;
+  padding-inline: clamp(1rem, 2vw, 2rem);
+  padding-top: clamp(2rem, 4vw, 4rem);
+}
+
+.topGrid {
+  max-width: var(--max-width-container);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(16rem, 20rem) minmax(0, 1fr);
+  gap: clamp(2rem, 4vw, 5rem);
+  align-items: start;
+  padding-bottom: clamp(2.5rem, 5vw, 4rem);
+
+  @media (max-width: 767px) {
+    grid-template-columns: 1fr;
+    gap: clamp(2rem, 5vw, 3rem);
+  }
+}
+
+.brandCol {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: clamp(2rem, 4vw, 4rem);
+  min-height: clamp(14rem, 30vw, 22rem);
+}
+
+.brandMark {
+  display: inline-flex;
+  width: fit-content;
+  line-height: 0;
+  text-decoration: none;
+}
+
+.brandMarkImage {
+  width: clamp(7rem, 10vw, 9rem);
+  height: auto;
+}
+
+.ctaWrap {
+  display: inline-flex;
+  align-items: stretch;
+  gap: 0.5rem;
+  width: fit-content;
+}
+
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: clamp(10rem, 16vw, 12rem);
+  padding-inline: clamp(1.25rem, 2vw, 1.75rem);
+  font-size: clamp(0.95rem, 1vw, 1rem);
+  text-decoration: none;
+  color: #1a1a1a;
+  background: var(--color-ppmYellow);
+  clip-path: polygon(6% 0%, 100% 0%, 94% 100%, 0% 100%);
+}
+
+.ctaArrow {
+  position: relative;
+  width: clamp(3.5rem, 5vw, 4.25rem);
+  min-width: clamp(3.5rem, 5vw, 4.25rem);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  clip-path: polygon(18% 0%, 100% 0%, 82% 100%, 0% 100%);
+  background: var(--color-ppmYellow);
+  color: #1a1a1a;
+}
+
+.ctaArrowTexture {
+  position: absolute;
+  inset: 0;
+  background-image: url('/textures/noise-yellow.webp');
+  background-size: cover;
+  background-position: center;
+  mix-blend-mode: multiply;
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.ctaArrowIcon {
+  position: relative;
+  z-index: 1;
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.contentCol {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2rem, 4vw, 3rem);
+}
+
+.titleBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 0.79em;
+}
+
+.titleLineMask {
+  display: block;
+  overflow: hidden;
+  line-height: 0.95;
+}
+
+.titleLine,
+.titleLineStrong {
+  display: inline-block;
+  font-size: clamp(2.1rem, 5.2vw, 5rem);
+  //letter-spacing: -0.04em;
+  line-height: 0.95;
+
+  will-change: transform, opacity;
+}
+
+.titleLine {
+  font-weight: 300;
+  font-family: var(--font-michroma);
+}
+
+.titleLineStrong {
+  font-weight: 700;
+  font-family: var(--font-questrial);
+  line-height: 0.85;
+}
+
+.linksGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, max-content));
+  gap: clamp(1.5rem, 3vw, 4rem);
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+    gap: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  }
+}
+
+.linksGroup {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1rem, 2vw, 1.5rem);
+
+  @media (max-width: 900px) {
+    padding-block: clamp(1.5rem, 5vw, 2rem);
+
+    &:not(:last-child) {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+    }
+  }
+}
+
+.groupTitle {
+  font-size: clamp(0.9rem, 1.1vw, 1rem);
+  line-height: 1.2;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.navList,
+.infoList {
+  display: flex;
+  flex-direction: row;
+
+  gap: clamp(0.75rem, 1vw, 1rem);
+}
+
+.whiteLink {
+  position: relative;
+  display: inline-flex;
+  width: fit-content;
+  font-size: clamp(0.95rem, 1vw, 1rem);
+  line-height: 1.35;
+  color: rgba(255, 255, 255, 0.92);
+  text-decoration: none;
+  transition:
+    color 0.25s ease,
+    opacity 0.25s ease;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -0.18rem;
+    width: 100%;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.7;
+    transform-origin: left center;
+    transform: scaleX(1);
+    transition:
+      transform 0.25s ease,
+      opacity 0.25s ease;
+  }
+
+  &:hover {
+    color: rgba(255, 255, 255, 0.6);
+
+    &::after {
+      opacity: 0.45;
+      transform: scaleX(0.96);
+    }
+  }
+}
+
+.bottomArea {
+  position: relative;
+  padding-top: clamp(1.2rem, 2vw, 2rem);
+}
+
+.socialRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: clamp(0.75rem, 1vw, 1rem);
+
+  @media (max-width: 900px) {
+    position: relative;
+    z-index: 3;
+  }
+}
+
+.yellowLink {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--color-ppmYellow);
+  width: fit-content;
+  font-size: clamp(1rem, 1.2vw, 1.35rem);
+  line-height: 1;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+}
+
+.yellowLinkOverflow {
+  display: inline-block;
+  overflow: hidden;
+  line-height: 1;
+}
+
+.yellowLinkInner {
+  display: inline-block;
+  will-change: transform;
+}
+
+.marqueeWrap {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  margin-top: clamp(0.5rem, 1vw, 1rem);
+  margin-bottom: clamp(0.5rem, 1vw, 1rem);
+  pointer-events: none;
+}
+
+.marqueeTrack {
+  display: flex;
+  align-items: flex-end;
+  width: max-content;
+  gap: clamp(1rem, 2vw, 2rem);
+}
+
+.logoMaskItem {
+  position: relative;
+  width: clamp(52rem, 92vw, 88rem);
+  height: clamp(9rem, 18vw, 16rem);
+  flex: 0 0 auto;
+}
+
+.logoTexture,
+.logoYellowOverlay,
+.logoNoise {
+  position: absolute;
+  inset: 0;
+
+  mask-image: url('/logos/ppm-long.svg');
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+
+  -webkit-mask-image: url('/logos/ppm-long.svg');
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  -webkit-mask-size: contain;
+}
+
+.logoTexture {
+  background-image: url('/images/footer-texture.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.logoYellowOverlay {
+  background: rgba(218, 224, 4, 0.22);
+  pointer-events: none;
+}
+
+.logoNoise {
+  background-image: url('/textures/noise-yellow.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.16;
+  pointer-events: none;
+}
+
+.legalRow {
+  position: relative;
+  z-index: 3;
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  align-items: center;
+  gap: 1rem;
+  padding-top: clamp(0.25rem, 0.8vw, 0.75rem);
+  padding-bottom: clamp(1rem, 1.4vw, 1.4rem);
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr 1fr;
+    align-items: end;
+    row-gap: 1rem;
+  }
+}
+
+.copyright {
+  justify-self: end;
+  font-size: clamp(0.95rem, 1vw, 1rem);
+  line-height: 1.2;
+  color: var(--color-ppmYellow);
+  @media (max-width: 900px) {
+    grid-column: 1 / -1;
+    justify-self: end;
+  }
+}
+
+.splitChar {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+
+@media (max-width: 900px) {
+  .inner {
+    padding-inline: 0;
+    padding-top: 0;
+  }
+
+  .topGrid {
+    gap: 0;
+    padding-bottom: 0;
+  }
+
+  .contentCol {
+    gap: 0;
+  }
+
+  .titleBlock {
+    padding-inline: clamp(1rem, 4vw, 1.2rem);
+    padding-top: clamp(1rem, 4vw, 1.25rem);
+    padding-bottom: clamp(1.5rem, 4vw, 2rem);
+  }
+
+  .brandCol {
+    display: none;
+  }
+
+  .socialRow {
+    padding-inline: clamp(1rem, 4vw, 1.2rem);
+    padding-top: clamp(1rem, 4vw, 1.2rem);
+  }
+
+  .marqueeWrap {
+    margin-top: 0;
+    margin-bottom: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+    padding-block: clamp(0.5rem, 2vw, 0.75rem);
+  }
+
+  .logoMaskItem {
+    width: clamp(30rem, 110vw, 42rem);
+    height: clamp(6rem, 24vw, 8rem);
+  }
+
+  .legalRow {
+    padding-inline: clamp(1rem, 4vw, 1.2rem);
+  }
+}

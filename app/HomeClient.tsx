@@ -11,6 +11,7 @@ import LogoHeroBg from '@/components/icons/LogoHeroBg';
 import { Makita } from '@/components/icons/Makita';
 import { Xiaomi } from '@/components/icons/Xiaomi';
 import { Section } from '@/components/layout/Section';
+import Contact from '@/components/sections/contact/Contact';
 import ParallaxSection from '@/components/sections/parallax-section/ParallaxSection';
 import { QualityBlock } from '@/components/sections/QualityBlock';
 import ServiceList from '@/components/sections/services/ServicesList';
@@ -322,6 +323,7 @@ export default function HomeClient({ serviceSection }: HomeClientProps) {
           items={serviceSection?.services}
           footnote={serviceSection?.footnote}
         />
+        <Contact ctaHref="link_agenda" routeHref="google_maps" />
       </div>
     </>
   );

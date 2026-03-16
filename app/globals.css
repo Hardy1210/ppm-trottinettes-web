@@ -15,13 +15,17 @@ html {
 html::-webkit-scrollbar {
   display: none; /* Chrome/Safari */
 }
-/* === Design tokens === */
+/* === Design tokens PARA SCSS MODULES === */
 :root {
   --header-h: 80px;
   --ppm-bg: #1e2126;
   --ppm-yellow: #e4e700;
   --color-brandText: #dededd;
   --color-brand-bg-secondary: #dededd;
+
+  --max-width-container: 1280px;
+  --max-width-reading: 720px;
+  --max-width-wide: 1600px;
 
   --font-title: var(--font-michroma);
   --font-body: var(--font-questrial);
@@ -37,7 +41,7 @@ html::-webkit-scrollbar {
   color: #000;
 }
 
-/* === Tailwind theme extension === */
+/* === para TAILWIND theme extension === */
 @theme inline {
   --color-ppmBg: var(--ppm-bg);
   --color-ppmYellow: var(--ppm-yellow);

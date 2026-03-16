@@ -7,7 +7,7 @@
   display: flex;
   align-items: center;
   background: #111;
-  color: #fff;
+  color: var(--color-brandText);
 
   @media (max-width: 767px) {
     min-height: clamp(34rem, 85vw, 48rem);
