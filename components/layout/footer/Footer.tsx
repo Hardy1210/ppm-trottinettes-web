@@ -1,6 +1,7 @@
 'use client';
 
 import { gsap, SplitText } from '@/lib/gsap';
+import { PrimaryButton } from '@/ui/Buttons';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useLayoutEffect, useRef } from 'react';
@@ -210,17 +211,17 @@ export default function Footer({
               aria-label="Pile Power Mobilité"
             >
               <Image
-                src="/logos/ppm-mark.svg"
+                src="/logo-navbar2.svg"
                 alt="PPM"
-                width={140}
-                height={48}
-                className={styles.brandMarkImage}
+                width={130}
+                height={40}
+                priority
               />
             </Link>
 
             <div ref={ctaWrapRef} className={styles.ctaWrap}>
               <Link href="#" className={styles.ctaButton}>
-                {buttonLabel}
+                <PrimaryButton>{buttonLabel}</PrimaryButton>
               </Link>
 
               <span
@@ -345,18 +346,15 @@ export default function Footer({
           </div>
 
           <div className={styles.marqueeWrap} aria-hidden="true">
-            <div className={styles.marqueeTrack}>
-              <div className={styles.logoMaskItem}>
-                <span className={styles.logoTexture} />
-                <span className={styles.logoYellowOverlay} />
-                <span className={styles.logoNoise} />
-              </div>
+            <span className={styles.marqueeBg} />
+            <span className={styles.marqueeOverlay} />
+            <span className={styles.marqueeNoise} />
 
-              <div className={styles.logoMaskItem}>
-                <span className={styles.logoTexture} />
-                <span className={styles.logoYellowOverlay} />
-                <span className={styles.logoNoise} />
-              </div>
+            <div className={styles.marqueeTrack}>
+              <div className={styles.logoMaskItem} />
+              <div className={styles.logoMaskItem} />
+              <div className={styles.logoMaskItem} />
+              <div className={styles.logoMaskItem} />
             </div>
           </div>
 
