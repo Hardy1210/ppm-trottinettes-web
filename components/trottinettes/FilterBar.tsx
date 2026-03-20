@@ -33,7 +33,7 @@ const FilterBar = ({
   sortOrder,
   onSortChange,
 }: FilterBarProps) => (
-  <div className="container pb-8">
+  <div className="container pb-8 max-w-container mx-auto">
     <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 justify-between">
       {/* Tabs */}
       <div className="flex gap-1 bg-secondary/50 p-1 rounded-md">

@@ -34,16 +34,16 @@ html::-webkit-scrollbar {
   /*ESTILOS PARA LA PAGINA CATALOGUE*/
 
   /* === Tokens catalogue / shadcn-like === */
-  --background: 220 15% 6%;
+  --background: 217 12% 13%;
   --foreground: 0 0% 95%;
 
-  --card: 220 15% 10%;
+  --card: 0 0% 11%;
   --card-foreground: 0 0% 95%;
 
   --popover: 220 15% 10%;
   --popover-foreground: 0 0% 95%;
 
-  --primary: 68 100% 50%;
+  --primary: 61 100% 45%;
   --primary-foreground: 220 15% 6%;
 
   --secondary: 220 15% 15%;

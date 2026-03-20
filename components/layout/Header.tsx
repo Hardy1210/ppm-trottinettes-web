@@ -4,6 +4,7 @@ import { useIntro } from '@/context/IntroContext';
 import gsap from 'gsap';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { MenuOverlayPortal } from '../MenuOverlayPortal';
 import styles from './Header.module.scss';
@@ -58,23 +59,48 @@ export function Header({
     [items],
   );
 
+  const pathname = usePathname();
+  const isHome = pathname === '/';
+
   // Fade in header (sin desplazamiento)
   useLayoutEffect(() => {
     const header = headerRef.current;
     const inner = innerRef.current;
     const backdrop = backdropRef.current;
-    if (!introDoneLogo || !header || !inner || !backdrop) return;
 
-    // evita flashes por estados previos (HMR)
+    if (!header || !inner || !backdrop) return;
+
     gsap.killTweensOf([header, inner, backdrop]);
 
-    // 1) habilita el header (incluye blur)
-    gsap.set(header, { autoAlpha: 1 }); // autoAlpha => opacity + visibility
+    // 1) Si NO es home -> visible directo
+    if (!isHome) {
+      gsap.set(header, { autoAlpha: 1 });
+      gsap.set(backdrop, { autoAlpha: 1 });
+      gsap.set(inner, {
+        autoAlpha: 1,
+        y: 0,
+        filter: 'blur(0px)',
+      });
+      return;
+    }
 
-    // 2) anima SOLO el inner
+    // 2) Si es home y la intro no terminó -> oculto
+    if (!introDoneLogo) {
+      gsap.set(header, { autoAlpha: 0 });
+      gsap.set(backdrop, { autoAlpha: 0 });
+      gsap.set(inner, {
+        autoAlpha: 0,
+        y: -8,
+        filter: 'blur(12px)',
+      });
+      return;
+    }
+
+    // 3) Home + intro terminada -> animación
+    gsap.set(header, { autoAlpha: 1 });
+
     const tl = gsap.timeline();
 
-    // barra blur aparece suave
     tl.fromTo(
       backdrop,
       { autoAlpha: 0 },
@@ -82,7 +108,6 @@ export function Header({
       0,
     );
 
-    // contenido aparece
     tl.fromTo(
       inner,
       { autoAlpha: 0, y: -8 },
@@ -90,14 +115,17 @@ export function Header({
       0,
     );
 
-    // blur del contenido desaparece
     tl.fromTo(
       inner,
       { filter: 'blur(12px)' },
       { filter: 'blur(0px)', duration: 1.4, ease: 'power2.out' },
       0,
     );
-  }, [introDoneLogo]);
+
+    return () => {
+      tl.kill();
+    };
+  }, [introDoneLogo, isHome]);
 
   // One-page active link (IntersectionObserver)
   useEffect(() => {

@@ -40,11 +40,11 @@ export default function CataloguePageClient() {
   }, [activeFilter, searchQuery, sortOrder]);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background w-full">
       <HeroSection />
       <IntroBlock />
 
-      <div id="catalogue">
+      <div id="catalogue" className="px-5 xl:px-0">
         <FilterBar
           activeFilter={activeFilter}
           onFilterChange={setActiveFilter}
@@ -54,7 +54,7 @@ export default function CataloguePageClient() {
           onSortChange={setSortOrder}
         />
 
-        <section className="container pb-16">
+        <section className="container pb-16 max-w-container mx-auto">
           {filtered.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {filtered.map((scooter, i) => (

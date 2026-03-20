@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { MessageCircle } from 'lucide-react';
 
 const CTABlock = () => (
-  <section className="container py-20">
+  <section className="container py-20 max-w-container mx-auto px-5 xl:px-0">
     <div className="relative bg-card border border-border rounded-lg p-10 md:p-16 text-center overflow-hidden">
       {/* Geometric accents */}
       <div className="absolute top-0 left-0 w-32 h-32 bg-primary/5 -translate-x-1/2 -translate-y-1/2 rotate-45" />

@@ -1,10 +1,10 @@
 'use client';
 
 const IntroBlock = () => (
-  <section className="container py-16">
+  <section className="container py-16 mx-auto px-5 xl:px-0">
     <div
       className="max-w-3xl mx-auto text-center space-y-4 animate-fade-in opacity-0"
-      style={{ animationDelay: '0.2s' }}
+      style={{ animationDelay: '0.7s' }}
     >
       <div className="w-16 h-[2px] bg-primary mx-auto mb-6" />
       <p className="text-lg text-muted-foreground leading-relaxed">

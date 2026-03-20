@@ -1,9 +1,12 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
 import heroImage from '@/public/images/scooter-hero.webp';
+import { PrimaryButton } from '@/ui/Buttons';
 import { ChevronDown, MessageCircle } from 'lucide-react';
 import Image from 'next/image';
+import { BadgeCheck } from '../icons/BadgeCheck';
+import { Shieldd } from '../icons/Shieldd';
+import { Wrench } from '../icons/Wrench';
 
 const HeroSection = () => {
   const scrollToCatalog = () => {
@@ -13,7 +16,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="relative min-h-[85vh] flex items-center overflow-hidden">
+    <section className="relative min-h-[700px] flex items-center overflow-hidden px-5 mt-10">
       {/* Background image */}
       <div className="absolute inset-0">
         <Image
@@ -28,55 +31,76 @@ const HeroSection = () => {
       {/* Diagonal geometric accent */}
       <div className="absolute top-0 right-0 w-1/3 h-full bg-primary/5 skew-x-[-12deg] translate-x-20" />
 
-      <div className="container relative z-10 py-20">
-        <div className="max-w-2xl space-y-6">
-          <div
-            className="inline-block animate-fade-in opacity-0"
-            style={{ animationDelay: '0.1s' }}
-          >
-            <span className="badge-neuf rounded-sm text-xs">
-              Catalogue 2025
-            </span>
-          </div>
-
+      <div className="container relative z-10 max-w-container mx-auto">
+        <div className="max-w-2xl space-y-12">
           <h1
-            className="text-5xl md:text-7xl font-display font-bold tracking-tight leading-[1.1] animate-fade-in opacity-0"
+            className=" text-[clamp(1.85rem,8vw,4.8rem)] font-title text-ppmYellow leading-[1.3] animate-fade-in opacity-0"
             style={{ animationDelay: '0.2s' }}
           >
-            Trottinettes
+            NOS TORTTINETTES
           </h1>
-
-          <p
-            className="text-xl md:text-2xl text-muted-foreground font-light animate-fade-in opacity-0"
+          {/*iconos */}
+          <div
+            className="flex w-full items-center gap-[clamp(2rem,2vw,2rem)] animate-fade-in opacity-0"
             style={{ animationDelay: '0.3s' }}
           >
-            Sélection de modèles neufs et d&apos;occasion
+            <div className="flex items-center gap-[clamp(0.35rem,1vw,0.75rem)]">
+              <BadgeCheck className="h-[clamp(1rem,1.5vw,1.4rem)] w-[clamp(1rem,1.5vw,1.4rem)] shrink-0 text-ppmYellow" />
+              <span className="text-[clamp(0.75rem,1.2vw,1.1rem)] font-medium uppercase tracking-[0.14em] text-slate-300">
+                Testés
+              </span>
+            </div>
+
+            <div className="flex items-center gap-[clamp(0.35rem,1vw,0.75rem)]">
+              <Wrench className="h-[clamp(1rem,1.5vw,1.4rem)] w-[clamp(1rem,1.5vw,1.4rem)] shrink-0 text-ppmYellow" />
+              <span className="text-[clamp(0.75rem,1.2vw,1.1rem)] font-medium uppercase tracking-[0.14em] text-slate-300">
+                Révisés
+              </span>
+            </div>
+
+            <div className="flex items-center gap-[clamp(0.35rem,1vw,0.75rem)]">
+              <Shieldd className="h-[clamp(1rem,1.5vw,1.4rem)] w-[clamp(1rem,1.5vw,1.4rem)] shrink-0 text-ppmYellow" />
+              <span className="text-[clamp(0.75rem,1.2vw,1.1rem)] font-medium uppercase tracking-[0.14em] text-slate-300">
+                Garantis
+              </span>
+            </div>
+          </div>
+
+          <p
+            className="text-[clamp(1.45rem,2vw,1.5rem)] text-muted-foreground font-body font-light leading-tight animate-fade-in opacity-0"
+            style={{ animationDelay: '0.4s' }}
+          >
+            Profitez de la liberté urbaine avec nos trottinettes d’occasion
+            contrôlées, performantes et prêtes à rouler. Économiques,
+            écologiques et garanties.
           </p>
 
           <p
-            className="text-sm text-muted-foreground tracking-wide uppercase animate-fade-in opacity-0"
-            style={{ animationDelay: '0.4s' }}
+            className="hidden sm:block text-sm text-muted-foreground font-body tracking-wide uppercase animate-fade-in opacity-0"
+            style={{ animationDelay: '0.5s' }}
           >
             Disponibles rapidement&ensp;•&ensp;Révisées&ensp;•&ensp;Conseils
             atelier
           </p>
 
           <div
-            className="flex flex-wrap gap-4 pt-4 animate-fade-in opacity-0"
-            style={{ animationDelay: '0.5s' }}
+            className="flex flex-wrap gap-10 pt-4 animate-fade-in opacity-0 justify-center"
+            style={{ animationDelay: '0.6s' }}
           >
-            <Button
-              size="lg"
+            <PrimaryButton
               onClick={scrollToCatalog}
-              className="gap-2 font-display font-semibold"
+              className="gap-2 font-title font-semibold"
             >
               Voir le catalogue
               <ChevronDown className="w-4 h-4" />
-            </Button>
-            <Button size="lg" variant="outline" className="gap-2 font-display">
+            </PrimaryButton>
+            <PrimaryButton
+              href="mailto:tonmail@example.com?subject=Demande%20de%20contact"
+              className="gap-2 border-4 border-neutral-500 bg-transparent font-title text-neutral-300"
+            >
               <MessageCircle className="w-4 h-4" />
               Nous contacter
-            </Button>
+            </PrimaryButton>
           </div>
         </div>
       </div>
