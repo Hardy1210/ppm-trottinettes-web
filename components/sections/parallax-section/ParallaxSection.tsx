@@ -1,7 +1,7 @@
 'use client';
 
 import { IconShape2 } from '@/components/icons/IconShape2';
-import { gsap } from '@/lib/gsap';
+import { gsap, registerGsapPlugins, SplitText } from '@/lib/gsap';
 import Image from 'next/image';
 import { useLayoutEffect, useRef } from 'react';
 import styles from './ParallaxSection.module.scss';
@@ -21,10 +21,20 @@ export default function ParallaxSection({
 }: Props) {
   const sectionRef = useRef<HTMLElement | null>(null);
   const bgParallaxRef = useRef<HTMLDivElement | null>(null);
+  const titleRef = useRef<HTMLHeadingElement | null>(null);
+  const introRef = useRef<HTMLParagraphElement | null>(null);
+  const dividerRef = useRef<HTMLDivElement | null>(null);
+  const descriptionBottomRef = useRef<HTMLParagraphElement | null>(null);
 
   useLayoutEffect(() => {
+    registerGsapPlugins();
+
     const section = sectionRef.current;
     const bgParallax = bgParallaxRef.current;
+
+    let titleSplit: SplitText | undefined;
+    let introSplit: SplitText | undefined;
+    let descriptionBottomSplit: SplitText | undefined;
 
     if (!section || !bgParallax) return;
 
@@ -48,9 +58,66 @@ export default function ParallaxSection({
             scrub: 1.2,
           },
         });
+
+        if (!titleRef.current || !introRef.current || !dividerRef.current)
+          return;
+
+        titleSplit = SplitText.create(titleRef.current, {
+          type: 'chars',
+          charsClass: 'char',
+          mask: 'chars',
+        });
+
+        introSplit = SplitText.create(introRef.current, {
+          type: 'lines',
+          linesClass: 'line',
+          mask: 'lines',
+        });
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: section,
+            start: 'top 72%',
+            once: true,
+          },
+        });
+
+        tl.from(titleSplit.chars, {
+          yPercent: 110,
+          opacity: 0,
+          duration: 0.85,
+          stagger: 0.018,
+          ease: 'power4.out',
+        })
+          .from(
+            introSplit.lines,
+            {
+              yPercent: 100,
+              opacity: 0,
+              duration: 0.9,
+              stagger: 0.08,
+              ease: 'expo.out',
+            },
+            '-=0.55',
+          )
+
+          .from(
+            dividerRef.current,
+            {
+              scaleX: 0,
+              transformOrigin: 'left center',
+              duration: 0.8,
+              ease: 'power2.out',
+            },
+            '-=0.15',
+          );
       }, section);
 
-      return () => ctx.revert();
+      return () => {
+        ctx.revert();
+        titleSplit?.revert();
+        introSplit?.revert();
+      };
     });
 
     mm.add('(max-width: 767px)', () => {
@@ -58,9 +125,73 @@ export default function ParallaxSection({
         gsap.set(bgParallax, {
           clearProps: 'transform,willChange',
         });
+
+        if (
+          !titleRef.current ||
+          !dividerRef.current ||
+          !descriptionBottomRef.current
+        )
+          return;
+
+        titleSplit = SplitText.create(titleRef.current, {
+          type: 'chars',
+          charsClass: 'char',
+          mask: 'chars',
+        });
+
+        descriptionBottomSplit = SplitText.create(
+          descriptionBottomRef.current,
+          {
+            type: 'lines',
+            linesClass: 'line',
+            mask: 'lines',
+          },
+        );
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: section,
+            start: 'top 80%',
+            once: true,
+          },
+        });
+
+        tl.from(titleSplit.chars, {
+          yPercent: 110,
+          opacity: 0,
+          duration: 0.85,
+          stagger: 0.018,
+          ease: 'power4.out',
+        })
+
+          .from(
+            dividerRef.current,
+            {
+              scaleX: 0,
+              transformOrigin: 'left center',
+              duration: 0.8,
+              ease: 'power3.out',
+            },
+            '-=0.25',
+          )
+          .from(
+            descriptionBottomSplit.lines,
+            {
+              yPercent: 100,
+              opacity: 0,
+              duration: 0.9,
+              stagger: 0.08,
+              ease: 'expo.out',
+            },
+            '-=0.15',
+          );
       }, section);
 
-      return () => ctx.revert();
+      return () => {
+        ctx.revert();
+        titleSplit?.revert();
+        introSplit?.revert();
+      };
     });
 
     return () => mm.revert();
@@ -94,14 +225,22 @@ export default function ParallaxSection({
       <div className={styles.container}>
         <div className={styles.content}>
           <div className={styles.topRow}>
-            <h2 className={styles.title}>{title}</h2>
+            <h2 ref={titleRef} className={styles.title}>
+              {title}
+            </h2>
 
             <div className={styles.textBox}>
-              <p className={styles.description}>{description}</p>
+              <p ref={introRef} className={styles.description}>
+                {description}
+              </p>
             </div>
           </div>
 
-          <div className={styles.titleLineWrap} aria-hidden="true">
+          <div
+            ref={dividerRef}
+            className={styles.titleLineWrap}
+            aria-hidden="true"
+          >
             <svg
               viewBox="2 0 355 16"
               preserveAspectRatio="none"
@@ -130,7 +269,9 @@ export default function ParallaxSection({
               />
             </svg>
           </div>
-          <p className={styles.descriptionBottom}>{description}</p>
+          <p ref={descriptionBottomRef} className={styles.descriptionBottom}>
+            {description}
+          </p>
         </div>
         <IconShape2
           size={400}

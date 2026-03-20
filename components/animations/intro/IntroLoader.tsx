@@ -107,13 +107,21 @@ export function IntroLoader({
       gsap.set(whiteLayer, { opacity: 1, clipPath: fullMask });
       gsap.set(blueLayer, { opacity: 1, clipPath: fullMask });
       gsap.set(yellowLayer, { opacity: 1, clipPath: fullMask });
-      gsap.set(layersGroup, { y: -100, autoAlpha: 0 });
+      gsap.set(layersGroup, {
+        y: -100,
+        x: 18,
+        rotation: 16,
+        transformOrigin: '50% 50%',
+        autoAlpha: 0,
+      });
       //el grupo de layers viene primero
 
       tl.to(
         layersGroup,
         {
           y: 0,
+          x: 0,
+          rotation: 16,
           autoAlpha: 1,
           duration: 0.7,
           delay: 0.5,
@@ -203,7 +211,7 @@ export function IntroLoader({
         yellowLayer,
         {
           clipPath: hideDown,
-          duration: 1.15,
+          duration: 1.28,
           ease: 'power3.in',
         },
         'reveal-=1.1', //aqui adelantamos la salida de el color amarillo
@@ -240,7 +248,7 @@ export function IntroLoader({
   return (
     <div
       ref={rootRef}
-      className="pointer-events-none fixed inset-0 z-[9999]"
+      className="pointer-events-none fixed inset-0 z-9999"
       aria-hidden="true"
     >
       <div data-curtain className="absolute inset-0 bg-black" />
@@ -250,7 +258,7 @@ export function IntroLoader({
         className="absolute inset-0 flex items-center justify-center"
       >
         <svg
-          className="w-[clamp(60px,5vw,300px)] select-none overflow-visible"
+          className="w-[clamp(60px,2vw,90px)] select-none overflow-visible"
           viewBox="0 0 31 51"
           role="img"
           aria-label="Intro logo"

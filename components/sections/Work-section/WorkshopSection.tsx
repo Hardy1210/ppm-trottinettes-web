@@ -1,7 +1,11 @@
+'use client';
+
 import { Quote } from '@/components/icons/Quote';
 import { Section } from '@/components/layout/Section';
+import { gsap, registerGsapPlugins, SplitText } from '@/lib/gsap';
 import YellowPanelLeftShape from '@/ui/YellowPanelLeftShape';
 import Image from 'next/image';
+import { useLayoutEffect, useRef } from 'react';
 import styles from './WorkshopSection.module.scss';
 
 type WorkshopSectionProps = {
@@ -13,8 +17,115 @@ export function WorkshopSection({
   imageSrc,
   imageAlt = 'Technicien réparant une carte électronique dans l’atelier',
 }: WorkshopSectionProps) {
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const titleRef = useRef<HTMLHeadingElement | null>(null);
+  const introRef = useRef<HTMLParagraphElement | null>(null);
+  const descriptionRef = useRef<HTMLParagraphElement | null>(null);
+  const dividerRef = useRef<HTMLDivElement | null>(null);
+
+  useLayoutEffect(() => {
+    registerGsapPlugins();
+
+    let titleSplit: SplitText | undefined;
+    let introSplit: SplitText | undefined;
+    let descriptionSplit: SplitText | undefined;
+    let ctx: gsap.Context | undefined;
+
+    const init = async () => {
+      await document.fonts.ready;
+
+      if (
+        !sectionRef.current ||
+        !titleRef.current ||
+        !introRef.current ||
+        !descriptionRef.current ||
+        !dividerRef.current
+      ) {
+        return;
+      }
+
+      ctx = gsap.context(() => {
+        titleSplit = SplitText.create(titleRef.current!, {
+          type: 'chars',
+          charsClass: 'char',
+          mask: 'chars',
+        });
+
+        introSplit = SplitText.create(introRef.current!, {
+          type: 'lines',
+          linesClass: 'line',
+          mask: 'lines',
+        });
+
+        descriptionSplit = SplitText.create(descriptionRef.current!, {
+          type: 'lines',
+          linesClass: 'line',
+          mask: 'lines',
+        });
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top 72%',
+            once: true,
+          },
+        });
+
+        tl.from(titleSplit.chars, {
+          yPercent: 110,
+          opacity: 0,
+          duration: 0.85,
+          stagger: 0.018,
+          ease: 'power4.out',
+        })
+          .from(
+            introSplit.lines,
+            {
+              yPercent: 100,
+              opacity: 0,
+              duration: 0.9,
+              stagger: 0.08,
+              ease: 'expo.out',
+            },
+            '-=0.5',
+          )
+          .from(
+            dividerRef.current,
+            {
+              scaleX: 0,
+              transformOrigin: 'left center',
+              duration: 0.8,
+              ease: 'power3.out',
+            },
+            '-=0.69',
+          )
+          .from(
+            descriptionSplit.lines,
+            {
+              yPercent: 100,
+              opacity: 0,
+              duration: 0.85,
+              stagger: 0.06,
+              ease: 'power2.out',
+            },
+            '-=0.18',
+          );
+      }, sectionRef);
+    };
+
+    init();
+
+    return () => {
+      ctx?.revert();
+      titleSplit?.revert();
+      introSplit?.revert();
+      descriptionSplit?.revert();
+    };
+  }, []);
+
   return (
     <section
+      ref={sectionRef}
       className={styles.workshopSection}
       aria-labelledby="workshop-title"
     >
@@ -22,13 +133,13 @@ export function WorkshopSection({
         <div>
           <div className={styles.topBlock}>
             <div className={styles.headingWrap}>
-              <h2 id="workshop-title" className={styles.title}>
+              <h2 ref={titleRef} id="workshop-title" className={styles.title}>
                 Notre atelier
               </h2>
             </div>
 
             <div className={styles.introWrap}>
-              <p className={styles.introText}>
+              <p ref={introRef} className={styles.introText}>
                 Spécialisé dans la réparation et la maintenance de trottinettes
                 électriques, l’atelier est né de la volonté de proposer une
                 alternative fiable face aux coûts élevés et aux délais souvent
@@ -37,7 +148,11 @@ export function WorkshopSection({
             </div>
           </div>
 
-          <div className={styles.titleLineWrap} aria-hidden="true">
+          <div
+            ref={dividerRef}
+            className={styles.titleLineWrap}
+            aria-hidden="true"
+          >
             <svg
               viewBox="2 0 355 16"
               preserveAspectRatio="none"
@@ -67,6 +182,7 @@ export function WorkshopSection({
             </svg>
           </div>
         </div>
+
         <div className={styles.bottomBlock}>
           <article
             className={styles.quoteBlock}
@@ -77,7 +193,7 @@ export function WorkshopSection({
             </div>
 
             <blockquote className={styles.quote}>
-              <p className={styles.quoteText}>
+              <p ref={descriptionRef} className={styles.quoteText}>
                 Passionnés de mécanique et utilisateurs quotidiens de
                 trottinettes électriques, nous développons des solutions fiables
                 pour particuliers et professionnels avec un service rapide et
@@ -94,9 +210,6 @@ export function WorkshopSection({
           </article>
 
           <div className={styles.mediaBlock}>
-            {/* formes discrètes de fond */}
-
-            {/* image principale */}
             <figure className={styles.figure}>
               <div className={styles.imageMask}>
                 <Image
@@ -111,7 +224,7 @@ export function WorkshopSection({
           </div>
         </div>
       </Section>
-      {/* forme jaune principale */}
+
       <div className={styles.yellowPanelWrap} aria-hidden="true">
         <YellowPanelLeftShape className={styles.yellowPanel} />
 
@@ -121,6 +234,7 @@ export function WorkshopSection({
           <span className={`${styles.ambientShape} ${styles.shapeThree}`} />
         </div>
       </div>
+
       <span className={styles.dotGrid} />
     </section>
   );

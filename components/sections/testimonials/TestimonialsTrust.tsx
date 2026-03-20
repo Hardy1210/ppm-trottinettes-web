@@ -17,14 +17,16 @@ export function TestimonialsTrustSection({ className }: Props) {
   const titleRef = useRef<HTMLHeadingElement | null>(null);
   const introRef = useRef<HTMLParagraphElement | null>(null);
   const cardTextRefs = useRef<HTMLParagraphElement[]>([]);
+  const dividerRef = useRef<HTMLDivElement | null>(null);
+  const cardRefs = useRef<HTMLElement[]>([]);
 
   useLayoutEffect(() => {
     registerGsapPlugins();
 
+    let ctx: gsap.Context | undefined;
     let titleSplit: SplitText | undefined;
     let introSplit: SplitText | undefined;
     let cardsSplits: SplitText[] = [];
-    let ctx: gsap.Context | undefined;
 
     const init = async () => {
       await document.fonts.ready;
@@ -44,7 +46,7 @@ export function TestimonialsTrustSection({ className }: Props) {
           mask: 'lines',
         });
 
-        cardsSplits = cardTextRefs.current.map((el) =>
+        cardsSplits = cardTextRefs.current.filter(Boolean).map((el) =>
           SplitText.create(el, {
             type: 'lines',
             linesClass: 'line',
@@ -52,7 +54,9 @@ export function TestimonialsTrustSection({ className }: Props) {
           }),
         );
 
-        const tl = gsap.timeline({
+        const cards = cardRefs.current.filter(Boolean);
+
+        const mainTl = gsap.timeline({
           scrollTrigger: {
             trigger: sectionRef.current,
             start: 'top 72%',
@@ -60,13 +64,14 @@ export function TestimonialsTrustSection({ className }: Props) {
           },
         });
 
-        tl.from(titleSplit.chars, {
-          yPercent: 110,
-          opacity: 0,
-          duration: 0.85,
-          stagger: 0.018,
-          ease: 'power4.out',
-        })
+        mainTl
+          .from(titleSplit.chars, {
+            yPercent: 110,
+            opacity: 0,
+            duration: 0.85,
+            stagger: 0.018,
+            ease: 'power4.out',
+          })
           .from(
             introSplit.lines,
             {
@@ -79,40 +84,43 @@ export function TestimonialsTrustSection({ className }: Props) {
             '-=0.55',
           )
           .from(
-            '.js-trust-divider',
+            dividerRef.current,
             {
               scaleX: 0,
               transformOrigin: 'left center',
-              duration: 0.9,
+              duration: 0.8,
               ease: 'power3.out',
             },
-            '-=0.55',
+            '-=0.65',
           )
           .from(
-            '.js-trust-card',
+            cards,
             {
               y: 28,
               opacity: 0,
-              duration: 0.8,
-              stagger: 0.12,
-              ease: 'power3.out',
-            },
-            '-=0.45',
-          );
-
-        cardsSplits.forEach((split, index) => {
-          tl.from(
-            split.lines,
-            {
-              yPercent: 100,
-              opacity: 0,
-              duration: 0.75,
+              duration: 0.7,
               stagger: 0.06,
               ease: 'power3.out',
             },
-            index === 0 ? '-=0.55' : '-=0.6',
+            '-=0.7',
           );
-        });
+
+        gsap.from(
+          cardsSplits.flatMap((split) => split.lines),
+          {
+            yPercent: 100,
+            opacity: 0,
+            duration: 0.65,
+            stagger: 0.045,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: 'top 72%',
+              once: true,
+            },
+            delay: 0.45,
+          },
+        );
       }, sectionRef);
     };
 
@@ -194,7 +202,7 @@ export function TestimonialsTrustSection({ className }: Props) {
         </div>
 
         {/* Divider */}
-        <div className="w-full mt-[3.2rem]" aria-hidden="true">
+        <div ref={dividerRef} className="w-full mt-[3.2rem]" aria-hidden="true">
           <svg
             viewBox="2 0 355 16"
             preserveAspectRatio="none"
@@ -237,6 +245,9 @@ export function TestimonialsTrustSection({ className }: Props) {
           {testimonials.map((item, index) => (
             <article
               key={item.id}
+              ref={(el) => {
+                if (el) cardRefs.current[index] = el;
+              }}
               className="
                 js-trust-card
                 relative flex h-full flex-col
