@@ -1,0 +1,132 @@
+@layer base {
+  :root {
+    --catalogue-background: 220 15% 6%;
+    --catalogue-foreground: 0 0% 95%;
+
+    --catalogue-card: 220 15% 10%;
+    --catalogue-card-foreground: 0 0% 95%;
+
+    --catalogue-primary: 68 100% 50%;
+    --catalogue-primary-foreground: 220 15% 6%;
+
+    --catalogue-secondary: 220 15% 15%;
+    --catalogue-secondary-foreground: 0 0% 85%;
+
+    --catalogue-muted: 220 10% 18%;
+    --catalogue-muted-foreground: 220 10% 55%;
+
+    --catalogue-accent: 68 80% 45%;
+    --catalogue-accent-foreground: 220 15% 6%;
+
+    --catalogue-border: 220 10% 18%;
+    --catalogue-input: 220 10% 18%;
+    --catalogue-ring: 68 100% 50%;
+
+    --catalogue-radius: 0.5rem;
+
+    --catalogue-neon-glow:
+      0 0 20px hsl(68 100% 50% / 0.3), 0 0 40px hsl(68 100% 50% / 0.1);
+    --catalogue-neon-glow-strong:
+      0 0 20px hsl(68 100% 50% / 0.5), 0 0 60px hsl(68 100% 50% / 0.2);
+  }
+}
+
+@layer components {
+  .catalogue-surface {
+    background: hsl(var(--catalogue-background));
+    color: hsl(var(--catalogue-foreground));
+  }
+
+  .catalogue-card {
+    background: hsl(var(--catalogue-card));
+    color: hsl(var(--catalogue-card-foreground));
+    border: 1px solid hsl(var(--catalogue-border));
+    border-radius: var(--catalogue-radius);
+  }
+
+  .catalogue-muted-text {
+    color: hsl(var(--catalogue-muted-foreground));
+  }
+
+  .catalogue-input-surface {
+    background: hsl(var(--catalogue-secondary));
+    border: 1px solid hsl(var(--catalogue-input));
+    color: hsl(var(--catalogue-foreground));
+  }
+
+  .neon-glow {
+    box-shadow: var(--catalogue-neon-glow);
+  }
+
+  .neon-glow-strong {
+    box-shadow: var(--catalogue-neon-glow-strong);
+  }
+
+  .diagonal-clip {
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+  }
+
+  .diagonal-clip-reverse {
+    clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%);
+  }
+
+  .geometric-border {
+    border: 1px solid hsl(var(--catalogue-border));
+    position: relative;
+  }
+
+  .geometric-border::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    background: linear-gradient(
+      135deg,
+      hsl(var(--catalogue-primary) / 0.3),
+      transparent 50%
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .card-hover {
+    transition: all 300ms ease;
+  }
+
+  .card-hover:hover {
+    box-shadow: var(--catalogue-neon-glow);
+    border-color: hsl(var(--catalogue-primary) / 0.4);
+    transform: translateY(-4px);
+  }
+
+  .badge-neuf {
+    background: hsl(var(--catalogue-primary));
+    color: hsl(var(--catalogue-primary-foreground));
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.25rem 0.75rem;
+  }
+
+  .badge-occasion {
+    background: hsl(var(--catalogue-secondary));
+    color: hsl(var(--catalogue-secondary-foreground));
+    border: 1px solid hsl(var(--catalogue-border));
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.25rem 0.75rem;
+  }
+
+  .text-gradient {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--catalogue-primary)),
+      hsl(var(--catalogue-accent))
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
