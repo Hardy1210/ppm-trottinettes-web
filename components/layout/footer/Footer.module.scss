@@ -379,7 +379,7 @@
   align-items: center;
   gap: 1rem;
   padding-top: clamp(0.25rem, 0.8vw, 0.75rem);
-  padding-bottom: clamp(1rem, 1.4vw, 1.4rem);
+  padding-bottom: clamp(0.25rem, 0.8vw, 0.75rem);
   color: var(--ppm-yellow);
 
   @media (max-width: 900px) {

@@ -369,6 +369,7 @@ export default function Footer({
               <span className={styles.yellowLinkOverflow}>
                 <span className={styles.yellowLinkInner}>
                   <span
+                    className="text-[clamp(0.95rem,1vw,1rem)]"
                     ref={(el) => {
                       if (el) yellowSplitWrappersRef.current[2] = el;
                     }}
@@ -389,6 +390,7 @@ export default function Footer({
               <span className={styles.yellowLinkOverflow}>
                 <span className={styles.yellowLinkInner}>
                   <span
+                    className="text-[clamp(0.95rem,1vw,1rem)]"
                     ref={(el) => {
                       if (el) yellowSplitWrappersRef.current[3] = el;
                     }}

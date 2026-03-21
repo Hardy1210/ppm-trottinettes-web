@@ -1,6 +1,5 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
@@ -10,6 +9,7 @@ import {
 import { Separator } from '@/components/ui/separator';
 import type { SparePart } from '@/data/spareParts';
 import scooterPlaceholder from '@/public/images/trottinettes/E-Glide.webp';
+import { PrimaryButton } from '@/ui/Buttons';
 import { MessageCircle } from 'lucide-react';
 import Image from 'next/image';
 
@@ -49,10 +49,10 @@ const SparePartModal = ({ part, open, onClose }: SparePartModalProps) => {
 
           <Separator className="bg-border" />
 
-          <Button className="w-full gap-2 font-display font-semibold" size="lg">
+          <PrimaryButton className="w-full gap-2 font-display font-semibold">
             <MessageCircle className="w-4 h-4" />
             Demander des infos
-          </Button>
+          </PrimaryButton>
         </div>
       </DialogContent>
     </Dialog>
