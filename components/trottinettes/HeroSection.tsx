@@ -15,6 +15,10 @@ const HeroSection = () => {
       ?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const scrollToSpare = () => {
+    document.getElementById('spare')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <section className="relative min-h-[700px] flex items-center overflow-hidden px-5 mt-10">
       {/* Background image */}
@@ -37,7 +41,7 @@ const HeroSection = () => {
             className=" text-[clamp(1.85rem,8vw,4.8rem)] font-title text-ppmYellow leading-[1.3] animate-fade-in opacity-0"
             style={{ animationDelay: '0.2s' }}
           >
-            NOS TORTTINETTES
+            NOS TROTTINETTES
           </h1>
           {/*iconos */}
           <div
@@ -47,21 +51,21 @@ const HeroSection = () => {
             <div className="flex items-center gap-[clamp(0.35rem,1vw,0.75rem)]">
               <BadgeCheck className="h-[clamp(1rem,1.5vw,1.4rem)] w-[clamp(1rem,1.5vw,1.4rem)] shrink-0 text-ppmYellow" />
               <span className="text-[clamp(0.75rem,1.2vw,1.1rem)] font-medium uppercase tracking-[0.14em] text-slate-300">
-                Testés
+                Testées
               </span>
             </div>
 
             <div className="flex items-center gap-[clamp(0.35rem,1vw,0.75rem)]">
               <Wrench className="h-[clamp(1rem,1.5vw,1.4rem)] w-[clamp(1rem,1.5vw,1.4rem)] shrink-0 text-ppmYellow" />
               <span className="text-[clamp(0.75rem,1.2vw,1.1rem)] font-medium uppercase tracking-[0.14em] text-slate-300">
-                Révisés
+                Révisées
               </span>
             </div>
 
             <div className="flex items-center gap-[clamp(0.35rem,1vw,0.75rem)]">
               <Shieldd className="h-[clamp(1rem,1.5vw,1.4rem)] w-[clamp(1rem,1.5vw,1.4rem)] shrink-0 text-ppmYellow" />
               <span className="text-[clamp(0.75rem,1.2vw,1.1rem)] font-medium uppercase tracking-[0.14em] text-slate-300">
-                Garantis
+                Garanties
               </span>
             </div>
           </div>
@@ -95,11 +99,11 @@ const HeroSection = () => {
               <ChevronDown className="w-4 h-4" />
             </PrimaryButton>
             <PrimaryButton
-              href="mailto:tonmail@example.com?subject=Demande%20de%20contact"
+              onClick={scrollToSpare}
               className="gap-2 border-4 border-neutral-500 bg-transparent font-title text-neutral-300"
             >
               <MessageCircle className="w-4 h-4" />
-              Nous contacter
+              Pièces détachées
             </PrimaryButton>
           </div>
         </div>

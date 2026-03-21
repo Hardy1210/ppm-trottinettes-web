@@ -36,18 +36,18 @@ const ScooterCard = ({ scooter, onDetails, index }: ScooterCardProps) => (
 
     {/* Content */}
     <div className="p-5 space-y-3">
-      <h3 className="font-display font-bold text-lg text-foreground">
+      <h3 className="font-body text-brandBbgSecondary font-bold text-lg">
         {scooter.name}
       </h3>
 
-      <p className="text-sm text-muted-foreground flex items-center gap-2">
+      <p className="text-sm text-muted-foreground font-body flex items-center gap-2">
         <Zap className="w-3.5 h-3.5 text-primary" />
         {scooter.specs.autonomie}&ensp;•&ensp;{scooter.specs.vitesse}
         &ensp;•&ensp;{scooter.specs.puissance}
       </p>
 
       <div className="flex items-center justify-between pt-2">
-        <span className="font-display font-bold text-xl text-foreground">
+        <span className="font-body text-brandBbgSecondary font-bold text-xl">
           {scooter.price ? `${scooter.price} €` : 'Sur demande'}
         </span>
         <Button

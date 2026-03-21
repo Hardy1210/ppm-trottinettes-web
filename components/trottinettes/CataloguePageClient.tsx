@@ -6,9 +6,14 @@ import HeroSection from '@/components/trottinettes/HeroSection';
 import IntroBlock from '@/components/trottinettes/IntroBlock';
 import ScooterCard from '@/components/trottinettes/ScooterCard';
 import ScooterModal from '@/components/trottinettes/ScooterModal';
+import { spareParts, type SparePart } from '@/data/spareParts';
+
 import { scooters, type Scooter } from '@/data/scooter';
 
 import { useMemo, useState } from 'react';
+import CardsCatalogue from './CardsCatalogue';
+import SparePartCard from './SparePartCard';
+import SparePartModal from './SparePartModal';
 
 export default function CataloguePageClient() {
   const [activeFilter, setActiveFilter] = useState<
@@ -17,6 +22,7 @@ export default function CataloguePageClient() {
   const [searchQuery, setSearchQuery] = useState('');
   const [sortOrder, setSortOrder] = useState('default');
   const [selectedScooter, setSelectedScooter] = useState<Scooter | null>(null);
+  const [selectedPart, setSelectedPart] = useState<SparePart | null>(null);
 
   const filtered = useMemo(() => {
     let list = [...scooters];
@@ -73,9 +79,39 @@ export default function CataloguePageClient() {
           )}
         </section>
       </div>
+      {/* Spare parts section */}
+      <section
+        id="spare"
+        className="container py-16 max-w-container mx-auto px-5 xl:px-0"
+      >
+        <h2 className="font-title text-3xl md:text-4xl font-bold text-foreground mb-2">
+          Nos pièces détachées
+        </h2>
+        <p className="text-muted-foreground mb-8 max-w-xl">
+          Pièces de rechange et accessoires compatibles avec la plupart des
+          trottinettes électriques.
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {spareParts.map((part, i) => (
+            <SparePartCard
+              key={part.id}
+              part={part}
+              onDetails={setSelectedPart}
+              index={i}
+            />
+          ))}
+        </div>
+      </section>
 
+      <CardsCatalogue />
       <CTABlock />
-
+      {/*modal de pieces detachees */}
+      <SparePartModal
+        part={selectedPart}
+        open={!!selectedPart}
+        onClose={() => setSelectedPart(null)}
+      />
+      {/*modal de catalogue*/}
       <ScooterModal
         scooter={selectedScooter}
         open={!!selectedScooter}

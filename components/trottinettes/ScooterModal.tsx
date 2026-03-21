@@ -52,7 +52,7 @@ const ScooterModal = ({ scooter, open, onClose }: ScooterModalProps) => {
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="max-w-2xl bg-card border-border p-0 overflow-hidden">
         {/* Image gallery */}
-        <div className="relative aspect-video bg-secondary/30">
+        <div className="relative text-brandBbgSecondary aspect-video bg-secondary/30">
           <Image
             src={scooter.images[0] || scooterPlaceholder}
             alt={scooter.name}
@@ -69,15 +69,15 @@ const ScooterModal = ({ scooter, open, onClose }: ScooterModalProps) => {
 
         <div className="p-6 space-y-5">
           <DialogHeader>
-            <DialogTitle className="font-display text-2xl font-bold">
+            <DialogTitle className="font-body text-brandBbgSecondary text-2xl font-bold">
               {scooter.name}
             </DialogTitle>
-            <p className="text-muted-foreground text-sm mt-1">
+            <p className="text-muted-foreground font-body text-sm mt-1">
               {scooter.shortDescription}
             </p>
           </DialogHeader>
 
-          <div className="font-display text-3xl font-bold text-primary">
+          <div className="font-body text-3xl font-bold text-primary">
             {scooter.price ? `${scooter.price} €` : 'Sur demande'}
           </div>
 
@@ -89,7 +89,7 @@ const ScooterModal = ({ scooter, open, onClose }: ScooterModalProps) => {
               (key) => {
                 const Icon = specIcons[key];
                 return (
-                  <div key={key} className="flex items-center gap-3">
+                  <div key={key} className="flex items-center gap-3 font-body">
                     <div className="w-9 h-9 rounded-md bg-secondary flex items-center justify-center">
                       <Icon className="w-4 h-4 text-primary" />
                     </div>
@@ -97,7 +97,7 @@ const ScooterModal = ({ scooter, open, onClose }: ScooterModalProps) => {
                       <p className="text-xs text-muted-foreground">
                         {specLabels[key]}
                       </p>
-                      <p className="text-sm font-medium text-foreground">
+                      <p className="text-sm font-medium text-brandBbgSecondary">
                         {scooter.specs[key]}
                       </p>
                     </div>
