@@ -1,5 +1,5 @@
+import ConditionalHeader from '@/components/layout/ConditionalHeader';
 import Footer from '@/components/layout/footer/Footer';
-import { Header } from '@/components/layout/Header';
 import { IntroProvider } from '@/context/IntroContext';
 import type { Metadata } from 'next';
 import { Michroma, Questrial } from 'next/font/google';
@@ -34,7 +34,7 @@ export default function RootLayout({
         className={`${michroma.variable} ${questrial.variable} antialiased`}
       >
         <IntroProvider>
-          <Header />
+          <ConditionalHeader />
           <SmoothScrollProvider>
             <main>{children}</main>
             <Footer />

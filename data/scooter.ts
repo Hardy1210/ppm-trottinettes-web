@@ -20,20 +20,24 @@ export interface Scooter {
 export const scooters: Scooter[] = [
   {
     id: 1,
-    name: 'Ninebot Max G2',
-    slug: 'ninebot-max-g2',
+    name: 'Glide City 350',
+    slug: 'Glide-City-350',
     status: 'neuf',
-    price: 849,
+    price: 299.99,
     shortDescription: 'Le best-seller urbain, confort et autonomie au top.',
     specs: {
-      autonomie: '70 km',
+      autonomie: '36V 10.4Ah',
       vitesse: '25 km/h',
-      puissance: '450W',
+      puissance: '350W',
       poids: '19,8 kg',
-      pneus: '10" tubeless',
-      freins: 'Frein à tambour + régénératif',
+      pneus: '10×2.5 pouces',
+      freins: 'disques avant et arrière',
     },
-    images: [],
+    images: [
+      '/images/trottinettes/e-glide-city-350/1.webp',
+      '/images/trottinettes/e-glide-city-350/2.webp',
+      '/images/trottinettes/e-glide-city-350/3.webp',
+    ],
   },
   {
     id: 2,

@@ -1,5 +1,6 @@
 'use client';
 
+import { formatPrice } from '@/app/lib/formatPrice';
 import {
   Dialog,
   DialogContent,
@@ -7,17 +8,19 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { Separator } from '@/components/ui/separator';
-import type { SparePart } from '@/data/spareParts';
+//import type { SparePart } from '@/data/spareParts';
 import scooterPlaceholder from '@/public/images/trottinettes/E-Glide.webp';
 import { PrimaryButton } from '@/ui/Buttons';
 import { MessageCircle } from 'lucide-react';
 import Image from 'next/image';
 
-interface SparePartModalProps {
-  part: SparePart | null;
+import type { CatalogueSparePart } from '@/app/catalogue/catalogue.type';
+
+type SparePartModalProps = {
+  part: CatalogueSparePart | null;
   open: boolean;
   onClose: () => void;
-}
+};
 
 const SparePartModal = ({ part, open, onClose }: SparePartModalProps) => {
   if (!part) return null;
@@ -25,11 +28,12 @@ const SparePartModal = ({ part, open, onClose }: SparePartModalProps) => {
   return (
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="max-w-lg bg-card border-border p-0 overflow-hidden">
-        <div className="relative aspect-video bg-secondary/30">
+        <div className="relative h-60 sm:h-60 md:h-60 bg-secondary/30">
           <Image
             src={part.image || scooterPlaceholder}
             alt={part.title}
-            className="w-full h-full object-cover"
+            fill
+            className="w-full h-full object-contain"
           />
         </div>
 
@@ -44,7 +48,9 @@ const SparePartModal = ({ part, open, onClose }: SparePartModalProps) => {
           </DialogHeader>
 
           <div className="font-display text-3xl font-bold text-primary">
-            {part.price ? `${part.price} €` : 'Sur demande'}
+            {part.price !== null
+              ? `${formatPrice(part.price)} €`
+              : 'Sur demande'}
           </div>
 
           <Separator className="bg-border" />

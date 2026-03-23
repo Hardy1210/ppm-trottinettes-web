@@ -1,15 +1,17 @@
 'use client';
 import { Button } from '@/components/ui/button';
-import type { Scooter } from '@/data/scooter';
+//import type { Scooter } from '@/data/scooter';
 //import scooterPlaceholder from '@/images/trottinettes/E-Glide.webp';
+import type { CatalogueScooter } from '@/app/catalogue/catalogue.type';
+import { formatPrice } from '@/app/lib/formatPrice';
 import { Zap } from 'lucide-react';
 import Image from 'next/image';
 
-interface ScooterCardProps {
-  scooter: Scooter;
-  onDetails: (scooter: Scooter) => void;
+type ScooterCardProps = {
+  scooter: CatalogueScooter;
+  onDetails: (scooter: CatalogueScooter) => void;
   index: number;
-}
+};
 const scooterPlaceholder = '/images/trottinettes/E-Glide.webp';
 const ScooterCard = ({ scooter, onDetails, index }: ScooterCardProps) => (
   <div
@@ -17,7 +19,7 @@ const ScooterCard = ({ scooter, onDetails, index }: ScooterCardProps) => (
     style={{ animationDelay: `${0.1 * index}s` }}
   >
     {/* Image */}
-    <div className="relative aspect-4/3 overflow-hidden bg-secondary/30">
+    <div className="relative aspect-square overflow-hidden bg-secondary/30">
       <Image
         src={scooter.images?.[0] || scooterPlaceholder}
         alt={scooter.name}
@@ -48,7 +50,9 @@ const ScooterCard = ({ scooter, onDetails, index }: ScooterCardProps) => (
 
       <div className="flex items-center justify-between pt-2">
         <span className="font-body text-brandBbgSecondary font-bold text-xl">
-          {scooter.price ? `${scooter.price} €` : 'Sur demande'}
+          {scooter.price !== null
+            ? `${formatPrice(scooter.price)} €`
+            : 'Sur demande'}
         </span>
         <Button
           size="sm"
