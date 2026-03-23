@@ -98,7 +98,7 @@ export default function CardsCatalogue({
   return (
     <section
       className={`
-        relative w-full overflow-hidden bg-ppmBg px-5
+        relative w-full overflow-hidden px-5
         py-[clamp(3rem,6vw,6rem)]
         ${className}
       `}

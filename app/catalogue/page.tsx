@@ -5,6 +5,8 @@ import CataloguePageClient from './CataloguePageClient';
 import type { CatalogueScooter, CatalogueSparePart } from './catalogue.type';
 
 export default async function CataloguePage() {
+  // LOGICA PARA LIMITAR MAXIMO _ PRODUCTOS QUE ABSOLUTAMNETE SE DEBE DEFINIR EN
+  //     /sanity/lib/queries/scooterQueries.ts
   const scooters = await client.fetch<CatalogueScooter[]>(scootersQuery, {
     start: 0,
     end: 8,
