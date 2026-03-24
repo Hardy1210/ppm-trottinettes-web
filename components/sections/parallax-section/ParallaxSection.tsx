@@ -1,7 +1,12 @@
 'use client';
 
 import { IconShape2 } from '@/components/icons/IconShape2';
-import { gsap, registerGsapPlugins, SplitText } from '@/lib/gsap';
+import {
+  gsap,
+  registerGsapPlugins,
+  ScrollTrigger,
+  SplitText,
+} from '@/lib/gsap';
 import Image from 'next/image';
 import { useLayoutEffect, useRef } from 'react';
 import styles from './ParallaxSection.module.scss';
@@ -25,6 +30,7 @@ export default function ParallaxSection({
   const introRef = useRef<HTMLParagraphElement | null>(null);
   const dividerRef = useRef<HTMLDivElement | null>(null);
   const descriptionBottomRef = useRef<HTMLParagraphElement | null>(null);
+  const topRowRef = useRef<HTMLDivElement | null>(null);
 
   useLayoutEffect(() => {
     registerGsapPlugins();
@@ -40,161 +46,214 @@ export default function ParallaxSection({
 
     const mm = gsap.matchMedia();
 
-    mm.add('(min-width: 768px)', () => {
-      const ctx = gsap.context(() => {
-        gsap.set(bgParallax, {
-          y: -30,
-          scale: 1.08,
-          willChange: 'transform',
-        });
+    const initAnimations = () => {
+      mm.add('(min-width: 768px)', () => {
+        const ctx = gsap.context(() => {
+          gsap.set(bgParallax, {
+            yPercent: -8,
+            scale: 1.08,
+            willChange: 'transform',
+          });
 
-        gsap.to(bgParallax, {
-          y: 30,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: section,
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: 1.2,
-          },
-        });
-
-        if (!titleRef.current || !introRef.current || !dividerRef.current)
-          return;
-
-        titleSplit = SplitText.create(titleRef.current, {
-          type: 'chars',
-          charsClass: 'char',
-          mask: 'chars',
-        });
-
-        introSplit = SplitText.create(introRef.current, {
-          type: 'lines',
-          linesClass: 'line',
-          mask: 'lines',
-        });
-
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: section,
-            start: 'top 72%',
-            once: true,
-          },
-        });
-
-        tl.from(titleSplit.chars, {
-          yPercent: 110,
-          opacity: 0,
-          duration: 0.85,
-          stagger: 0.018,
-          ease: 'power4.out',
-        })
-          .from(
-            introSplit.lines,
-            {
-              yPercent: 100,
-              opacity: 0,
-              duration: 0.9,
-              stagger: 0.08,
-              ease: 'expo.out',
+          gsap.to(bgParallax, {
+            yPercent: 8,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: section,
+              start: 'top bottom',
+              end: 'bottom top',
+              scrub: 1.2,
+              invalidateOnRefresh: true,
             },
-            '-=0.55',
+          });
+
+          if (
+            !titleRef.current ||
+            !introRef.current ||
+            !dividerRef.current ||
+            !topRowRef.current
           )
+            return;
 
-          .from(
-            dividerRef.current,
-            {
-              scaleX: 0,
-              transformOrigin: 'left center',
-              duration: 0.8,
-              ease: 'power2.out',
-            },
-            '-=0.15',
-          );
-      }, section);
+          titleSplit = SplitText.create(titleRef.current, {
+            type: 'chars',
+            charsClass: 'char',
+            mask: 'chars',
+          });
 
-      return () => {
-        ctx.revert();
-        titleSplit?.revert();
-        introSplit?.revert();
-      };
-    });
-
-    mm.add('(max-width: 767px)', () => {
-      const ctx = gsap.context(() => {
-        gsap.set(bgParallax, {
-          clearProps: 'transform,willChange',
-        });
-
-        if (
-          !titleRef.current ||
-          !dividerRef.current ||
-          !descriptionBottomRef.current
-        )
-          return;
-
-        titleSplit = SplitText.create(titleRef.current, {
-          type: 'chars',
-          charsClass: 'char',
-          mask: 'chars',
-        });
-
-        descriptionBottomSplit = SplitText.create(
-          descriptionBottomRef.current,
-          {
+          introSplit = SplitText.create(introRef.current, {
             type: 'lines',
             linesClass: 'line',
             mask: 'lines',
-          },
-        );
+          });
 
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: section,
-            start: 'top 80%',
-            once: true,
-          },
-        });
+          gsap.set(titleSplit.chars, {
+            yPercent: 110,
+            autoAlpha: 0,
+          });
 
-        tl.from(titleSplit.chars, {
-          yPercent: 110,
-          opacity: 0,
-          duration: 0.85,
-          stagger: 0.018,
-          ease: 'power4.out',
-        })
+          gsap.set(introSplit.lines, {
+            yPercent: 100,
+            autoAlpha: 0,
+          });
 
-          .from(
-            dividerRef.current,
-            {
-              scaleX: 0,
-              transformOrigin: 'left center',
-              duration: 0.8,
-              ease: 'power3.out',
+          gsap.set(dividerRef.current, {
+            scaleX: 0,
+            transformOrigin: 'left center',
+          });
+
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: topRowRef.current,
+              start: 'top 82%',
+              once: true,
+              //markers: true,
+              invalidateOnRefresh: true,
             },
-            '-=0.25',
+          });
+
+          tl.to(titleSplit.chars, {
+            yPercent: 0,
+            autoAlpha: 1,
+            duration: 0.85,
+            stagger: 0.018,
+            ease: 'power4.out',
+          })
+            .to(
+              introSplit.lines,
+              {
+                yPercent: 0,
+                autoAlpha: 1,
+                duration: 0.9,
+                stagger: 0.08,
+                ease: 'expo.out',
+              },
+              '-=0.55',
+            )
+            .to(
+              dividerRef.current,
+              {
+                scaleX: 1,
+                duration: 0.8,
+                ease: 'power3.out',
+              },
+              '-=0.65',
+            );
+
+          requestAnimationFrame(() => {
+            ScrollTrigger.refresh();
+          });
+        }, section);
+
+        return () => {
+          ctx.revert();
+          titleSplit?.revert();
+          introSplit?.revert();
+        };
+      });
+
+      mm.add('(max-width: 767px)', () => {
+        const ctx = gsap.context(() => {
+          gsap.set(bgParallax, {
+            clearProps: 'transform,willChange',
+          });
+
+          if (
+            !titleRef.current ||
+            !dividerRef.current ||
+            !descriptionBottomRef.current
           )
-          .from(
-            descriptionBottomSplit.lines,
+            return;
+
+          titleSplit = SplitText.create(titleRef.current, {
+            type: 'chars',
+            charsClass: 'char',
+            mask: 'chars',
+          });
+
+          descriptionBottomSplit = SplitText.create(
+            descriptionBottomRef.current,
             {
-              yPercent: 100,
-              opacity: 0,
-              duration: 0.9,
-              stagger: 0.08,
-              ease: 'expo.out',
+              type: 'lines',
+              linesClass: 'line',
+              mask: 'lines',
             },
-            '-=0.15',
           );
-      }, section);
 
-      return () => {
-        ctx.revert();
-        titleSplit?.revert();
-        introSplit?.revert();
-      };
-    });
+          gsap.set(titleSplit.chars, {
+            yPercent: 110,
+            autoAlpha: 0,
+          });
 
-    return () => mm.revert();
+          gsap.set(descriptionBottomSplit.lines, {
+            yPercent: 100,
+            autoAlpha: 0,
+          });
+
+          gsap.set(dividerRef.current, {
+            scaleX: 0,
+            transformOrigin: 'left center',
+          });
+
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: section,
+              start: 'top 80%',
+              once: true,
+              invalidateOnRefresh: true,
+            },
+          });
+
+          tl.to(titleSplit.chars, {
+            yPercent: 0,
+            autoAlpha: 1,
+            duration: 0.85,
+            stagger: 0.018,
+            ease: 'power4.out',
+          })
+            .to(
+              dividerRef.current,
+              {
+                scaleX: 1,
+                duration: 0.8,
+                ease: 'power3.out',
+              },
+              '-=0.25',
+            )
+            .to(
+              descriptionBottomSplit.lines,
+              {
+                yPercent: 0,
+                autoAlpha: 1,
+                duration: 0.9,
+                stagger: 0.08,
+                ease: 'expo.out',
+              },
+              '-=0.15',
+            );
+
+          requestAnimationFrame(() => {
+            ScrollTrigger.refresh();
+          });
+        }, section);
+
+        return () => {
+          ctx.revert();
+          titleSplit?.revert();
+          descriptionBottomSplit?.revert();
+        };
+      });
+    };
+
+    if ('fonts' in document) {
+      document.fonts.ready.then(initAnimations);
+    } else {
+      initAnimations();
+    }
+
+    return () => {
+      mm.revert();
+    };
   }, []);
 
   return (
@@ -224,7 +283,7 @@ export default function ParallaxSection({
 
       <div className={styles.container}>
         <div className={styles.content}>
-          <div className={styles.topRow}>
+          <div ref={topRowRef} className={styles.topRow}>
             <h2 ref={titleRef} className={styles.title}>
               {title}
             </h2>
@@ -269,10 +328,12 @@ export default function ParallaxSection({
               />
             </svg>
           </div>
+
           <p ref={descriptionBottomRef} className={styles.descriptionBottom}>
             {description}
           </p>
         </div>
+
         <IconShape2
           size={400}
           color="#FEFEFE"

@@ -15,7 +15,18 @@ type FooterProps = {
   addressLine1?: string;
   addressLine2?: string;
   buttonLabel?: string;
+
+  whatsapp?: boolean;
 };
+function toWhatsAppNumber(phone: string) {
+  const digits = phone.replace(/\D/g, '');
+
+  if (digits.startsWith('0')) {
+    return `33${digits.slice(1)}`;
+  }
+
+  return digits;
+}
 
 export default function Footer({
   titleTop = 'Besoin d’aide ?',
@@ -25,6 +36,8 @@ export default function Footer({
   addressLine1 = '40 rue d’Alembert',
   addressLine2 = '21000, Dijon',
   buttonLabel = 'Contact',
+
+  whatsapp = true,
 }: FooterProps) {
   const rootRef = useRef<HTMLElement | null>(null);
 
@@ -36,6 +49,9 @@ export default function Footer({
   const ctaArrowRef = useRef<HTMLSpanElement | null>(null);
   const ctaWrapRef = useRef<HTMLDivElement | null>(null);
 
+  const phoneHref = whatsapp
+    ? `https://wa.me/${toWhatsAppNumber(phone)}`
+    : `tel:${phone.replace(/\s+/g, '')}`;
   useLayoutEffect(() => {
     if (!rootRef.current) return;
 
@@ -206,7 +222,7 @@ export default function Footer({
         <div className={styles.topGrid}>
           <div className={styles.brandCol}>
             <Link
-              href="#"
+              href="/"
               className={styles.brandMark}
               aria-label="Pile Power Mobilité"
             >
@@ -220,7 +236,10 @@ export default function Footer({
             </Link>
 
             <div ref={ctaWrapRef} className={styles.ctaWrap}>
-              <Link href="#" className={styles.ctaButton}>
+              <Link
+                href="mailto:rrepartrot@gmail.com?subject=Demande%20de%20renseignement"
+                className={styles.ctaButton}
+              >
                 <PrimaryButton>{buttonLabel}</PrimaryButton>
               </Link>
 
@@ -267,13 +286,21 @@ export default function Footer({
                 <h3 className={styles.groupTitle}>Website map</h3>
 
                 <nav className={styles.navList} aria-label="Website map">
-                  {['Accueil', 'Services', 'À propos', 'Contact'].map(
-                    (item) => (
-                      <Link key={item} href="#" className={styles.whiteLink}>
-                        {item}
-                      </Link>
-                    ),
-                  )}
+                  {[
+                    { label: 'Accueil', href: '/#accueil' },
+                    { label: 'À propos', href: '/#apropos' },
+                    { label: 'Services', href: '/#services' },
+                    { label: 'Contact', href: '/#contact' },
+                    { label: 'Nos trottinettes', href: '/catalogue' },
+                  ].map((item) => (
+                    <Link
+                      key={item.label}
+                      href={item.href}
+                      className={styles.whiteLink}
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
                 </nav>
               </div>
 
@@ -281,11 +308,19 @@ export default function Footer({
                 <h3 className={styles.groupTitle}>AIDE & CONTACT</h3>
 
                 <div className={styles.infoList}>
-                  <Link href="#" className={styles.whiteLink}>
+                  <Link
+                    href="mailto:rrepartrot@gmail.com?subject=Demande%20de%20renseignement"
+                    className={styles.whiteLink}
+                  >
                     {email}
                   </Link>
 
-                  <Link href="#" className={styles.whiteLink}>
+                  <Link
+                    href={phoneHref}
+                    className={styles.whiteLink}
+                    target={whatsapp ? '_blank' : undefined}
+                    rel={whatsapp ? 'noopener noreferrer' : undefined}
+                  >
                     Tel : {phone}
                   </Link>
 
@@ -305,7 +340,7 @@ export default function Footer({
         <div className={styles.bottomArea}>
           <div className={styles.socialRow}>
             <a
-              href="#"
+              href="https://www.instagram.com/pile_power_mobilite/"
               className={styles.yellowLink}
               ref={(el) => {
                 if (el) yellowLinkRefs.current[0] = el;
@@ -325,7 +360,7 @@ export default function Footer({
             </a>
 
             <a
-              href="#"
+              href="https://www.facebook.com/profile.php?id=61581404125924&utm_source=ig&utm_medium=social&utm_content=link_in_bio"
               className={styles.yellowLink}
               ref={(el) => {
                 if (el) yellowLinkRefs.current[1] = el;

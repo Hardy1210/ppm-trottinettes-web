@@ -108,7 +108,7 @@ export function WorkshopSection({
               stagger: 0.06,
               ease: 'power2.out',
             },
-            '-=0.18',
+            '-=0.48',
           );
       }, sectionRef);
     };
@@ -129,7 +129,7 @@ export function WorkshopSection({
       className={styles.workshopSection}
       aria-labelledby="workshop-title"
     >
-      <Section innerClassName={styles.inner}>
+      <Section id="apropos" innerClassName={styles.inner}>
         <div>
           <div className={styles.topBlock}>
             <div className={styles.headingWrap}>

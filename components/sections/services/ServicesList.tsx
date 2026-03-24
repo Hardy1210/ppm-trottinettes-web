@@ -172,7 +172,7 @@ export default function ServiceList({
   if (isDesktop === null) return null;
 
   return (
-    <section className={styles.section}>
+    <section id="services" className={styles.section}>
       <div className={styles.inner}>
         <header className={styles.srOnly}>
           <h2 className={styles.sectionTitle}>{title}</h2>

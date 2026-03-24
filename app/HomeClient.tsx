@@ -130,6 +130,7 @@ export default function HomeClient({ serviceSection }: HomeClientProps) {
       {!introDone && <IntroLoader />}
       <div className="overflow-hidden ">
         <Section
+          id="accueil"
           aria-label="Hero Pile Power Mobilité"
           className="relative bg-ppm-bg text-brandText "
         >
@@ -323,7 +324,10 @@ export default function HomeClient({ serviceSection }: HomeClientProps) {
           items={serviceSection?.services}
           footnote={serviceSection?.footnote}
         />
-        <Contact ctaHref="link_agenda" routeHref="google_maps" />
+        <Contact
+          //ctaHref="https://calendar.google.com/"
+          routeHref="https://www.google.com/maps/dir/?api=1&destination=40+rue+d%27Alembert,+21000+Dijon,+France"
+        />
       </div>
     </>
   );

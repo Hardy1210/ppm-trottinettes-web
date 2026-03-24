@@ -109,6 +109,7 @@ function AnimatedWindow({
             src={config.src}
             alt={config.alt}
             fill
+            sizes="100vw"
             className="object-cover"
             priority={config.priority}
           />

@@ -42,7 +42,7 @@ export default function Contact({
   ctaLabel = 'Prendre rendez-vous',
   ctaHref = '#',
   routeLabel = 'Voir l’itinéraire',
-  routeHref = '#',
+  routeHref = 'https://www.google.com/maps/dir/?api=1&destination=40+rue+d%27Alembert,+21000+Dijon,+France',
   privacyNote = `En cliquant sur « Prendre rendez-vous », vous serez redirigé vers un service externe de réservation. Les informations que vous choisissez d’y renseigner sont traitées par ce service selon sa propre politique de confidentialité.`,
   mapAriaLabel = 'Plan de localisation',
 }: ContactProps) {
@@ -55,183 +55,231 @@ export default function Contact({
   const mapCardRef = useRef<HTMLDivElement | null>(null);
   const infoCardRef = useRef<HTMLDivElement | null>(null);
   const ctaWrapRef = useRef<HTMLDivElement | null>(null);
+  const headingRef = useRef<HTMLDivElement | null>(null);
 
   useLayoutEffect(() => {
     const section = sectionRef.current;
+    const heading = headingRef.current;
     const title = titleRef.current;
     const infoTitle = infoTitleRef.current;
     const mapCard = mapCardRef.current;
     const infoCard = infoCardRef.current;
     const ctaWrap = ctaWrapRef.current;
 
-    if (!section || !title || !infoTitle || !mapCard || !infoCard || !ctaWrap) {
+    if (
+      !section ||
+      !heading ||
+      !title ||
+      !infoTitle ||
+      !mapCard ||
+      !infoCard ||
+      !ctaWrap
+    ) {
       return;
     }
 
     gsap.registerPlugin(ScrollTrigger, SplitText);
 
-    const validLineTextRefs = lineTextRefs.current.filter(
-      Boolean,
-    ) as HTMLElement[];
-    const validItemRefs = itemRefs.current.filter(Boolean) as HTMLElement[];
+    let splitTitle: SplitText | undefined;
+    let splitInfoTitle: SplitText | undefined;
+    let lineSplits: SplitText[] = [];
+    let ctx: gsap.Context | undefined;
 
-    const splitTitle = SplitText.create(title, {
-      type: 'chars',
-      charsClass: styles.char,
-    });
+    const init = async () => {
+      if ('fonts' in document) {
+        await document.fonts.ready;
+      }
 
-    const splitInfoTitle = SplitText.create(infoTitle, {
-      type: 'chars',
-      charsClass: styles.char,
-    });
+      const validLineTextRefs = lineTextRefs.current.filter(
+        Boolean,
+      ) as HTMLElement[];
+      const validItemRefs = itemRefs.current.filter(Boolean) as HTMLElement[];
 
-    const lineSplits = validLineTextRefs.map((el) =>
-      SplitText.create(el, {
-        type: 'lines',
-        linesClass: styles.line,
-        mask: 'lines',
-      }),
-    );
+      ctx = gsap.context(() => {
+        splitTitle = SplitText.create(title, {
+          type: 'chars',
+          charsClass: styles.char,
+          mask: 'chars',
+        });
 
-    gsap.set(splitTitle.chars, {
-      yPercent: 110,
-      opacity: 0,
-      rotateX: -70,
-      transformOrigin: '50% 100%',
-      willChange: 'transform, opacity',
-    });
+        splitInfoTitle = SplitText.create(infoTitle, {
+          type: 'chars',
+          charsClass: styles.char,
+          mask: 'chars',
+        });
 
-    gsap.set(splitInfoTitle.chars, {
-      yPercent: 110,
-      opacity: 0,
-      rotateX: -70,
-      transformOrigin: '50% 100%',
-      willChange: 'transform, opacity',
-    });
+        lineSplits = validLineTextRefs.map((el) =>
+          SplitText.create(el, {
+            type: 'lines',
+            linesClass: styles.line,
+            mask: 'lines',
+          }),
+        );
 
-    lineSplits.forEach((split) => {
-      gsap.set(split.lines, {
-        yPercent: 120,
-        opacity: 0,
-        willChange: 'transform, opacity',
-      });
-    });
+        gsap.set(splitTitle.chars, {
+          yPercent: 110,
+          autoAlpha: 0,
+          rotateX: -70,
+          transformOrigin: '50% 100%',
+          willChange: 'transform, opacity',
+        });
 
-    gsap.set([mapCard, infoCard], {
-      y: 40,
-      opacity: 0,
-      willChange: 'transform, opacity',
-    });
+        gsap.set(splitInfoTitle.chars, {
+          yPercent: 110,
+          autoAlpha: 0,
+          rotateX: -70,
+          transformOrigin: '50% 100%',
+          willChange: 'transform, opacity',
+        });
 
-    gsap.set(validItemRefs, {
-      y: 24,
-      opacity: 0,
-      willChange: 'transform, opacity',
-    });
+        lineSplits.forEach((split) => {
+          gsap.set(split.lines, {
+            yPercent: 120,
+            autoAlpha: 0,
+            willChange: 'transform, opacity',
+          });
+        });
 
-    gsap.set(ctaWrap, {
-      y: 20,
-      opacity: 0,
-      willChange: 'transform, opacity',
-    });
+        gsap.set([mapCard, infoCard], {
+          y: 40,
+          autoAlpha: 0,
+          willChange: 'transform, opacity',
+        });
 
-    const tl = gsap.timeline({
-      defaults: {
-        ease: 'power3.out',
-      },
-      scrollTrigger: {
-        trigger: section,
-        start: 'top 72%',
-        once: true,
-      },
-    });
+        gsap.set(validItemRefs, {
+          y: 24,
+          autoAlpha: 0,
+          willChange: 'transform, opacity',
+        });
 
-    tl.to(splitTitle.chars, {
-      yPercent: 0,
-      opacity: 1,
-      rotateX: 0,
-      duration: 0.8,
-      stagger: 0.025,
-    })
-      .to(
-        mapCard,
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-        },
-        '-=0.45',
-      )
-      .to(
-        infoCard,
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-        },
-        '<',
-      )
-      .to(
-        splitInfoTitle.chars,
-        {
+        gsap.set(ctaWrap, {
+          y: 20,
+          autoAlpha: 0,
+          willChange: 'transform, opacity',
+        });
+
+        const tl = gsap.timeline({
+          defaults: {
+            ease: 'power3.out',
+          },
+          scrollTrigger: {
+            trigger: heading,
+            start: 'top 80%',
+            once: true,
+            invalidateOnRefresh: true,
+            //markers: true,
+          },
+        });
+
+        tl.to(splitTitle.chars, {
           yPercent: 0,
-          opacity: 1,
+          autoAlpha: 1,
           rotateX: 0,
-          duration: 0.7,
-          stagger: 0.02,
-        },
-        '-=0.45',
-      );
+          duration: 0.75,
+          stagger: {
+            amount: 0.32,
+          },
+          ease: 'power3.out',
+        })
+          .to(
+            mapCard,
+            {
+              y: 0,
+              autoAlpha: 1,
+              duration: 0.7,
+              ease: 'power3.out',
+            },
+            '-=0.42',
+          )
+          .to(
+            infoCard,
+            {
+              y: 0,
+              autoAlpha: 1,
+              duration: 0.7,
+              ease: 'power3.out',
+            },
+            '<',
+          )
+          .to(
+            splitInfoTitle.chars,
+            {
+              yPercent: 0,
+              autoAlpha: 1,
+              rotateX: 0,
+              duration: 0.7,
+              stagger: {
+                amount: 0.22,
+              },
+            },
+            '-=0.45',
+          )
+          .addLabel('infoContentStart', '-=0.2');
 
-    lineSplits.forEach((split, index) => {
-      tl.to(
-        split.lines,
-        {
-          yPercent: 0,
-          opacity: 1,
-          duration: 0.65,
-          stagger: 0.08,
-        },
-        index === 0 ? '-=0.45' : '-=0.5',
-      );
-    });
+        lineSplits.forEach((split, index) => {
+          tl.to(
+            split.lines,
+            {
+              yPercent: 0,
+              autoAlpha: 1,
+              duration: 0.6,
+              stagger: {
+                amount: 0.18,
+              },
+              ease: 'expo.out',
+            },
+            index === 0 ? 'infoContentStart' : 'infoContentStart+=0.08',
+          );
+        });
 
-    tl.to(
-      validItemRefs,
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.55,
-        stagger: 0.08,
-      },
-      '-=0.35',
-    ).to(
-      ctaWrap,
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.55,
-      },
-      '-=0.3',
-    );
+        tl.to(
+          validItemRefs,
+          {
+            y: 0,
+            autoAlpha: 1,
+            duration: 0.5,
+            stagger: {
+              amount: 0.18,
+            },
+            ease: 'power3.out',
+          },
+          'infoContentStart+=0.12',
+        ).to(
+          ctaWrap,
+          {
+            y: 0,
+            autoAlpha: 1,
+            duration: 0.5,
+            ease: 'power3.out',
+          },
+          'infoContentStart+=0.2',
+        );
+
+        requestAnimationFrame(() => {
+          ScrollTrigger.refresh();
+        });
+      }, section);
+    };
+
+    init();
 
     return () => {
-      splitTitle.revert();
-      splitInfoTitle.revert();
+      ctx?.revert();
+      splitTitle?.revert();
+      splitInfoTitle?.revert();
       lineSplits.forEach((split) => split.revert());
-      tl.scrollTrigger?.kill();
-      tl.kill();
     };
   }, []);
 
   return (
     <section
+      id="contact"
       ref={sectionRef}
       className={styles.contactSection}
       aria-labelledby="contact-title"
     >
       <div className={styles.inner}>
-        <div className={styles.heading}>
+        <div ref={headingRef} className={styles.heading}>
           <h2 id="contact-title" ref={titleRef} className={styles.title}>
             {title}
           </h2>
@@ -270,10 +318,12 @@ export default function Contact({
 
         <div className={styles.grid}>
           <div ref={mapCardRef} className={styles.mapCard}>
-            <div
+            <a
+              href={routeHref}
+              target="_blank"
+              rel="noreferrer"
               className={styles.mapVisual}
-              aria-label={mapAriaLabel}
-              role="img"
+              aria-label="Ouvrir l’itinéraire dans l’application de navigation"
             >
               <Image
                 src="/images/map-visual-1.webp"
@@ -283,24 +333,10 @@ export default function Contact({
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
 
-              {/* <svg
-                className={styles.routeSvg}
-                viewBox="0 0 420 300"
-                aria-hidden="true"
-                preserveAspectRatio="none"
-              >
-                <path
-                  d="M115 210 L155 165 L220 192 L268 118"
-                  className={styles.routeLine}
-                />
-              </svg>
-               <span className={styles.arrowMarker} aria-hidden="true" />
-              */}
-
               <span className={styles.pin} aria-hidden="true">
                 <span className={styles.pinCore} />
               </span>
-            </div>
+            </a>
           </div>
 
           <div ref={infoCardRef} className={styles.infoCard}>

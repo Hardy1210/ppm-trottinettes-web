@@ -139,7 +139,10 @@ html::-webkit-scrollbar {
   --color-sidebar-border: hsl(var(--sidebar-border));
   --color-sidebar-ring: hsl(var(--sidebar-ring));
 }
-
+/*Altura del scroll conectado con los Id del el componente Header*/
+section[id] {
+  scroll-margin-top: calc(var(--header-h) + 1px);
+}
 /* Base app */
 body {
   background: var(--ppm-bg);

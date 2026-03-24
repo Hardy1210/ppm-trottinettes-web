@@ -102,7 +102,7 @@ export function TestimonialsTrustSection({ className }: Props) {
               stagger: 0.06,
               ease: 'power3.out',
             },
-            '-=0.7',
+            '-=0.35',
           );
 
         gsap.from(

@@ -46,14 +46,13 @@ export function Header({
   const navItems = useMemo<NavItem[]>(
     () =>
       items ?? [
-        { label: 'Accueil', href: '#accueil', sectionId: 'accueil' },
-        { label: 'A propos', href: '#apropos', sectionId: 'apropos' },
-        { label: 'Services', href: '#services', sectionId: 'services' },
-        { label: 'Contact', href: '#contact', sectionId: 'contact' },
+        { label: 'Accueil', href: '/#accueil', sectionId: 'accueil' },
+        { label: 'À propos', href: '/#apropos', sectionId: 'apropos' },
+        { label: 'Services', href: '/#services', sectionId: 'services' },
+        { label: 'Contact', href: '/#contact', sectionId: 'contact' },
         {
           label: 'Nos trottinettes',
-          href: '#trottinettes',
-          sectionId: 'trottinettes',
+          href: '/catalogue',
         },
       ],
     [items],
@@ -61,6 +60,7 @@ export function Header({
 
   const pathname = usePathname();
   const isHome = pathname === '/';
+  const isCatalogue = pathname === '/catalogue';
 
   // Fade in header (sin desplazamiento)
   useLayoutEffect(() => {
@@ -129,37 +129,69 @@ export function Header({
 
   // One-page active link (IntersectionObserver)
   useEffect(() => {
+    if (!isHome) return;
+
     const sectionIds = navItems
       .map((i) => i.sectionId)
       .filter(Boolean) as string[];
+
     if (!sectionIds.length) return;
 
-    const els = sectionIds
-      .map((id) => document.getElementById(id))
-      .filter((el): el is HTMLElement => Boolean(el));
+    let frameId = 0;
 
-    if (!els.length) return;
+    const getSections = () =>
+      sectionIds
+        .map((id) => document.getElementById(id))
+        .filter((el): el is HTMLElement => Boolean(el));
 
-    const obs = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort(
-            (a, b) => (b.intersectionRatio ?? 0) - (a.intersectionRatio ?? 0),
-          )[0];
+    const updateActive = () => {
+      const sections = getSections();
+      if (!sections.length) return;
 
-        if (visible?.target?.id) setActiveId(visible.target.id);
-      },
-      {
-        root: null,
-        rootMargin: '-35% 0px -55% 0px',
-        threshold: [0.15, 0.25, 0.4, 0.6],
-      },
-    );
+      const marker = window.innerHeight * 0.35;
+      let nextActiveId = sections[0].id;
 
-    els.forEach((el) => obs.observe(el));
-    return () => obs.disconnect();
-  }, [navItems]);
+      for (const section of sections) {
+        const rect = section.getBoundingClientRect();
+
+        if (rect.top <= marker && rect.bottom > marker) {
+          nextActiveId = section.id;
+          break;
+        }
+      }
+
+      setActiveId((prev) => (prev === nextActiveId ? prev : nextActiveId));
+    };
+
+    const scheduleUpdate = () => {
+      cancelAnimationFrame(frameId);
+      frameId = requestAnimationFrame(updateActive);
+    };
+
+    const waitForSectionsAndInit = () => {
+      const sections = getSections();
+
+      if (sections.length !== sectionIds.length) {
+        frameId = requestAnimationFrame(waitForSectionsAndInit);
+        return;
+      }
+
+      scheduleUpdate();
+
+      window.addEventListener('scroll', scheduleUpdate, { passive: true });
+      window.addEventListener('resize', scheduleUpdate);
+      window.addEventListener('hashchange', scheduleUpdate);
+    };
+
+    frameId = requestAnimationFrame(waitForSectionsAndInit);
+
+    return () => {
+      cancelAnimationFrame(frameId);
+      window.removeEventListener('scroll', scheduleUpdate);
+      window.removeEventListener('resize', scheduleUpdate);
+      window.removeEventListener('hashchange', scheduleUpdate);
+    };
+  }, [isHome, navItems]);
 
   const phoneHref = whatsapp
     ? `https://wa.me/${toDigitsOnly(phoneE164)}`
@@ -241,13 +273,13 @@ export function Header({
         />
 
         <div className={styles.inner} ref={innerRef}>
-          <Link href="#accueil" className={styles.brand} aria-label="Accueil">
+          <Link href="/" className={styles.brand} aria-label="Accueil">
             <Image
               src="/logo-navbar2.svg"
               alt="PPM"
               width={130}
               height={40}
-              priority
+              className={styles.logo}
             />
           </Link>
 
@@ -255,15 +287,19 @@ export function Header({
             {/* Inline list (se oculta en desktop >= lg) */}
             <ul className={styles.navList}>
               {navItems.map((item) => {
-                const isActive = item.sectionId && item.sectionId === activeId;
+                const isActive =
+                  (isHome && !!item.sectionId && item.sectionId === activeId) ||
+                  (item.href === '/catalogue' && isCatalogue);
+
                 return (
                   <li key={item.label} className={styles.navItem}>
-                    <a
+                    <Link
                       href={item.href}
                       className={`${styles.navLink} ${isActive ? styles.isActive : ''}`}
+                      aria-current={isActive ? 'page' : undefined}
                     >
                       {item.label}
-                    </a>
+                    </Link>
                   </li>
                 );
               })}
@@ -322,20 +358,30 @@ export function Header({
             onMouseDown={(e) => e.stopPropagation()}
           >
             <ul className="grid gap-2">
-              {navItems.map((item) => (
-                <li key={item.label}>
-                  <a
-                    href={item.href}
-                    onClick={() => setDesktopMenuOpen(false)}
-                    className="block px-6 py-3 text-sm hover:bg-[#e4e700]/10 border-b border-white/10"
-                    style={{
-                      clipPath: 'polygon(8% 0%, 100% 0%, 92% 100%, 0% 100%)',
-                    }}
-                  >
-                    {item.label}
-                  </a>
-                </li>
-              ))}
+              {navItems.map((item) => {
+                const isActive =
+                  (isHome && !!item.sectionId && item.sectionId === activeId) ||
+                  (item.href === '/catalogue' && isCatalogue);
+
+                return (
+                  <li key={item.label}>
+                    <Link
+                      href={item.href}
+                      onClick={() => setDesktopMenuOpen(false)}
+                      aria-current={isActive ? 'page' : undefined}
+                      className={[
+                        'block px-6 py-3 text-sm border-b border-white/10 transition-colors',
+                        isActive ? 'bg-[#e4e700]/10' : 'hover:bg-[#e4e700]/10',
+                      ].join(' ')}
+                      style={{
+                        clipPath: 'polygon(8% 0%, 100% 0%, 92% 100%, 0% 100%)',
+                      }}
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
 
             <div className="mt-3 border-t border-white/10 pt-3 flex justify-end">
