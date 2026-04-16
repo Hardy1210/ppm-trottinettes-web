@@ -197,7 +197,7 @@ export function WorkshopSection({
                 Passionnés de mécanique et utilisateurs quotidiens de
                 trottinettes électriques, nous développons des solutions fiables
                 pour particuliers et professionnels avec un service rapide et
-                honnête.
+                efficace.
               </p>
             </blockquote>
 
@@ -216,6 +216,7 @@ export function WorkshopSection({
                   src={imageSrc}
                   alt={imageAlt}
                   fill
+                  priority
                   className={styles.image}
                   sizes="(max-width: 768px) 80vw, (max-width: 1200px) 42vw, 520px"
                 />

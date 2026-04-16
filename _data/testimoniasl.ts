@@ -10,25 +10,24 @@ export const testimonials: TestimonialItem[] = [
   {
     id: 1,
     quote:
-      'Un atelier sérieux et réactif. Diagnostic rapide et explications claires à chaque étape. On sent une vraie expertise technique et un vrai souci de la qualité du travail.',
-    name: 'Marc D.',
+      "Réactif et professionnel. J'ai plusieurs fois emmené ma trottinette et à chaque fois les réparations étaient rapides et propres. Petit plus, on récupère la trottinette nettoyée comme neuve.",
+    name: 'MZt.L.',
     role: 'CLIENT PARTICULIER',
-    avatar: '/images/testimonials/user4.webp',
+    avatar: '/images/testimonials/user44.png',
   },
   {
     id: 2,
     quote:
-      'Service professionnel et délais respectés, ce qui est rare dans le domaine de la réparation. Intervention propre et efficace avec des conseils utiles pour l’entretien de la trottinette.',
-    name: 'Sophie L.',
-    role: 'UTILISATRICE QUOTIDIENNE',
-    avatar: '/images/testimonials/user6.webp',
+      'Merci pour la réparation de la batterie de ma vieille visseuse de 2016 (pour info : pièce introuvable dans le commerce). Depuis, elle fonctionne encore mieux qu’avant, une journée complète à visser et percer dans du bois sans recharger, c’est super. Merci encore.',
+    name: 'Rogerio',
+    role: 'CLIENT PARTICULIER',
+    avatar: '/images/testimonials/user66.png',
   },
   {
     id: 3,
-    quote:
-      'Très bonne expérience du premier contact jusqu’à la récupération de la trottinette. Travail soigné, prix cohérents et communication transparente tout au long de l’intervention.',
-    name: 'Julien R.',
+    quote: 'Efficacité, rapidité disponibilité!!',
+    name: 'Fabricio.',
     role: 'CLIENT RÉGULIER',
-    avatar: '/images/testimonials/user5.webp',
+    avatar: '/images/testimonials/user55.png',
   },
 ];

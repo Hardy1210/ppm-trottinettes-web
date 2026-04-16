@@ -283,7 +283,7 @@ export default function Footer({
 
             <div className={styles.linksGrid}>
               <div className={styles.linksGroup}>
-                <h3 className={styles.groupTitle}>Website map</h3>
+                <h2 className={styles.groupTitle}>Website map</h2>
 
                 <nav className={styles.navList} aria-label="Website map">
                   {[
@@ -305,7 +305,7 @@ export default function Footer({
               </div>
 
               <div className={styles.linksGroup}>
-                <h3 className={styles.groupTitle}>AIDE & CONTACT</h3>
+                <h2 className={styles.groupTitle}>AIDE & CONTACT</h2>
 
                 <div className={styles.infoList}>
                   <Link
@@ -333,7 +333,10 @@ export default function Footer({
                     {addressLine1}
                   </Link>
 
-                  <Link href="#" className={styles.whiteLink}>
+                  <Link
+                    href="https://www.google.com/maps/dir/?api=1&destination=40+rue+d%27Alembert,+21000+Dijon,+France"
+                    className={styles.whiteLink}
+                  >
                     {addressLine2}
                   </Link>
                 </div>
