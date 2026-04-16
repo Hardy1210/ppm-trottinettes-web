@@ -1,7 +1,7 @@
 import ConditionalHeader from '@/components/layout/ConditionalHeader';
 import Footer from '@/components/layout/footer/Footer';
 import { IntroProvider } from '@/context/IntroContext';
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Michroma, Questrial } from 'next/font/google';
 import './globals.css';
 import SmoothScrollProvider from './providers/SmoothScrollProvider';
@@ -106,6 +106,8 @@ export const metadata: Metadata = {
       { rel: 'icon', url: '/android-chrome-512x512.png', sizes: '512x512' },
     ],
   },
+};
+export const viewport: Viewport = {
   colorScheme: 'dark',
   themeColor: '#1E2126',
 };
