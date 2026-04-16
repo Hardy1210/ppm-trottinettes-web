@@ -433,7 +433,7 @@ function MobileEmblaShowcase({
               <button
                 key={idx}
                 type="button"
-                aria-label={`Ir al slide ${idx + 1}`}
+                aria-label={`Aller au slide ${idx + 1}`}
                 onClick={() => scrollTo(idx)}
                 className={`cursor-pointer rounded-full border transition-all duration-300 ${
                   idx === selectedIndex

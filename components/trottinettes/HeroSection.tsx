@@ -9,15 +9,18 @@ import { Shieldd } from '../icons/Shieldd';
 import { Wrench } from '../icons/Wrench';
 
 const HeroSection = () => {
-  const scrollToCatalog = () => {
-    document
-      .getElementById('catalogue')
-      ?.scrollIntoView({ behavior: 'smooth' });
+  const scrollToSection = (id: string) => {
+    const reduced = window.matchMedia(
+      '(prefers-reduced-motion: reduce)',
+    ).matches;
+
+    document.getElementById(id)?.scrollIntoView({
+      behavior: reduced ? 'auto' : 'smooth',
+    });
   };
 
-  const scrollToSpare = () => {
-    document.getElementById('spare')?.scrollIntoView({ behavior: 'smooth' });
-  };
+  const scrollToCatalog = () => scrollToSection('catalogue');
+  const scrollToSpare = () => scrollToSection('spare');
 
   return (
     <section className="relative min-h-[700px] flex items-center overflow-hidden px-5 mt-10">

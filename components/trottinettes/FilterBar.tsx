@@ -56,7 +56,11 @@ const FilterBar = ({
         {/* Search */}
         <div className="relative flex-1 sm:flex-none">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+          <label htmlFor="search-scooters" className="sr-only">
+            Rechercher un modèle
+          </label>
           <Input
+            id="search-scooters"
             placeholder="Rechercher un modèle"
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}

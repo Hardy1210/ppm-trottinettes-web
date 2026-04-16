@@ -4,6 +4,7 @@ import * as React from 'react';
 
 type ButtonProps = {
   href?: string;
+  rel?: string;
   children: React.ReactNode;
   className?: string;
   target?: '_blank' | '_self';
@@ -14,6 +15,7 @@ type ButtonProps = {
 
 export function PrimaryButton({
   href,
+  rel,
   children,
   className,
   target = '_self',
@@ -55,7 +57,7 @@ export function PrimaryButton({
         style={{
           clipPath: 'polygon(8% 0%, 100% 0%, 92% 100%, 0% 100%)',
         }}
-        rel={target === '_blank' ? 'noopener noreferrer' : undefined}
+        rel={rel ?? (target === '_blank' ? 'noopener noreferrer' : undefined)}
       >
         {children}
       </Link>

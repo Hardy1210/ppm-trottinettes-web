@@ -247,6 +247,7 @@ export function IntroLoader({
 
   return (
     <div
+      aria-label="Visualisation et animation du Logo PPM"
       ref={rootRef}
       className="pointer-events-none fixed inset-0 z-9999"
       aria-hidden="true"

@@ -289,7 +289,8 @@ export function TestimonialsTrustSection({ className }: Props) {
                 <div className="relative top-3 -ml-[clamp(2.2rem,1.6vw,1.5rem)] h-[clamp(3.8rem,3.6vw,3.8rem)]  w-[clamp(3.9rem,3.6vw,3.9rem)] overflow-hidden rounded-full border border-white/10">
                   <Image
                     src={item.avatar}
-                    alt={item.name}
+                    alt={`Photo de ${item.name},       
+                    ${item.role}`}
                     fill
                     className="object-cover"
                     sizes="76px"

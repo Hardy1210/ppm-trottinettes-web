@@ -36,7 +36,11 @@ export default function ScooterMobile() {
   return (
     <div ref={rootRef} className={styles.root}>
       {isDesktop ? (
-        <div className={styles.desktopMedia}>
+        <div
+          aria-label="Visualisation 3D d'une 
+        trottinette électrique"
+          className={styles.desktopMedia}
+        >
           <ScooterScene modelUrl="/3d/scooter2.glb" />
         </div>
       ) : (

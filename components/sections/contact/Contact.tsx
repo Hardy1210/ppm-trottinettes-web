@@ -40,7 +40,7 @@ export default function Contact({
   sundayHours = 'Fermé',
   phone = '+33676326473',
   ctaLabel = 'Prendre rendez-vous',
-  ctaHref = '#',
+  ctaHref = 'https://calendar.app.google/qNJHSjsfdHy12Hrz6',
   routeLabel = 'Voir l’itinéraire',
   routeHref = 'https://www.google.com/maps/dir/?api=1&destination=40+rue+d%27Alembert,+21000+Dijon,+France',
   privacyNote = `En cliquant sur « Prendre rendez-vous », vous serez redirigé vers un service externe de réservation. Les informations que vous choisissez d’y renseigner sont traitées par ce service selon sa propre politique de confidentialité.`,
@@ -397,7 +397,12 @@ export default function Contact({
 
               <div ref={ctaWrapRef} className={styles.actions}>
                 <div className={styles.buttonWrap}>
-                  <PrimaryButton href={ctaHref} className="text-[0.85rem]">
+                  <PrimaryButton
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href={ctaHref}
+                    className="text-[0.85rem]"
+                  >
                     {ctaLabel}
                   </PrimaryButton>
                 </div>

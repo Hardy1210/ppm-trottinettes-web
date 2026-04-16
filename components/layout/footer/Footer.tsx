@@ -324,7 +324,12 @@ export default function Footer({
                     Tel : {phone}
                   </Link>
 
-                  <Link href="#" className={styles.whiteLink}>
+                  <Link
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href="https://www.google.com/maps/dir/?api=1&destination=40+rue+d%27Alembert,+21000+Dijon,+France"
+                    className={styles.whiteLink}
+                  >
                     {addressLine1}
                   </Link>
 
@@ -395,7 +400,7 @@ export default function Footer({
 
           <div className={styles.legalRow}>
             <a
-              href="#"
+              href="/mention-legales"
               className={styles.yellowLink}
               ref={(el) => {
                 if (el) yellowLinkRefs.current[2] = el;
@@ -416,7 +421,7 @@ export default function Footer({
             </a>
 
             <a
-              href="#"
+              href="https://www.kalevs.com/"
               className={styles.yellowLink}
               ref={(el) => {
                 if (el) yellowLinkRefs.current[3] = el;

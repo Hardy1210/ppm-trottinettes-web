@@ -153,7 +153,7 @@ export default function HomeClient({ serviceSection }: HomeClientProps) {
               tracking-wide
             "
               >
-                Pile
+                Piles
                 <br />
                 Power
                 <br />

@@ -100,8 +100,17 @@ function ServiceAccordionItem({
 
   return (
     <article
+      role="button"
+      tabIndex={0}
       className={`${styles.item} ${open ? styles.itemOpen : ''}`}
       onMouseEnter={onMouseEnter}
+      onFocus={onMouseEnter}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          onMouseEnter();
+        }
+      }}
     >
       <div className={styles.itemInner}>
         <div className={styles.itemHeaderRow}>
