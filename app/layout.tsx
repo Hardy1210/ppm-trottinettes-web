@@ -10,12 +10,14 @@ const michroma = Michroma({
   subsets: ['latin'],
   variable: '--font-michroma',
   weight: '400',
+  display: 'swap',
 });
 
 const questrial = Questrial({
   subsets: ['latin'],
   variable: '--font-questrial',
   weight: '400',
+  display: 'swap',
 });
 
 const BASE_URL = 'https://pilespowermobilite.fr';
