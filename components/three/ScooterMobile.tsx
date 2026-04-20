@@ -29,7 +29,7 @@ export default function ScooterMobile() {
     gsap.fromTo(
       rootRef.current,
       { opacity: 0, x: -40 },
-      { opacity: 1, x: 0, delay: 1.5, duration: 1.2, ease: 'power2.out' },
+      { opacity: 1, x: 0, delay: 1.9, duration: 1.6, ease: 'power2.out' },
     );
   }, []);
 

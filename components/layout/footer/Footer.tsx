@@ -236,12 +236,12 @@ export default function Footer({
             </Link>
 
             <div ref={ctaWrapRef} className={styles.ctaWrap}>
-              <Link
-                href="mailto:rrepartrot@gmail.com?subject=Demande%20de%20renseignement"
+              <div
+                
                 className={styles.ctaButton}
               >
-                <PrimaryButton>{buttonLabel}</PrimaryButton>
-              </Link>
+                <PrimaryButton href="mailto:rrepartrot@gmail.com?subject=Demande%20de%20renseignement">{buttonLabel}</PrimaryButton>
+              </div>
 
               <span
                 ref={ctaArrowRef}
@@ -268,17 +268,25 @@ export default function Footer({
 
           <div className={styles.contentCol}>
             <div className={styles.titleBlock}>
-              <span className={styles.titleLineMask}>
-                <span ref={titleLine1Ref} className={styles.titleLine}>
-                  {titleTop}
-                </span>
-              </span>
+              {/* Titre réel sémantique */}
+              <h2 className={styles.srOnly}>
+                {titleTop} {titleBottom}
+              </h2>
 
-              <span className={styles.titleLineMask}>
-                <span ref={titleLine2Ref} className={styles.titleLineStrong}>
-                  {titleBottom}
+              {/* Version visuelle animée */}
+              <div aria-hidden="true">
+                <span className={styles.titleLineMask}>
+                  <span ref={titleLine1Ref} className={styles.titleLine}>
+                    {titleTop}
+                  </span>
                 </span>
-              </span>
+
+                <span className={styles.titleLineMask}>
+                  <span ref={titleLine2Ref} className={styles.titleLineStrong}>
+                    {titleBottom}
+                  </span>
+                </span>
+              </div>
             </div>
 
             <div className={styles.linksGrid}>

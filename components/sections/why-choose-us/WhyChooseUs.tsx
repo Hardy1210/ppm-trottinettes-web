@@ -1,6 +1,7 @@
 'use client';
 
 import { useIntro } from '@/context/IntroContext';
+import dynamic from 'next/dynamic';
 import type { ReactNode } from 'react';
 
 import { IconShape2 } from '@/components/icons/IconShape2';
@@ -10,8 +11,15 @@ import { Gear } from '@/components/icons/Gear';
 import { Leaf } from '@/components/icons/Leaf';
 import { Shield } from '@/components/icons/Shield';
 
-import ScooterMobile from '@/components/three/ScooterMobile';
+//import ScooterMobile from '@/components/three/ScooterMobile';
 import styles from './WhyChooseUs.module.scss';
+const ScooterMobile = dynamic(
+  () => import('@/components/three/ScooterMobile'),
+  {
+    ssr: false,
+    loading: () => <div className={styles.scooterPlaceholder} aria-hidden="true" />,
+  }
+);
 
 type Item = {
   title: string;
@@ -45,13 +53,13 @@ export default function WhyChooseUs() {
         {/* LEFT: 3D scooter */}
         <div className={styles.left}>
           <div className={styles.scooterStage} aria-hidden="true">
-            {introDoneLogo && <ScooterMobile />}
-          </div>
+          {introDoneLogo && <ScooterMobile />}
+        </div>
         </div>
 
         {/* RIGHT: text */}
         <div className={styles.right}>
-          <p className={styles.kicker}>Pourquoi nous choisir ?</p>
+          <h2 className={styles.kicker}>Pourquoi nous choisir ?</h2>
 
           <ul className={styles.list}>
             {items.map((it) => (

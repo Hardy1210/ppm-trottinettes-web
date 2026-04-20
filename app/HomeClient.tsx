@@ -12,7 +12,7 @@ import { Makita } from '@/components/icons/Makita';
 import { Xiaomi } from '@/components/icons/Xiaomi';
 import { Section } from '@/components/layout/Section';
 import Contact from '@/components/sections/contact/Contact';
-import ParallaxSection from '@/components/sections/parallax-section/ParallaxSection';
+//import ParallaxSection from '@/components/sections/parallax-section/ParallaxSection';
 import { QualityBlock } from '@/components/sections/QualityBlock';
 import ServiceList from '@/components/sections/services/ServicesList';
 import { TestimonialsTrustSection } from '@/components/sections/testimonials/TestimonialsTrust';
@@ -24,6 +24,16 @@ import { PrimaryButton } from '@/ui/Buttons';
 import gsap from 'gsap';
 import { SplitText } from 'gsap/SplitText';
 import { useLayoutEffect, useRef, useState } from 'react';
+
+import dynamic from 'next/dynamic';
+
+const ParallaxSection = dynamic(
+  () => import('@/components/sections/parallax-section/ParallaxSection'),
+  {
+    ssr: false,
+    loading: () =>  <div className="relative min-h-[700px] w-full overflow-hidden bg-ppmBg" />,
+  },
+);
 
 gsap.registerPlugin(SplitText);
 
@@ -54,11 +64,9 @@ export default function HomeClient({ serviceSection }: HomeClientProps) {
 
   useIntroScrollReset(setIntroDone);
 
-  const h1Ref = useRef<HTMLHeadingElement | null>(null);
-  const pRef = useRef<HTMLParagraphElement | null>(null);
+  const h1Ref = useRef<HTMLDivElement | null>(null);
+  const pRef = useRef<HTMLDivElement | null>(null);
   const ctaRef = useRef<HTMLDivElement | null>(null);
-
-  useIntroScrollReset(setIntroDone);
 
   useLayoutEffect(() => {
     let h1Split: SplitText | undefined;
@@ -144,38 +152,49 @@ export default function HomeClient({ serviceSection }: HomeClientProps) {
               {/* (En tu screenshot móvil hay logo + icono menú arriba; navbar lo haces luego)
               Igual te dejo un placeholder superior para que no te rompa el layout. */}
 
-              <h1
-                ref={h1Ref}
-                className="
-              font-title
-              text-[clamp(2.8rem,8vw,4.8rem)]
-              leading-[1.2]
-              tracking-wide
-            "
-              >
-                Piles
-                <br />
-                Power
-                <br />
-                Mobilité
-              </h1>
+              {/* H1 semántico real para SEO / accessibilité */}
+              <h1 className="sr-only">Piles Power Mobilité</h1>
 
-              <p
-                ref={pRef}
-                className="
-              mt-6 max-w-[42ch]
-              font-body text-brandText
-              text-[clamp(1rem,2.6vw,1.9rem)]
               
-              leading-snug pr-10
-            "
+              {/* H1 visual animado */}
+              <div
+                ref={h1Ref}
+                aria-hidden="true"
+                className="
+                  font-title
+                  text-[clamp(2.8rem,8vw,4.8rem)]
+                  leading-[1.2]
+                  tracking-wide
+                "
               >
+                <div>Piles</div>
+                <div>Power</div>
+                <div>Mobilité</div>
+              </div>
+
+              {/* Párrafo semántico real para SEO / accessibilité */}
+              <p className="sr-only">
                 Nous accompagnons chaque utilisateur avec des solutions fiables,
                 rapides et adaptées pour garantir performance et sécurité au
                 quotidien.
               </p>
 
-              {/* Desktop CTA sits under text (mobile CTA goes bottom like screenshot) */}
+              {/* Párrafo visual animado */}
+              <div
+                ref={pRef}
+                aria-hidden="true"
+                className="
+                  mt-6 max-w-[42ch]
+                  font-body text-brandText
+                  text-[clamp(1rem,2.6vw,1.9rem)]
+                  leading-snug pr-10
+                "
+              >
+                Nous accompagnons chaque utilisateur avec des solutions fiables,
+                rapides et adaptées pour garantir performance et sécurité au
+                quotidien.
+              </div>
+
               <div ref={ctaRef} className="mt-20 hidden lg:block">
                 <PrimaryButton
                   href="#contact"
@@ -247,10 +266,10 @@ export default function HomeClient({ serviceSection }: HomeClientProps) {
           ]}
           brands={[
             {
-              name: 'Segway',
+              name: 'Hikoki',
               /* eslint-disable @next/next/no-img-element */
               logo: (
-                <img src="/icons/hikoki.svg" alt="Segway" className="h-5" />
+                <img src="/icons/hikoki.svg" alt="Hikoki" className="h-5" />
               ),
             },
             {

@@ -26,8 +26,8 @@ export default function ParallaxSection({
 }: Props) {
   const sectionRef = useRef<HTMLElement | null>(null);
   const bgParallaxRef = useRef<HTMLDivElement | null>(null);
-  const titleRef = useRef<HTMLHeadingElement | null>(null);
-  const introRef = useRef<HTMLParagraphElement | null>(null);
+  const titleRef = useRef<HTMLDivElement | null>(null);
+  const introRef = useRef<HTMLDivElement | null>(null);
   const dividerRef = useRef<HTMLDivElement | null>(null);
   const descriptionBottomRef = useRef<HTMLParagraphElement | null>(null);
   const topRowRef = useRef<HTMLDivElement | null>(null);
@@ -284,16 +284,32 @@ export default function ParallaxSection({
       <div className={styles.container}>
         <div className={styles.content}>
           <div ref={topRowRef} className={styles.topRow}>
-            <h2 ref={titleRef} className={styles.title}>
-              {title}
-            </h2>
+          {/* Titre réel sémantique */}
+          <h2 className={styles.srOnly}>{title}</h2>
 
-            <div className={styles.textBox}>
-              <p ref={introRef} className={styles.description}>
-                {description}
-              </p>
+          {/* Titre visuel animé */}
+          <div
+            ref={titleRef}
+            aria-hidden="true"
+            className={styles.title}
+          >
+            {title}
+          </div>
+
+          <div className={styles.textBox}>
+            {/* Texte réel sémantique */}
+            <p className={styles.srOnly}>{description}</p>
+
+            {/* Texte visuel animé */}
+            <div
+              ref={introRef}
+              aria-hidden="true"
+              className={styles.description}
+            >
+              {description}
             </div>
           </div>
+        </div>
 
           <div
             ref={dividerRef}

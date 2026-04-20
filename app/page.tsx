@@ -32,7 +32,11 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  const serviceSection = await client.fetch(serviceListSectionQuery);
+ const serviceSection = await client.fetch(
+    serviceListSectionQuery,
+    {},
+    { next: { revalidate: 3600 } }
+  );
 
   return (
     <>

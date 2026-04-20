@@ -18,9 +18,9 @@ export function WorkshopSection({
   imageAlt = 'Technicien réparant une carte électronique dans l’atelier',
 }: WorkshopSectionProps) {
   const sectionRef = useRef<HTMLElement | null>(null);
-  const titleRef = useRef<HTMLHeadingElement | null>(null);
-  const introRef = useRef<HTMLParagraphElement | null>(null);
-  const descriptionRef = useRef<HTMLParagraphElement | null>(null);
+  const titleRef = useRef<HTMLDivElement | null>(null);
+  const introRef = useRef<HTMLDivElement | null>(null);
+  const descriptionRef = useRef<HTMLDivElement | null>(null);
   const dividerRef = useRef<HTMLDivElement | null>(null);
 
   useLayoutEffect(() => {
@@ -133,19 +133,42 @@ export function WorkshopSection({
         <div>
           <div className={styles.topBlock}>
             <div className={styles.headingWrap}>
-              <h2 ref={titleRef} id="workshop-title" className={styles.title}>
-                Notre atelier
-              </h2>
-            </div>
+          {/* Título semántico real */}
+          <h2 id="workshop-title" className="sr-only">
+            Notre atelier
+          </h2>
 
-            <div className={styles.introWrap}>
-              <p ref={introRef} className={styles.introText}>
-                Spécialisé dans la réparation et la maintenance de trottinettes
-                électriques, l’atelier est né de la volonté de proposer une
-                alternative fiable face aux coûts élevés et aux délais souvent
-                trop longs du service après-vente traditionnel.
-              </p>
-            </div>
+          {/* Título visual animado */}
+          <div
+            ref={titleRef}
+            aria-hidden="true"
+            className={styles.title}
+          >
+            Notre atelier
+          </div>
+        </div>
+
+        <div className={styles.introWrap}>
+          {/* Texto semántico real */}
+          <p className="sr-only">
+            Spécialisé dans la réparation et la maintenance de trottinettes
+            électriques, l’atelier est né de la volonté de proposer une
+            alternative fiable face aux coûts élevés et aux délais souvent
+            trop longs du service après-vente traditionnel.
+          </p>
+
+          {/* Texte visuel animé */}
+          <div
+            ref={introRef}
+            aria-hidden="true"
+            className={styles.introText}
+          >
+            Spécialisé dans la réparation et la maintenance de trottinettes
+            électriques, l’atelier est né de la volonté de proposer une
+            alternative fiable face aux coûts élevés et aux délais souvent
+            trop longs du service après-vente traditionnel.
+          </div>
+        </div>
           </div>
 
           <div
@@ -193,12 +216,23 @@ export function WorkshopSection({
             </div>
 
             <blockquote className={styles.quote}>
-              <p ref={descriptionRef} className={styles.quoteText}>
-                Passionnés de mécanique et utilisateurs quotidiens de
-                trottinettes électriques, nous développons des solutions fiables
-                pour particuliers et professionnels avec un service rapide et
-                efficace.
+              {/* Texte réel sémantique */}
+              <p className={styles.srOnly}>
+                Passionnés de mécanique et utilisateurs quotidiens de trottinettes
+                électriques, nous développons des solutions fiables pour particuliers et
+                professionnels avec un service rapide et efficace.
               </p>
+
+              {/* Texte visuel animé */}
+              <div
+                ref={descriptionRef}
+                aria-hidden="true"
+                className={styles.quoteText}
+              >
+                Passionnés de mécanique et utilisateurs quotidiens de trottinettes
+                électriques, nous développons des solutions fiables pour particuliers et
+                professionnels avec un service rapide et efficace.
+              </div>
             </blockquote>
 
             <footer className={styles.author}>

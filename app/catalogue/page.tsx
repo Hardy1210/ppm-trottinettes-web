@@ -37,9 +37,14 @@ export default async function CataloguePage() {
   const scooters = await client.fetch<CatalogueScooter[]>(scootersQuery, {
     start: 0,
     end: 8,
-  });
+  }, { next: { revalidate: 3600 } }
+);
 
-  const spareParts = await client.fetch<CatalogueSparePart[]>(sparePartsQuery);
+  const spareParts = await client.fetch<CatalogueSparePart[]>(
+  sparePartsQuery,
+  {},
+  { next: { revalidate: 3600 } }
+);
 
   return (
     <>

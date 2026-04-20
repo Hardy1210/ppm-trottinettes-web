@@ -14,9 +14,9 @@ type Props = {
 
 export function TestimonialsTrustSection({ className }: Props) {
   const sectionRef = useRef<HTMLElement | null>(null);
-  const titleRef = useRef<HTMLHeadingElement | null>(null);
-  const introRef = useRef<HTMLParagraphElement | null>(null);
-  const cardTextRefs = useRef<HTMLParagraphElement[]>([]);
+  const titleRef = useRef<HTMLDivElement | null>(null); 
+  const introRef = useRef<HTMLDivElement | null>(null);
+  const cardTextRefs = useRef<(HTMLDivElement | null)[]>([]);
   const dividerRef = useRef<HTMLDivElement | null>(null);
   const cardRefs = useRef<HTMLElement[]>([]);
 
@@ -167,39 +167,54 @@ export function TestimonialsTrustSection({ className }: Props) {
 
       <div className="relative mx-auto w-full max-w-container px-[clamp(1.2rem,1vw,2.5rem)] xl:px-0">
         {/* Header */}
-        <div className="flex flex-col gap-y-[clamp(1.25rem,2vw,2rem)] lg:flex-row lg:items-end">
-          <div className="lg:max-w-[63ch]">
-            <h2
-              ref={titleRef}
-              className="
-              max-w-[13ch]
-              font-title
-              leading-[0.95]
-              tracking-[-0.04em]
-              text-[clamp(2rem,9vw,3.5rem)]
-              "
-            >
-              La confiance de nos clients.
-            </h2>
-          </div>
+        {/* Header */}
+  <div className="flex flex-col gap-y-[clamp(1.25rem,2vw,2rem)] lg:flex-row lg:items-end">
+    <div className="lg:max-w-[63ch]">
+      {/* Titre réel sémantique */}
+      <h2 className="sr-only">La confiance de nos clients.</h2>
 
-          <div className="lg:ml-auto w-full lg:max-w-[55ch] ">
-            <p
-              ref={introRef}
-              className="
-       
-              text-primary-white/90
-              leading-[1.55]
-              text-[clamp(0.95rem,1.1vw,1.2rem)]
-              "
-            >
-              Nous accompagnons chaque client avec sérieux et transparence.
-              Notre priorité est d’assurer un service fiable, rapide et durable,
-              afin de garantir votre sécurité et la performance de votre
-              mobilité au quotidien.
-            </p>
-          </div>
-        </div>
+      {/* Titre visuel animé */}
+      <div
+        ref={titleRef}
+        aria-hidden="true"
+        className="
+          max-w-[13ch]
+          font-title
+          leading-[0.95]
+          tracking-[-0.04em]
+          text-[clamp(2rem,9vw,3.5rem)]
+        "
+      >
+        La confiance de nos clients.
+      </div>
+    </div>
+
+    <div className="lg:ml-auto w-full lg:max-w-[55ch]">
+      {/* Texte réel sémantique */}
+      <p className="sr-only">
+        Nous accompagnons chaque client avec sérieux et transparence.
+        Notre priorité est d’assurer un service fiable, rapide et durable,
+        afin de garantir votre sécurité et la performance de votre
+        mobilité au quotidien.
+      </p>
+
+      {/* Texte visuel animé */}
+      <div
+        ref={introRef}
+        aria-hidden="true"
+        className="
+          text-primary-white/90
+          leading-[1.55]
+          text-[clamp(0.95rem,1.1vw,1.2rem)]
+        "
+      >
+        Nous accompagnons chaque client avec sérieux et transparence.
+        Notre priorité est d’assurer un service fiable, rapide et durable,
+        afin de garantir votre sécurité et la performance de votre
+        mobilité au quotidien.
+      </div>
+    </div>
+  </div>
 
         {/* Divider */}
         <div ref={dividerRef} className="w-full mt-[3.2rem]" aria-hidden="true">
@@ -262,20 +277,25 @@ export function TestimonialsTrustSection({ className }: Props) {
                 <Quote size={50} />
               </div>
 
-              <p
-                ref={(el) => {
-                  if (el) cardTextRefs.current[index] = el;
-                }}
-                className="
-                  max-w-[40h]
-                  text-primary-white/92
-                  leading-[1.45]
-                  text-[clamp(1rem,1.15vw,1.3rem)]
-                  pt-3
-                "
-              >
-                {item.quote}
-              </p>
+              {/* Texte réel sémantique */}
+      <p className="sr-only">{item.quote}</p>
+
+      {/* Texte visuel animé */}
+      <div
+        ref={(el) => {
+          if (el) cardTextRefs.current[index] = el;
+        }}
+        aria-hidden="true"
+        className="
+          max-w-[40h]
+          text-primary-white/92
+          leading-[1.45]
+          text-[clamp(1rem,1.15vw,1.3rem)]
+          pt-3
+        "
+      >
+        {item.quote}
+      </div>
 
               <div className="mt-[clamp(0.5rem,1vw,1rem)] flex items-end gap-[clamp(0.75rem,1vw,1rem)]">
                 {/* icono marca */}
