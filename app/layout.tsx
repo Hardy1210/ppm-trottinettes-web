@@ -1,5 +1,6 @@
 import ConditionalHeader from '@/components/layout/ConditionalHeader';
 import Footer from '@/components/layout/footer/Footer';
+import { ValidationOverlay } from '@/components/ValidationOverlay';
 import { IntroProvider } from '@/context/IntroContext';
 import type { Metadata, Viewport } from 'next';
 import { Michroma, Questrial } from 'next/font/google';
@@ -208,6 +209,7 @@ export default function RootLayout({
           </SmoothScrollProvider>
         </IntroProvider>
         <div id="modal-root" />
+        <ValidationOverlay />
       </body>
     </html>
   );
