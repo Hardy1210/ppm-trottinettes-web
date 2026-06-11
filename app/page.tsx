@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     url: BASE_URL,
     images: [
       {
-        url: '/image/bannierr.png',
+        url: '/images/bannierr.jpg',
         width: 1200,
         height: 630,
         alt: 'Piles Power Mobilité - Réparation trottinette électrique Dijon',

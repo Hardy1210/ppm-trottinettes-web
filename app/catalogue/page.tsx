@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     url: `${BASE_URL}/catalogue`,
     images: [
       {
-        url: '/image/bannierr.png',
+        url: '/images/bannierr.jpg',
         width: 1200,
         height: 630,
         alt: 'Catalogue trottinettes électriques Piles Power Mobilité Dijon',

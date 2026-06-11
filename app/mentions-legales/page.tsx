@@ -1,5 +1,28 @@
 //import Footer from '../sections/footer/Footer'
 
+import { Metadata } from "next";
+
+
+export const metadata: Metadata = {
+  title: 'Mentions légales — Piles Power Mobilité | Dijon',
+  description: 'Mentions légales, CGV et CGS de Piles Power Mobilité, atelier de réparation de trottinettes électriques à Dijon (21000).',
+  alternates: {
+    canonical: 'https://pilespowermobilite.fr/mentions-legales',
+  },
+  openGraph: {
+    title: 'Mentions légales — Piles Power Mobilité',
+    description: 'Informations légales, conditions de vente et de service de Piles Power Mobilité à Dijon.',
+    url: 'https://pilespowermobilite.fr/mentions-legales',
+    images: [{ url: '/images/bannierr.jpg', width: 1200, height: 630, alt: 'Mentions légales Piles Power Mobilité Dijon' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Mentions légales — Piles Power Mobilité',
+    description: 'Informations légales, conditions de vente et de service de Piles Power Mobilité à Dijon.',
+    images: ['/images/bannierr.jpg'],
+  },
+}
+
 const MentionsLegales = () => {
   return (
     <div className="bg-ppmBg text-white">

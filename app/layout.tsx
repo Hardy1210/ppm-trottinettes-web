@@ -67,7 +67,7 @@ export const metadata: Metadata = {
       "Réparation, entretien et vente de trottinettes électriques à Dijon. Pièces détachées, trottinettes neuves et d'occasion — PPM Dijon.",
     images: [
       {
-        url: '/image/bannierr.png', // 1200x630px à créer
+        url: '/images/bannierr.jpg', // 1200x630px à créer
         width: 1200,
         height: 630,
         alt: 'Piles Power Mobilité - Réparation trottinette électrique Dijon',
@@ -80,15 +80,15 @@ export const metadata: Metadata = {
     title: 'Piles Power Mobilité | Réparation Trottinette Électrique Dijon',
     description:
       'Réparation, entretien et vente de trottinettes électriques à Dijon. Pièces détachées, neuves et occasion — PPM.',
-    images: ['/image/bannierr.png'],
+    images: ['/images/bannierr.jpg'],
   },
 
   robots: {
-    index: false,
-    follow: false,
+    index: true,
+    follow: true,
     googleBot: {
-      index: false,
-      follow: false,
+      index: true,
+      follow: true,
       'max-video-preview': -1,
       'max-image-preview': 'large',
       'max-snippet': -1,
@@ -141,7 +141,7 @@ export default function RootLayout({
               name: 'Piles Power Mobilité',
               alternateName: 'PPM',
               image:
-                'https://pilespowermobilite.fr/image/reparation-trottinette.jpg',
+                'https://pilespowermobilite.fr/images/reparation-trottinette.jpg',
               '@id': 'https://pilespowermobilite.fr',
               url: 'https://pilespowermobilite.fr',
               telephone: '+33676326473',
@@ -209,7 +209,7 @@ export default function RootLayout({
           </SmoothScrollProvider>
         </IntroProvider>
         <div id="modal-root" />
-        <ValidationOverlay />
+        
       </body>
     </html>
   );

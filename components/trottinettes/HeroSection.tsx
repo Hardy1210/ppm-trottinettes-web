@@ -28,6 +28,7 @@ const HeroSection = () => {
       <div className="absolute inset-0">
         <Image
           src={heroImage}
+          priority
           alt="Trottinette électrique"
           className="w-full h-full object-cover opacity-60"
         />
@@ -44,6 +45,7 @@ const HeroSection = () => {
             className=" text-[clamp(1.85rem,8vw,4.8rem)] font-title text-ppmYellow leading-[1.3] animate-fade-in opacity-0"
             style={{ animationDelay: '0.2s' }}
           >
+            <span className="sr-only">Catalogue trottinettes électriques & pièces détachées — Dijon — </span>
             NOS TROTTINETTES
           </h1>
           {/*iconos */}
