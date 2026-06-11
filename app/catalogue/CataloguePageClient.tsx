@@ -156,7 +156,7 @@ export default function CataloguePageClient({
           )}
         </section>
       </div>
-
+{/* PIECES DETACHEES */}
       <section
         id="spare"
         className="container py-16 max-w-container mx-auto px-5 xl:px-0"

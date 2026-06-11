@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 //import type { SparePart } from '@/data/spareParts';
 import type { CatalogueSparePart } from '@/app/catalogue/catalogue.type';
 import Image from 'next/image';
+import Link from 'next/link';
 
 type SparePartCardProps = {
   part: CatalogueSparePart;
@@ -43,7 +44,11 @@ const SparePartCard = ({ part, onDetails, index }: SparePartCardProps) => (
           onClick={() => onDetails(part)}
           className="font-display font-semibold"
         >
-          {part.buttonLabel || "Plus d'infos"}
+          <Link
+            href={`mailto:rrepartrot@gmail.com?subject=${encodeURIComponent(`Demande de renseignement - ${part.title}`)}`}
+          >
+            Plus d&apos;infos
+          </Link>
         </Button>
       </div>
     </div>

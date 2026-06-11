@@ -17,7 +17,7 @@ const CTABlock = () => (
           Dites-nous votre usage (trajet, poids, budget) et on vous oriente.
         </p>
         <PrimaryButton
-          href="mailto:tonmail@example.com?subject=Demande%20de%20contact"
+          href="mailto:rrepartrot@gmail.com?subject=Demande%20de%20contact"
           className="gap-2 font-display font-semibold mt-4"
         >
           <MessageCircle className="w-4 h-4" />

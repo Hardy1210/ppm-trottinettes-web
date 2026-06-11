@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { formatPrice } from '@/app/lib/formatPrice';
 import {
   Dialog,
@@ -232,10 +233,13 @@ const ScooterModal = ({ scooter, open, onClose }: ScooterModalProps) => {
             </>
           )}
 
-          <PrimaryButton className="w-full gap-2 font-display font-semibold">
-            <MessageCircle className="w-4 h-4" />
-            Demander des infos
-          </PrimaryButton>
+<PrimaryButton
+  href={`mailto:rrepartrot@gmail.com?subject=${encodeURIComponent(`Demande de renseignement - ${scooter.name}`)}`}
+  className="w-full gap-2 font-display font-semibold"
+>
+  <MessageCircle className="w-4 h-4" />
+  Demander des infos
+</PrimaryButton>
         </div>
       </DialogContent>
     </Dialog>
