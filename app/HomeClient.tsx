@@ -31,7 +31,7 @@ const ParallaxSection = dynamic(
   () => import('@/components/sections/parallax-section/ParallaxSection'),
   {
     ssr: false,
-    loading: () =>  <div className="relative min-h-[700px] w-full overflow-hidden bg-ppmBg" />,
+    loading: () => <div className="relative min-h-[700px] w-full overflow-hidden bg-ppmBg" />,
   },
 );
 
@@ -155,7 +155,7 @@ export default function HomeClient({ serviceSection }: HomeClientProps) {
               {/* H1 semántico real para SEO / accessibilité */}
               <h1 className="sr-only">Piles Power Mobilité</h1>
 
-              
+
               {/* H1 visual animado */}
               <div
                 ref={h1Ref}
@@ -197,9 +197,11 @@ export default function HomeClient({ serviceSection }: HomeClientProps) {
 
               <div ref={ctaRef} className="mt-20 hidden lg:block">
                 <PrimaryButton
-                  href="#contact"
+                  href="https://calendar.app.google/145rCA1WAuJtnLrb9"
                   ariaLabel="Prendre rendez-vous"
                   className="min-w-[220px]"
+                  rel="noopener noreferrer"
+                  target="_blank"
                 >
                   Prendre RV
                 </PrimaryButton>
@@ -232,9 +234,11 @@ export default function HomeClient({ serviceSection }: HomeClientProps) {
             {/* Mobile CTA at bottom centered wide (like screenshot) */}
             <div className="lg:hidden mx-auto w-full max-w-[360px] mt-10">
               <PrimaryButton
-                href="#contact"
+                href="https://calendar.app.google/145rCA1WAuJtnLrb9"
                 ariaLabel="Prendre rendez-vous"
                 className="mx-auto w-full max-w-[360px]"
+                rel="noopener noreferrer"
+                target="_blank"
               >
                 Prendre RV
               </PrimaryButton>

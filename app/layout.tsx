@@ -130,21 +130,21 @@ export default function RootLayout({
         >
           Aller au contenu principal
         </a>
-        {/* Schema LocalBusiness */}
+        {/* Schema AutoRepair */}
         <script
           type="application/ld+json"
           suppressHydrationWarning
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               '@context': 'https://schema.org',
-              '@type': 'LocalBusiness',
+              '@type': ['AutoRepair', 'Store'],
               name: 'Piles Power Mobilité',
               alternateName: 'PPM',
-              image:
-                'https://pilespowermobilite.fr/images/reparation-trottinette.jpg',
-              '@id': 'https://pilespowermobilite.fr',
+              image: 'https://pilespowermobilite.fr/images/reparation-trottinette.jpg',
+              '@id': 'https://pilespowermobilite.fr/#business',
               url: 'https://pilespowermobilite.fr',
               telephone: '+33676326473',
+              email: 'rrepartrot@gmail.com',
               address: {
                 '@type': 'PostalAddress',
                 streetAddress: "40 rue d'Alembert",
@@ -157,16 +157,10 @@ export default function RootLayout({
                 latitude: 47.3301046,
                 longitude: 5.0630524,
               },
+              hasMap: "https://maps.google.com/?q=40+rue+d%27Alembert+21000+Dijon",
               openingHoursSpecification: {
                 '@type': 'OpeningHoursSpecification',
-                dayOfWeek: [
-                  'Monday',
-                  'Tuesday',
-                  'Wednesday',
-                  'Thursday',
-                  'Friday',
-                  'Saturday',
-                ],
+                dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
                 opens: '09:00',
                 closes: '20:00',
               },
@@ -175,8 +169,7 @@ export default function RootLayout({
                 { '@type': 'Place', name: "Côte-d'Or" },
                 { '@type': 'Place', name: 'Bourgogne' },
               ],
-              description:
-                "Piles Power Mobilité (PPM) — Réparation, entretien et vente de trottinettes électriques à Dijon. Pièces détachées, trottinettes neuves et d'occasion.",
+              description: "Piles Power Mobilité (PPM) — Réparation, entretien et vente de trottinettes électriques à Dijon. Pièces détachées, trottinettes neuves et d'occasion.",
               priceRange: '€€',
               sameAs: [
                 'https://www.facebook.com/profile.php?id=61581404125924',
@@ -209,7 +202,7 @@ export default function RootLayout({
           </SmoothScrollProvider>
         </IntroProvider>
         <div id="modal-root" />
-        
+
       </body>
     </html>
   );

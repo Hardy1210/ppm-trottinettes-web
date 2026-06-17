@@ -40,7 +40,7 @@ export default function Contact({
   sundayHours = '10:30 - 13:00 sur RDV',
   phone = '+33676326473',
   ctaLabel = 'Prendre rendez-vous',
-  ctaHref = 'https://calendar.app.google/qNJHSjsfdHy12Hrz6',
+  ctaHref = 'https://calendar.app.google/145rCA1WAuJtnLrb9',
   routeLabel = 'Voir l’itinéraire',
   routeHref = 'https://www.google.com/maps/dir/?api=1&destination=40+rue+d%27Alembert,+21000+Dijon,+France',
   privacyNote = `En cliquant sur « Prendre rendez-vous », vous serez redirigé vers un service externe de réservation. Les informations que vous choisissez d’y renseigner sont traitées par ce service selon sa propre politique de confidentialité.`,

@@ -43,7 +43,7 @@ const MentionsLegales = () => {
         </div>
       </header>
 
-      <main className="px-[clamp(1rem,3vw,1.4rem)] py-12 md:py-16">
+      <section className="px-[clamp(1rem,3vw,1.4rem)] py-12 md:py-16">
         <div className="mx-auto flex max-w-container flex-col gap-8">
           {/* Bloc société */}
           <section className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 md:p-8">
@@ -337,7 +337,7 @@ const MentionsLegales = () => {
             </p>
           </section>
         </div>
-      </main>
+      </section>
     </div>
   );
 };
